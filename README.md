@@ -1,6 +1,6 @@
 # JavaLearning — kurs Javy po polsku do nauki i powtórek
 
-Samodzielny kurs Javy SE 17 w 29 działach (`t00`–`t28`). Każda lekcja to plik `.java`, który możesz uruchomić. Ma szczegółowe komentarze po polsku, a przy każdej angielskiej nazwie jest tłumaczenie. Każda lekcja zawiera też:
+Samodzielny kurs Javy SE 17 w 36 działach (`t00`–`t35`). Każda lekcja to plik `.java`, który możesz uruchomić. Ma szczegółowe komentarze po polsku, a przy każdej angielskiej nazwie jest tłumaczenie. Każda lekcja zawiera też:
 - ćwiczenia sprawdzane automatycznie,
 - pytania kontrolne,
 - ściągę do powtórek.
@@ -21,7 +21,7 @@ src/
 ├── t00_start/        jak korzystać z kursu, słowniczek, ścieżka nauki, dziennik powtórek
 ├── t01_basics/       podstawy
 ├── ...
-└── t28_capstone/     mini-projekty łączące tematy
+└── t35_capstone/     mini-projekty łączące tematy
 ```
 Każdy temat to osobny folder (= pakiet) bezpośrednio w `src/`. Pakiety mają numery `t00_`, `t01_`… Dzięki temu drzewo projektu układa się w kolejności nauki.
 
@@ -59,35 +59,42 @@ Legenda: ✅ gotowe · 🔶 w trakcie · ⏳ zaplanowane
 | Dział | Temat | Stan |
 |---|---|---|
 | `helpers/` | Wspólne narzędzia (`Console`, `Check`, `Sleep`, `TempDir`) i dane przykładowe (`SampleData`, `model/`) | ✅ |
-| `t00_start` | Jak korzystać z kursu, słowniczek, ścieżka nauki, dziennik powtórek | ✅ |
+| `t00_start` | Jak korzystać z kursu, słowniczek, ścieżka nauki, dziennik powtórek (✅); debugowanie w IntelliJ (⏳ nowa lekcja) | 🔶 |
 | `t01_basics` | Podstawy (11 lekcji): jak działa program, typy proste, zmienne, operatory, rzutowanie i przepełnienie, klasy opakowujące, Math i liczby losowe, pułapki double, referencje i przekazywanie przez wartość, Scanner, wypisywanie i printf | ✅ |
 | `t02_controlflow` | Sterowanie (5 lekcji): if/else i klauzule strażnika, switch (klasyczny i wyrażenie), pętle, break/continue/etykiety, wzorce pętli | ✅ |
 | `t03_arrays` | Tablice (5 lekcji): podstawy, tablice wielowymiarowe, klasa `Arrays`, algorytmy pisane ręcznie, varargs | ✅ |
 | `t04_strings` | Napisy (7 lekcji): niezmienność i pula, == kontra equals, metody String, StringBuilder/StringJoiner, formatowanie i bloki tekstu, wyrażenia regularne, char i Unicode (polskie litery, emoji), algorytmy na tekście | ✅ |
 | `t05_methods` | Metody (4 lekcje): budowa i stos wywołań, przeciążanie i wybór wersji, rekurencja (memoizacja, StackOverflowError), dobre praktyki | ✅ |
 | `t06_oop_basics` | Obiektowość (9 lekcji): klasy i obiekty, konstruktory i kolejność inicjalizacji, hermetyzacja, static, `toString`/`equals`/`hashCode`, niezmienność i kopie obronne, klasy zagnieżdżone, pakiety i modyfikatory dostępu, obiekty wartości | ✅ |
-| `t07_inheritance_polymorphism` | Dziedziczenie, klasy abstrakcyjne, interfejsy, polimorfizm, sealed, SOLID | ⏳ |
+| `t07_inheritance_polymorphism` | Dziedziczenie (8): podstawy, nadpisywanie, klasy abstrakcyjne, interfejsy (default/static/private), polimorfizm, kompozycja kontra dziedziczenie, sealed, SOLID | ⏳ |
 | `t08_enums` | Enumy (4 lekcje): podstawy (values, valueOf, ordinal, switch), pola/konstruktor/metody i wyszukiwanie po kodzie, zachowanie stałych (ciała, lambdy, interfejs, singleton), EnumSet/EnumMap i maszyna stanów | ✅ |
 | `t09_records` | Rekordy (3 lekcje): co generuje record, płytka niezmienność, konstruktor kompaktowy (walidacja, normalizacja, kopie obronne), fabryki i „withery”, rekordy generyczne i lokalne, Comparable, klucze map, sealed + instanceof | ✅ |
 | `t10_exceptions` | Wyjątki (7 lekcji): try/catch/finally i stos wywołań, checked kontra unchecked i throws, kilka catch i multi-catch, try-with-resources i wyjątki stłumione, własne wyjątki z danymi, łańcuch przyczyn i opakowywanie, dobre praktyki i antywzorce | ✅ |
 | `t11_generics` | Typy generyczne (7 lekcji): po co generyki (surowe typy, remove(int)), własne klasy i interfejsy, metody generyczne i wnioskowanie, ograniczenia (extends, &), dżokery ? extends / ? super i PECS, wymazywanie typów i obejścia, generyczne repozytorium | ✅ |
-| `t12_collections` | Kolekcje | ⏳ |
+| `t12_collections` | Kolekcje (13): przegląd, listy, iterowanie i modyfikacja, zbiory, mapy, kolejki, Comparable/Comparator, kolekcje niemodyfikowalne, klasa Collections, wzorce, jak działa HashMap, własny Iterable, wydajność kolekcji | ⏳ |
 | `t13_lambdas` | Lambdy: od klasy anonimowej do lambdy, interfejsy funkcyjne, `java.util.function`, referencje do metod, składanie funkcji, domknięcia, funkcje wyższego rzędu, pułapki (8 lekcji) | ✅ |
 | `t14_optional` | Optional: podstawy, przekształcanie (map/flatMap/filter/or), dobre praktyki (3 lekcje) | ✅ |
 | `t15_numbers` | BigDecimal, kwota jako obiekt wartości (VAT, raty), BigInteger, formatowanie i parsowanie liczb, sztuczki na liczbach całkowitych (5 lekcji) | ✅ |
 | `t16_streams` | **Streamy**, 20 lekcji: wprowadzenie, tworzenie, filter/map, flatMap, sortowanie/distinct/limit, operacje końcowe, reduce, strumienie liczbowe, kolektory, toMap, groupingBy, partitioningBy, zaawansowane kolektory, Optional w streamach, pieniądze (BigDecimal), leniwość, efekty uboczne i pułapki, strumienie równoległe, 39 przepisów, 23 ćwiczenia | ✅ |
 | `t17_datetime` | Data i czas, java.time (5 lekcji): LocalDate/LocalTime/LocalDateTime i Clock, Period/Duration/ChronoUnit, DateTimeFormatter (polskie nazwy, tryb STRICT, pułapki YYYY i mm), strefy i Instant (zmiana czasu), praktyka (dni robocze, YearMonth, kolizje spotkań, kalendarz) | ✅ |
-| `t18_io_files` | Pliki, CSV, JSON, Properties, serializacja | ⏳ |
-| `t19_annotations_reflection` | Adnotacje i refleksja | ⏳ |
-| `t20_lombok` | Lombok | ⏳ |
-| `t21_concurrency` | Wątki, locki, ExecutorService, CompletableFuture | ⏳ |
-| `t22_design_patterns` | Wzorce projektowe | ⏳ |
+| `t18_io_files` | Pliki (13): Path/Files, odczyt i zapis tekstu, CSV, JSON ręcznie, Properties, przechodzenie katalogów, strumienie binarne, serializacja, własny logger, wyjątki IO, kodowanie znaków (UTF-8, polskie litery), archiwa ZIP | ⏳ |
+| `t19_annotations_reflection` | Adnotacje i refleksja (6): wbudowane, własne, refleksja, mini-walidator, mini-framework komend, dynamiczne proxy (podstawa AOP w Springu) | ⏳ |
+| `t20_lombok` | Lombok (4): gettery/settery, konstruktory, @Data/@Value/@Builder, pozostałe | ⏳ |
+| `t21_concurrency` | Współbieżność (9): wątki, wyścigi, locki i deadlock, ExecutorService, CompletableFuture, kolekcje współbieżne, synchronizatory, wzorce bezpieczeństwa wątkowego, zadania cykliczne i ForkJoin | ⏳ |
+| `t22_design_patterns` | Wzorce projektowe (10): strategia, budowniczy, fabryka, singleton, metoda szablonowa, obserwator, dekorator, wstrzykiwanie zależności, polecenie, fasada | ⏳ |
 | `t23_modern_java` | Nowości Java 8→17 (i zapowiedź 21) | ⏳ |
-| `t24_algorithms` | Złożoność, sortowanie, wyszukiwanie, struktury danych | ⏳ |
-| `t25_testing` | Testowanie bez frameworka | ⏳ |
-| `t26_jvm` | Pamięć, ładowanie klas, GC | ⏳ |
+| `t24_algorithms` | Algorytmy (8): złożoność, sortowanie, wyszukiwanie, własne struktury danych, klasyki, rekurencja z nawrotami (backtracking), programowanie dynamiczne, grafy (BFS/DFS) | ⏳ |
+| `t25_testing` | Testowanie — pojęcia bez frameworka (3): rodzaje testów, dublery (fake/stub/mock), kod łatwy do testowania | ⏳ |
+| `t26_jvm` | JVM (4): pamięć, ładowanie klas, GC, narzędzia diagnostyczne (jcmd, jstack, JFR, VisualVM) | ⏳ |
 | `t27_clean_code_pitfalls` | Pułapki, code review, czysty kod, SOLID | ⏳ |
-| `t28_capstone` | Mini-projekty łączące tematy | ⏳ |
+| `t28_networking_http` | **Nowy.** HTTP i sieć (5): URI/URL, HttpClient (Java 11+), lokalny serwer HTTP, JSON przez HTTP, asynchroniczność i timeouty | ⏳ |
+| `t29_jdbc_databases` | **Nowy.** Bazy danych (5): podstawy SQL, połączenie JDBC, PreparedStatement i SQL injection, transakcje, DAO/repozytorium (baza H2 w pamięci — zależność Maven) | ⏳ |
+| `t30_build_modules` | **Nowy.** Budowanie i uruchamianie (5): Maven od środka, JAR i classpath, moduły JPMS, aplikacje konsolowe (argumenty, kody wyjścia), procesy i zmienne środowiskowe | ⏳ |
+| `t31_jdk_toolbox` | **Nowy.** Przydatne narzędzia JDK (4): UUID i Base64, hashowanie i bezpieczeństwo (SHA-256, hasła PBKDF2, SecureRandom), wielojęzyczność (ResourceBundle, MessageFormat), logowanie (System.Logger, java.util.logging) | ⏳ |
+| `t32_junit_mockito` | **Nowy.** Testy w praktyce (5): JUnit 5, testy parametryzowane, AssertJ, Mockito, TDD na przykładzie (zależności testowe Maven) | ⏳ |
+| `t33_interview_prep` | **Nowy.** Rozmowa kwalifikacyjna (4): pytania z Javy z odpowiedziami, OOP i kolekcje „od kuchni”, zadania programistyczne, live coding krok po kroku | ⏳ |
+| `t34_toward_spring` | **Nowy.** Most do Springa (4): własny kontener IoC/DI, warstwy controller–service–repository, REST i HTTP, co daje Spring Boot | ⏳ |
+| `t35_capstone` | Mini-projekty łączące tematy (4): biblioteka, raport sprzedaży z CSV, stacje pogodowe (współbieżność), REST-owa lista zadań | ⏳ |
 
 ## Indeks haseł A–Z
 Indeks jest uzupełniany wraz z kolejnymi lekcjami. Format: *hasło → plik (numer sekcji)*.

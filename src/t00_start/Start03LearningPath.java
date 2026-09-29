@@ -13,7 +13,7 @@ import static helpers.Console.*;
  *        (learning path = ścieżka nauki; spaced repetition = powtórki w odstępach)
  *
  * W SKRÓCIE:
- *   Kurs ma 29 działów (t00–t28), ułożonych tak, że każdy korzysta tylko z wcześniejszych — idź po kolei.
+ *   Kurs ma 36 działów (t00–t35), ułożonych tak, że każdy korzysta tylko z wcześniejszych — idź po kolei.
  *   Po każdej lekcji rób powtórki w rosnących odstępach — to najskuteczniejszy sposób na trwałą wiedzę.
  *
  * ANALOGIA:
@@ -99,8 +99,16 @@ public class Start03LearningPath {
                             "t26_jvm", "t27_clean_code_pitfalls"),
                     "wzorce projektowe, nowości Javy, algorytmy, testowanie, JVM, czysty kod",
                     "Etapy 1–8"),
-            new Stage("Etap 10 — Projekty łączące",
-                    List.of("t28_capstone"),
+            new Stage("Etap 10 — Program w prawdziwym świecie",
+                    List.of("t28_networking_http", "t29_jdbc_databases", "t30_build_modules", "t31_jdk_toolbox"),
+                    "HTTP i sieć, bazy danych (JDBC), Maven/JAR/moduły, przydatne narzędzia JDK (UUID, hashe, i18n, logi)",
+                    "Etapy 1–9"),
+            new Stage("Etap 11 — Warsztat zawodowca",
+                    List.of("t32_junit_mockito", "t33_interview_prep", "t34_toward_spring"),
+                    "JUnit 5 i Mockito, przygotowanie do rozmowy kwalifikacyjnej, most do Springa",
+                    "Etap 10"),
+            new Stage("Etap 12 — Projekty łączące",
+                    List.of("t35_capstone"),
                     "małe aplikacje łączące wiele tematów naraz",
                     "wszystko powyżej")
     );

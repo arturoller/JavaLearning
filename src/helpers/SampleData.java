@@ -214,7 +214,7 @@ public final class SampleData {
      * <p>
      * Nagłówek + 8 poprawnych wierszy + 4 CELOWO BŁĘDNE (za mało pól, tekst zamiast liczby, pusta linia, zła data).
      * Prawdziwe pliki prawie zawsze mają błędne wiersze — dobry parser je pomija i liczy, zamiast się wysypać.
-     * Używane w lekcjach o plikach (t18_io_files/Io04Csv) i w t28_capstone/Capstone02SalesReport.
+     * Używane w lekcjach o plikach (t18_io_files/Io04Csv) i w t35_capstone/Capstone02SalesReport.
      */
     public static List<String> salesCsvLines() {
         return List.of(

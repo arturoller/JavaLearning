@@ -44,7 +44,7 @@ import static helpers.Console.*;
  *   meeting = spotkanie; slot = przedział (w kalendarzu); calendar = kalendarz; text style = styl tekstu (pełny/skrót).
  *
  * ZOBACZ TEŻ: t17_datetime/DateTime01LocalDateTime … DateTime04ZonesInstant, t16_streams/Streams11GroupingBy (grupowanie),
- *             t28_capstone/Capstone01Library (terminy zwrotów książek).
+ *             t35_capstone/Capstone01Library (terminy zwrotów książek).
  * </pre>
  */
 public class DateTime05Practical {
