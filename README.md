@@ -6,6 +6,8 @@ Samodzielny kurs Javy SE 17 w 36 działach (`t00`–`t35`). Każda lekcja to pli
 - ściągę do powtórek.
 
 > **Zacznij tutaj:** [`t00_start/Start01HowToUse.java`](src/t00_start/Start01HowToUse.java). Tam jest opis budowy lekcji, tagów, wyszukiwania i uruchamiania.
+>
+> **Co dalej:** po Javie kontynuuj kurs Springa w tym samym stylu — [SpringLearning](https://github.com/arturoller/SpringLearning).
 
 ## Szybki start
 1. Zainstaluj **JDK 17** (albo nowszy).
@@ -93,7 +95,7 @@ Legenda: ✅ gotowe · 🔶 w trakcie · ⏳ zaplanowane
 | `t31_jdk_toolbox` | **Nowy.** Przydatne narzędzia JDK (4): UUID i Base64, hashowanie i bezpieczeństwo (SHA-256, hasła PBKDF2, SecureRandom), wielojęzyczność (ResourceBundle, MessageFormat), logowanie (System.Logger, java.util.logging) | ⏳ |
 | `t32_junit_mockito` | **Nowy.** Testy w praktyce (5): JUnit 5, testy parametryzowane, AssertJ, Mockito, TDD na przykładzie (zależności testowe Maven) | ⏳ |
 | `t33_interview_prep` | **Nowy.** Rozmowa kwalifikacyjna (4): pytania z Javy z odpowiedziami, OOP i kolekcje „od kuchni”, zadania programistyczne, live coding krok po kroku | ⏳ |
-| `t34_toward_spring` | **Nowy.** Most do Springa (4): własny kontener IoC/DI, warstwy controller–service–repository, REST i HTTP, co daje Spring Boot | ⏳ |
+| `t34_toward_spring` | **Nowy.** Most do Springa (4): własny kontener IoC/DI, warstwy controller–service–repository, REST i HTTP, co daje Spring Boot; pełny kurs Springa: [SpringLearning](https://github.com/arturoller/SpringLearning) | ⏳ |
 | `t35_capstone` | Mini-projekty łączące tematy (4): biblioteka, raport sprzedaży z CSV, stacje pogodowe (współbieżność), REST-owa lista zadań | ⏳ |
 
 ## Indeks haseł A–Z
@@ -129,4 +131,9 @@ Indeks jest uzupełniany wraz z kolejnymi lekcjami. Format: *hasło → plik (nu
   - Awaryjnie: w konfiguracji uruchomienia (Run → Edit Configurations → Modify options → Before launch) zamień „Build” na „Build, no error check”.
 - **Kodowanie polskich znaków:** pliki kursu są w UTF-8. Jeśli polskie litery wyświetlają się źle, ustaw kodowanie projektu na UTF-8: File → Settings → Editor → File Encodings → Project Encoding.
 - **Zwinięte bloki z rozwiązaniami i odpowiedziami:** rozwiniesz je, klikając „+” na marginesie. Ctrl+Shift+NumPad+ rozwija wszystkie bloki w pliku.
-- **Wymagania:** tylko Java 17. Lekcje nie korzystają z bibliotek zewnętrznych; wyjątkiem jest Lombok w `t20_lombok`.
+- **Wymagania:** tylko Java 17. Lekcje nie korzystają z bibliotek zewnętrznych. Wyjątki (Maven pobierze je sam): Lombok w `t20_lombok`, baza H2 w `t29_jdbc_databases`, JUnit 5 / AssertJ / Mockito w `t32_junit_mockito`.
+
+## Co dalej — Spring
+Ten kurs to czysta Java SE. Następny krok to **[SpringLearning](https://github.com/arturoller/SpringLearning)** — kurs Springa i Spring Boota po polsku, w tym samym stylu: komentarze z tłumaczeniami, ćwiczenia, pytania kontrolne i ściągi.
+- Zanim zaczniesz Springa, przerób przede wszystkim działy `t06`–`t16`, `t19_annotations_reflection`, `t22_design_patterns` i `t28`–`t34`.
+- Dział `t34_toward_spring` jest mostem: pokazuje w czystej Javie to, co Spring robi „magicznie” (kontener DI, warstwy, REST).
