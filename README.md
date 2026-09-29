@@ -70,7 +70,7 @@ Legenda: ✅ gotowe · 🔶 w trakcie · ⏳ zaplanowane
 | `t08_enums` | Enumy (4 lekcje): podstawy (values, valueOf, ordinal, switch), pola/konstruktor/metody i wyszukiwanie po kodzie, zachowanie stałych (ciała, lambdy, interfejs, singleton), EnumSet/EnumMap i maszyna stanów | ✅ |
 | `t09_records` | Rekordy (3 lekcje): co generuje record, płytka niezmienność, konstruktor kompaktowy (walidacja, normalizacja, kopie obronne), fabryki i „withery”, rekordy generyczne i lokalne, Comparable, klucze map, sealed + instanceof | ✅ |
 | `t10_exceptions` | Wyjątki (7 lekcji): try/catch/finally i stos wywołań, checked kontra unchecked i throws, kilka catch i multi-catch, try-with-resources i wyjątki stłumione, własne wyjątki z danymi, łańcuch przyczyn i opakowywanie, dobre praktyki i antywzorce | ✅ |
-| `t11_generics` | Typy generyczne | ⏳ |
+| `t11_generics` | Typy generyczne (7 lekcji): po co generyki (surowe typy, remove(int)), własne klasy i interfejsy, metody generyczne i wnioskowanie, ograniczenia (extends, &), dżokery ? extends / ? super i PECS, wymazywanie typów i obejścia, generyczne repozytorium | ✅ |
 | `t12_collections` | Kolekcje | ⏳ |
 | `t13_lambdas` | Lambdy: od klasy anonimowej do lambdy, interfejsy funkcyjne, `java.util.function`, referencje do metod, składanie funkcji, domknięcia, funkcje wyższego rzędu, pułapki (8 lekcji) | ✅ |
 | `t14_optional` | Optional: podstawy, przekształcanie (map/flatMap/filter/or), dobre praktyki (3 lekcje) | ✅ |
