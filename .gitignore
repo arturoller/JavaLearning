@@ -1,0 +1,21 @@
+# Maven / kompilacja
+target/
+out/
+*.class
+
+# IntelliJ IDEA
+.idea/
+*.iml
+
+# VS Code / Eclipse
+.vscode/
+.classpath
+.project
+.settings/
+
+# System
+.DS_Store
+Thumbs.db
+
+# Logi
+*.log
