@@ -65,7 +65,7 @@ Legenda: ✅ gotowe · 🔶 w trakcie · ⏳ zaplanowane
 | `t03_arrays` | Tablice (5 lekcji): podstawy, tablice wielowymiarowe, klasa `Arrays`, algorytmy pisane ręcznie, varargs | ✅ |
 | `t04_strings` | Napisy (7 lekcji): niezmienność i pula, == kontra equals, metody String, StringBuilder/StringJoiner, formatowanie i bloki tekstu, wyrażenia regularne, char i Unicode (polskie litery, emoji), algorytmy na tekście | ✅ |
 | `t05_methods` | Metody (4 lekcje): budowa i stos wywołań, przeciążanie i wybór wersji, rekurencja (memoizacja, StackOverflowError), dobre praktyki | ✅ |
-| `t06_oop_basics` | Klasy i obiekty, konstruktory, hermetyzacja, static, `equals`/`hashCode`, niezmienność, klasy zagnieżdżone, pakiety, obiekty wartości (gotowe 4 z 9) | 🔶 |
+| `t06_oop_basics` | Obiektowość (9 lekcji): klasy i obiekty, konstruktory i kolejność inicjalizacji, hermetyzacja, static, `toString`/`equals`/`hashCode`, niezmienność i kopie obronne, klasy zagnieżdżone, pakiety i modyfikatory dostępu, obiekty wartości | ✅ |
 | `t07_inheritance_polymorphism` | Dziedziczenie, klasy abstrakcyjne, interfejsy, polimorfizm, sealed, SOLID | ⏳ |
 | `t08_enums` | Enumy (4 lekcje): podstawy (values, valueOf, ordinal, switch), pola/konstruktor/metody i wyszukiwanie po kodzie, zachowanie stałych (ciała, lambdy, interfejs, singleton), EnumSet/EnumMap i maszyna stanów | ✅ |
 | `t09_records` | Rekordy (3 lekcje): co generuje record, płytka niezmienność, konstruktor kompaktowy (walidacja, normalizacja, kopie obronne), fabryki i „withery”, rekordy generyczne i lokalne, Comparable, klucze map, sealed + instanceof | ✅ |
