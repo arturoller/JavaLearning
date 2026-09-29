@@ -76,7 +76,7 @@ Legenda: ✅ gotowe · 🔶 w trakcie · ⏳ zaplanowane
 | `t14_optional` | Optional: podstawy, przekształcanie (map/flatMap/filter/or), dobre praktyki (3 lekcje) | ✅ |
 | `t15_numbers` | BigDecimal, kwota jako obiekt wartości (VAT, raty), BigInteger, formatowanie i parsowanie liczb, sztuczki na liczbach całkowitych (5 lekcji) | ✅ |
 | `t16_streams` | **Streamy**, 20 lekcji: wprowadzenie, tworzenie, filter/map, flatMap, sortowanie/distinct/limit, operacje końcowe, reduce, strumienie liczbowe, kolektory, toMap, groupingBy, partitioningBy, zaawansowane kolektory, Optional w streamach, pieniądze (BigDecimal), leniwość, efekty uboczne i pułapki, strumienie równoległe, 39 przepisów, 23 ćwiczenia | ✅ |
-| `t17_datetime` | java.time | ⏳ |
+| `t17_datetime` | Data i czas, java.time (5 lekcji): LocalDate/LocalTime/LocalDateTime i Clock, Period/Duration/ChronoUnit, DateTimeFormatter (polskie nazwy, tryb STRICT, pułapki YYYY i mm), strefy i Instant (zmiana czasu), praktyka (dni robocze, YearMonth, kolizje spotkań, kalendarz) | ✅ |
 | `t18_io_files` | Pliki, CSV, JSON, Properties, serializacja | ⏳ |
 | `t19_annotations_reflection` | Adnotacje i refleksja | ⏳ |
 | `t20_lombok` | Lombok | ⏳ |
