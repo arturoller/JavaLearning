@@ -86,7 +86,7 @@ Legenda: ✅ gotowe · 🔶 w trakcie · ⏳ zaplanowane
 | `t22_design_patterns` | Wzorce projektowe (10): strategia, budowniczy, fabryka, singleton, metoda szablonowa, obserwator, dekorator, wstrzykiwanie zależności, polecenie, fasada | ⏳ |
 | `t23_modern_java` | Nowości Java 8→17 (i zapowiedź 21) | ⏳ |
 | `t24_algorithms` | Algorytmy i matematyka (18). Algorytmy: złożoność, sortowanie, wyszukiwanie, własne struktury danych, klasyki, rekurencja z nawrotami (backtracking), programowanie dynamiczne, grafy (BFS/DFS). Matematyka: teoria liczb (NWD, liczby pierwsze, sito Eratostenesa), arytmetyka modularna i sumy kontrolne (PESEL, NIP, Luhn, IBAN), kombinatoryka, systemy liczbowe i liczby rzymskie, metody numeryczne (Newton, bisekcja, całkowanie, Monte Carlo), statystyka, macierze i geometria, wielkie liczby, klasyki z rozmów kwalifikacyjnych (silnia, Fibonacci, liczby pierwsze, palindromy, sztuczki bitowe), zadania w stylu Project Euler | ⏳ |
-| `t25_testing` | Testowanie — pojęcia bez frameworka (3): rodzaje testów, dublery (fake/stub/mock), kod łatwy do testowania | ⏳ |
+| `t25_testing` | Testowanie — pojęcia bez frameworka (3 lekcje): po co testy, piramida testów, AAA i FIRST, własny mini-runner testów, dublery (dummy/stub/fake/spy/mock), kod łatwy do testowania (wstrzykiwanie zależności, Clock) | ✅ |
 | `t26_jvm` | JVM (4): pamięć, ładowanie klas, GC, narzędzia diagnostyczne (jcmd, jstack, JFR, VisualVM) | ⏳ |
 | `t27_clean_code_pitfalls` | Pułapki, code review, czysty kod, SOLID | ⏳ |
 | `t28_networking_http` | **Nowy.** HTTP i sieć (5): URI/URL, HttpClient (Java 11+), lokalny serwer HTTP, JSON przez HTTP, asynchroniczność i timeouty | ⏳ |
