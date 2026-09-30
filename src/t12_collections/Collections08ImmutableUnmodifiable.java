@@ -12,13 +12,13 @@ import static helpers.Console.*;
 
 /**
  * <pre>
- * TEMAT: Niemutowalność i widoki „tylko do odczytu” — List.of, unmodifiableList, copyOf, Arrays.asList
- *        (immutable = niemutowalny; unmodifiable = niemodyfikowalny; view = widok; defensive copy = kopia obronna)
+ * TEMAT: Niezmienność i widoki „tylko do odczytu” — List.of, unmodifiableList, copyOf, Arrays.asList
+ *        (immutable = niezmienny; unmodifiable = niemodyfikowalny; view = widok; defensive copy = kopia obronna)
  *
  * W SKRÓCIE:
  *   Cztery różne sposoby na „listę, której nie da się (albo nie powinno się) zmieniać” — i to NIE są synonimy.
- *   List.of tworzy naprawdę niemutowalną listę. Collections.unmodifiableList to tylko WIDOK na cudzą listę — sam
- *   nie chroni przed zmianą oryginału. List.copyOf robi niezależną, niemutowalną kopię. Arrays.asList to specjalna
+ *   List.of tworzy naprawdę niezmienną listę. Collections.unmodifiableList to tylko WIDOK na cudzą listę — sam
+ *   nie chroni przed zmianą oryginału. List.copyOf robi niezależną, niezmienną kopię. Arrays.asList to specjalna
  *   lista o STAŁYM rozmiarze, spięta z tablicą. Mylenie ich to częste źródło błędów „czemu moja lista się zmieniła”.
  *
  * ANALOGIA: kopia vs. okno.
@@ -27,47 +27,47 @@ import static helpers.Console.*;
  *   wejdzie do pokoju drzwiami (oryginalną referencją) i przestawi meble, przez okno i tak to zobaczysz.
  *
  * JAK TO DZIAŁA:
- *   List{@code <String>} a = List.of("x", "y");                        ← naprawdę niemutowalna, własne dane
+ *   List{@code <String>} a = List.of("x", "y");                        ← naprawdę niezmienna, własne dane
  *   List{@code <String>} b = Collections.unmodifiableList(mutableList); ← widok, dane wciąż w mutableList
- *   List{@code <String>} c = List.copyOf(mutableList);                  ← niezależna kopia, niemutowalna
+ *   List{@code <String>} c = List.copyOf(mutableList);                  ← niezależna kopia, niezmienna
  *   List{@code <String>} d = Arrays.asList(tablica);                    ← stały rozmiar, set działa, add/remove nie
  *
  * SŁÓWKA:
- *   immutable = niemutowalny (nie da się w ogóle zmienić); unmodifiable = niemodyfikowalny (przez TEN obiekt, ale
+ *   immutable = niezmienny (nie da się w ogóle zmienić); unmodifiable = niemodyfikowalny (przez TEN obiekt, ale
  *   dane mogą się zmienić skądinąd); view = widok; defensive copy = kopia obronna; fixed-size = o stałym rozmiarze;
- *   leak = wyciek (referencji na zewnątrz); shallow = płytki (niemutowalność nie sięga do wnętrza elementów);
+ *   leak = wyciek (referencji na zewnątrz); shallow = płytki (niezmienność nie sięga do wnętrza elementów);
  *   snapshot = migawka, zdjęcie stanu w danej chwili.
  *
  * ZOBACZ TEŻ: t12_collections/Collections01Overview (List.of — pierwsze wprowadzenie), t12_collections/Collections02Lists
- *             (ArrayList, subList jako widok), t06_oop_basics/Oop06Immutability (niemutowalność obiektów w ogóle),
- *             t09_records/Records01Basics (rekordy jako naturalnie niemutowalne wartości).
+ *             (ArrayList, subList jako widok), t06_oop_basics/Oop06Immutability (niezmienność obiektów w ogóle),
+ *             t09_records/Records01Basics (rekordy jako naturalnie niezmienne wartości).
  * </pre>
  */
 public class Collections08ImmutableUnmodifiable {
 
     public static void main(String[] args) {
-        title("Collections08 — niemutowalność: List.of, unmodifiableList, copyOf, Arrays.asList");
+        title("Collections08 — niezmienność: List.of, unmodifiableList, copyOf, Arrays.asList");
 
-        factoryImmutable();      // factory immutable = fabryki niemutowalne
+        factoryImmutable();      // factory immutable = fabryki niezmienne
         unmodifiableView();      // unmodifiable view = widok niemodyfikowalny
         copyOfIndependent();     // copy of independent = copyOf niezależny
         arraysAsListFixedSize(); // arrays as list fixed size = Arrays.asList o stałym rozmiarze
-        shallowImmutability();   // shallow immutability = niemutowalność płytka
+        shallowImmutability();   // shallow immutability = niezmienność płytka
         comparisonTable();       // comparison table = tabela porównawcza
         defensiveCopies();       // defensive copies = kopie obronne
         exercises();              // exercises = ćwiczenia
     }
 
     // =================================================================================================
-    // 1. FABRYKI NIEMUTOWALNE: List.of / Set.of / Map.of
+    // 1. FABRYKI NIEZMIENNE: List.of / Set.of / Map.of
     // =================================================================================================
 
     /**
-     * 1. List.of (9+) tworzy listę, która jest niemutowalna NAPRAWDĘ — nie da się jej zmienić żadną metodą,
+     * 1. List.of (9+) tworzy listę, która jest niezmienna NAPRAWDĘ — nie da się jej zmienić żadną metodą,
      * bo w środku w ogóle nie ma miejsca na zmianę (specjalna, wewnętrzna implementacja JDK). Null jest zabroniony.
      */
     static void factoryImmutable() {
-        section("1. List.of — naprawdę niemutowalne, null zabroniony");
+        section("1. List.of — naprawdę niezmienne, null zabroniony");
 
         List<String> colors = List.of("czerwony", "zielony", "niebieski");
         show("kolory", colors);
@@ -85,11 +85,11 @@ public class Collections08ImmutableUnmodifiable {
         expectThrows("List.of(\"a\", null, \"b\")", () -> List.of("a", null, "b"));
         // WYNIK: ✔ List.of("a", null, "b") → rzucono NullPointerException: (brak komunikatu)
 
-        // SampleData korzysta z List.of pod maską (patrz kit projektu) — dlatego jej listy też są niemutowalne:
+        // SampleData korzysta z List.of pod maską (patrz kit projektu) — dlatego jej listy też są niezmienne:
         expectThrows("SampleData.products().add(...)", () -> SampleData.products().add(SampleData.productBySku("ELE-001")));
         // WYNIK: ✔ SampleData.products().add(...) → rzucono UnsupportedOperationException: (brak komunikatu)
 
-        note("Set.of i Map.of działają tak samo: niemutowalne, null zabroniony. Ich kolejność jest NIEOKREŚLONA");
+        note("Set.of i Map.of działają tak samo: niezmienne, null zabroniony. Ich kolejność jest NIEOKREŚLONA");
         note("(może się różnić między uruchomieniami JVM) — dlatego nigdy nie wypisujemy ich wprost (reguła kursu).");
 
         // DOBRA PRAKTYKA: List.of/Set.of/Map.of do „stałych” danych w kodzie (np. lista dozwolonych statusów) —
@@ -134,12 +134,12 @@ public class Collections08ImmutableUnmodifiable {
     // =================================================================================================
 
     /**
-     * 3. List.copyOf (10+) kopiuje ELEMENTY do nowej, niemutowalnej listy. Późniejsze zmiany źródła jej nie dotyczą.
-     * Ciekawostka z dokumentacji JDK: jeśli źródło jest już niemutowalną listą (np. z List.of), copyOf zazwyczaj
+     * 3. List.copyOf (10+) kopiuje ELEMENTY do nowej, niezmiennej listy. Późniejsze zmiany źródła jej nie dotyczą.
+     * Ciekawostka z dokumentacji JDK: jeśli źródło jest już niezmienną listą (np. z List.of), copyOf zazwyczaj
      * nie kopiuje wcale, tylko oddaje tę samą instancję — bo i tak nic jej nie zagraża.
      */
     static void copyOfIndependent() {
-        section("3. List.copyOf — niezależna, niemutowalna kopia (Java 10+)");
+        section("3. List.copyOf — niezależna, niezmienna kopia (Java 10+)");
 
         List<String> mutable = new ArrayList<>(List.of("x", "y"));
         List<String> copy = List.copyOf(mutable);
@@ -195,20 +195,20 @@ public class Collections08ImmutableUnmodifiable {
         //   asList.set zmieniła się też tablica array), a add/remove zmieniłyby rozmiar tablicy, czego Java nie
         //   potrafi zrobić w miejscu → UnsupportedOperationException, nie jakiś błąd tablicy.
 
-        // DOBRA PRAKTYKA: potrzebujesz zwykłej, w pełni mutowalnej listy z tablicy?
+        // DOBRA PRAKTYKA: potrzebujesz zwykłej, w pełni zmiennej listy z tablicy?
         //   Owiń: new ArrayList<>(Arrays.asList(array)) — wtedy add/remove działają normalnie i tablicy to nie dotyczy.
     }
 
     // =================================================================================================
-    // 5. PUŁAPKA: NIEMUTOWALNOŚĆ JEST PŁYTKA
+    // 5. PUŁAPKA: NIEZMIENNOŚĆ JEST PŁYTKA
     // =================================================================================================
 
     /**
      * 5. List.of/List.copyOf/unmodifiableList chronią tylko SAMĄ LISTĘ (jej strukturę: dodawanie/usuwanie/
-     * podmiana elementów). Jeśli element sam jest mutowalny, nic nie broni przed zmianą JEGO wnętrza.
+     * podmiana elementów). Jeśli element sam jest zmienny, nic nie broni przed zmianą JEGO wnętrza.
      */
     static void shallowImmutability() {
-        section("5. Pułapka: niemutowalność jest PŁYTKA (shallow)");
+        section("5. Pułapka: niezmienność jest PŁYTKA (shallow)");
 
         List<StringBuilder> names = List.of(new StringBuilder("Ala"), new StringBuilder("Bartek"));
         show("lista", names);
@@ -223,23 +223,23 @@ public class Collections08ImmutableUnmodifiable {
 
         // PUŁAPKA: struktura listy jest chroniona (nie da się dodać/usunąć/podmienić elementu), ale StringBuilder
         //   w środku ma własne metody modyfikujące (append) i lista nic o tym nie wie — nadal jest to "ten sam"
-        //   obiekt na tej samej pozycji. Prawdziwa, pełna niemutowalność wymaga niemutowalnych ELEMENTÓW
-        //   (String, opakowania liczbowe, rekordy bez mutowalnych pól — t06_oop_basics/Oop06Immutability).
+        //   obiekt na tej samej pozycji. Prawdziwa, pełna niezmienność wymaga niezmiennych ELEMENTÓW
+        //   (String, opakowania liczbowe, rekordy bez zmiennych pól — t06_oop_basics/Oop06Immutability).
     }
 
     // =================================================================================================
-    // 6. TABELA: KTÓRĄ NIEMUTOWALNOŚĆ WYBRAĆ?
+    // 6. TABELA: KTÓRĄ NIEZMIENNOŚĆ WYBRAĆ?
     // =================================================================================================
 
     /** 6. Skrócona ściąga „na już” — pełna wersja w ŚCIĄDZE na końcu pliku. */
     static void comparisonTable() {
-        section("6. Tabela: którą niemutowalność wybrać?");
+        section("6. Tabela: którą niezmienność wybrać?");
 
-        note("List.of(...)                        → nowa lista OD ZERA, naprawdę niemutowalna, null zabroniony.");
-        note("List.copyOf(kolekcja)                → niezależna KOPIA cudzej kolekcji, niemutowalna, null zabroniony.");
-        note("Collections.unmodifiableList(lista)  → WIDOK na cudzą listę, sam nie kopiuje, oryginał wciąż mutowalny.");
+        note("List.of(...)                        → nowa lista OD ZERA, naprawdę niezmienna, null zabroniony.");
+        note("List.copyOf(kolekcja)                → niezależna KOPIA cudzej kolekcji, niezmienna, null zabroniony.");
+        note("Collections.unmodifiableList(lista)  → WIDOK na cudzą listę, sam nie kopiuje, oryginał wciąż zmienny.");
         note("Arrays.asList(tablica)                → STAŁY rozmiar, set pisze do tablicy, add/remove wyjątek.");
-        note("new ArrayList<>(cokolwiek)            → zwykła, w pełni mutowalna lista, niezależna kopia źródła.");
+        note("new ArrayList<>(cokolwiek)            → zwykła, w pełni zmienna lista, niezależna kopia źródła.");
     }
 
     // =================================================================================================
@@ -288,7 +288,7 @@ public class Collections08ImmutableUnmodifiable {
             }
 
             List<String> getItems() {
-                return items;                       // items jest JUŻ niemutowalne — bezpiecznie oddać wprost
+                return items;                       // items jest JUŻ niezmienne — bezpiecznie oddać wprost
             }
         }
 
@@ -302,20 +302,20 @@ public class Collections08ImmutableUnmodifiable {
         // WYNIK: ✔ safe.getItems().add(...) → rzucono UnsupportedOperationException: (brak komunikatu)
 
         // DOBRA PRAKTYKA: gdy pole klasy to kolekcja, kopiuj obronnie W KONSTRUKTORZE (odetnij się od cudzej listy)
-        //   i pilnuj, żeby GETTER nie oddawał referencji do mutowalnego wnętrza. Najprościej: przechowuj od razu
-        //   niemutowalną kopię (List.copyOf raz, w konstruktorze) i zwracaj ją wprost — nie trzeba kopiować drugi raz.
+        //   i pilnuj, żeby GETTER nie oddawał referencji do zmiennego wnętrza. Najprościej: przechowuj od razu
+        //   niezmienną kopię (List.copyOf raz, w konstruktorze) i zwracaj ją wprost — nie trzeba kopiować drugi raz.
     }
 
     /*
      * =================================================================================================
      * ŚCIĄGA:
-     *   • List.of(...)               — nowa lista, naprawdę niemutowalna, null zabroniony (NPE).
-     *   • List.copyOf(kolekcja)      — niezależna KOPIA, niemutowalna, null w środku zabroniony (NPE).
+     *   • List.of(...)               — nowa lista, naprawdę niezmienna, null zabroniony (NPE).
+     *   • List.copyOf(kolekcja)      — niezależna KOPIA, niezmienna, null w środku zabroniony (NPE).
      *   • Collections.unmodifiableList(l) — WIDOK na l: sam się nie modyfikuje, ale zmiany w l są przez niego widoczne.
      *   • Arrays.asList(tablica)     — stały rozmiar: set() zapisuje do tablicy, add/remove → UnsupportedOperationException.
-     *   • Niemutowalność list/kolekcji jest PŁYTKA: chroni strukturę, nie chroni wnętrza mutowalnych elementów.
+     *   • Niezmienność list/kolekcji jest PŁYTKA: chroni strukturę, nie chroni wnętrza zmiennych elementów.
      *   • Kopia obronna: kopiuj w konstruktorze (wejście) i pilnuj, by getter nie oddawał referencji do wnętrza.
-     *   • Set.of/Map.of działają jak List.of (niemutowalne, null zabroniony) — ich kolejność jest NIEOKREŚLONA.
+     *   • Set.of/Map.of działają jak List.of (niezmienne, null zabroniony) — ich kolejność jest NIEOKREŚLONA.
      *
      * PYTANIA KONTROLNE:
      *   1. Czym różni się List.of od Collections.unmodifiableList — co się dzieje z każdą z nich, gdy zmienisz
@@ -386,7 +386,7 @@ public class Collections08ImmutableUnmodifiable {
     }
 
     /**
-     * ĆWICZENIE 1 (łatwe): zwróć niezależną, niemutowalną kopię podanej listy — zmiana source PO wywołaniu
+     * ĆWICZENIE 1 (łatwe): zwróć niezależną, niezmienną kopię podanej listy — zmiana source PO wywołaniu
      * metody nie może być widoczna w wyniku. Podpowiedź: List.copyOf.
      */
     static List<String> exercise1(List<String> source) {
@@ -414,7 +414,7 @@ public class Collections08ImmutableUnmodifiable {
     }
 
     /**
-     * ĆWICZENIE 4 (trudniejsze): podana lista może zawierać null. Zwróć niemutowalną kopię BEZ elementów null,
+     * ĆWICZENIE 4 (trudniejsze): podana lista może zawierać null. Zwróć niezmienną kopię BEZ elementów null,
      * zachowując kolejność pozostałych. Podpowiedź: zwykła pętla do nowej ArrayList (albo removeIf), a na końcu
      * List.copyOf — samo List.copyOf nie przepuści null, trzeba je usunąć wcześniej.
      */
@@ -463,13 +463,13 @@ public class Collections08ImmutableUnmodifiable {
      *   2. „[1, 2, 3]” — b to widok na a, a a się zmieniło.
      *   3. Arrays.asList zwraca listę o stałym rozmiarze (spiętą z tablicą) — add zmieniłby rozmiar, więc rzuca
      *      UnsupportedOperationException. set(i, x) by zadziałał, bo nie zmienia rozmiaru.
-     *   4. „[xy]” — lista jest niemutowalna (nie można dodać/usunąć/podmienić elementu), ale element (StringBuilder)
-     *      sam jest mutowalny i append zmienia jego wnętrze, a nie strukturę listy.
+     *   4. „[xy]” — lista jest niezmienna (nie można dodać/usunąć/podmienić elementu), ale element (StringBuilder)
+     *      sam jest zmienny i append zmienia jego wnętrze, a nie strukturę listy.
      *   5. Konstruktor chroni przed CUDZĄ referencją trzymaną na wejściu (ktoś zmieni listę, którą Tobie przekazał).
      *      Getter chroni przed oddaniem referencji do WŁASNEGO wnętrza (ktoś zmieni to, co Ty trzymasz). To dwa
      *      różne kierunki wycieku — bez obu obrona jest niepełna. (W tej lekcji wystarczyła jedna kopia w
-     *      konstruktorze, bo przechowywaliśmy już niemutowalną listę — getter mógł bezpiecznie oddać ją wprost.)
-     *   6. Nie zawsze — jeśli źródło jest już niemutowalną listą (np. z List.of), copyOf zwraca TĘ SAMĄ instancję
+     *      konstruktorze, bo przechowywaliśmy już niezmienną listę — getter mógł bezpiecznie oddać ją wprost.)
+     *   6. Nie zawsze — jeśli źródło jest już niezmienną listą (np. z List.of), copyOf zwraca TĘ SAMĄ instancję
      *      zamiast kopiować (optymalizacja z dokumentacji JDK). To ważne dla wydajności: unikamy zbędnych kopii,
      *      gdy i tak nic nie zagraża oryginałowi.
      */

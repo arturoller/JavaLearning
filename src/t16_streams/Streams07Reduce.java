@@ -380,7 +380,7 @@ public class Streams07Reduce {
         show("max(naturalOrder())", numbers.stream().max(Comparator.naturalOrder()));
         // WYNIK: max(naturalOrder()) → Optional[10]
 
-        // PUŁAPKA: reduce do MUTOWALNEGO kontenera (ArrayList). identity ma być niezmienne i neutralne,
+        // PUŁAPKA: reduce do ZMIENNEGO kontenera (ArrayList). identity ma być niezmienne i neutralne,
         // a tu je zmieniamy — „element neutralny” po operacji nie jest już pusty!
         List<Integer> identity = new ArrayList<>();
         List<Integer> result = Stream.of(1, 2, 3).reduce(identity,
@@ -450,7 +450,7 @@ public class Streams07Reduce {
      *   • iloczyn → long / BigInteger (13! nie mieści się w int)
      *   • pieniądze → map(X::kwota).reduce(BigDecimal.ZERO, BigDecimal::add); porównanie → compareTo
      *   • liczby → mapToInt(...).sum() / max() / average() czytelniej niż reduce
-     *   • zbieranie do listy/mapy → collect / toList; NIGDY reduce z mutowalnym ArrayList jako identity
+     *   • zbieranie do listy/mapy → collect / toList; NIGDY reduce z zmiennym ArrayList jako identity
      *   • sklejanie tekstu → Collectors.joining(", ") (StringBuilder), nie reduce("", a + b) (O(n²))
      *
      * PYTANIA KONTROLNE:

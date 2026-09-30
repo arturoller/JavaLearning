@@ -88,7 +88,7 @@ public class Collections09CollectionsUtility {
         // WYNIK: nazwiska malejąco (Comparator) → [Celina, Bartek, Ala]
 
         // DOBRA PRAKTYKA: sort/reverse mutują przekazaną listę. Potrzebujesz oryginału bez zmian? Sortuj KOPIĘ
-        //   (jak numbers powyżej, zrobiona z SampleData.numbers()) — samo SampleData.numbers() jest niemutowalne.
+        //   (jak numbers powyżej, zrobiona z SampleData.numbers()) — samo SampleData.numbers() jest niezmienne.
         // PUŁAPKA: Collections.reverse to NIE „posortuj malejąco” — to zwykłe odwrócenie kolejności elementów.
         //   Reverse nieposortowanej listy da bałagan, nie porządek malejący (zobacz pytanie kontrolne 2).
     }
@@ -165,8 +165,8 @@ public class Collections09CollectionsUtility {
         // WYNIK: ✔ nCopies(...).set(0, "y") → rzucono UnsupportedOperationException: (brak komunikatu)
 
         // PUŁAPKA: nCopies zwraca niemodyfikowalną listę, w której WSZYSTKIE "kopie" to w rzeczywistości JEDNA,
-        //   powtórzona n razy referencja. Dla niemutowalnych elementów (String, liczby) to nieszkodliwe. Dla
-        //   mutowalnego obiektu (np. własna klasa z setterem, StringBuilder) byłaby to jedna wspólna pułapka:
+        //   powtórzona n razy referencja. Dla niezmiennych elementów (String, liczby) to nieszkodliwe. Dla
+        //   zmiennego obiektu (np. własna klasa z setterem, StringBuilder) byłaby to jedna wspólna pułapka:
         //   zmiana "jednej kopii" (przez ten sam obiekt) zmieniłaby WSZYSTKIE na raz.
     }
 
@@ -319,7 +319,7 @@ public class Collections09CollectionsUtility {
      *   • Collections.sort/reverse/shuffle/swap/rotate — działają W MIEJSCU (mutują przekazaną listę, zwracają void).
      *   • Collections.max/min/frequency/disjoint/binarySearch — TYLKO odczytują, zwracają wynik.
      *   • binarySearch wymaga listy POSORTOWANEJ tym samym porządkiem — inaczej wynik jest niezdefiniowany (cicho zły!).
-     *   • nCopies(n, x) — n razy TA SAMA referencja x, niemodyfikowalna lista; uważaj przy mutowalnym x.
+     *   • nCopies(n, x) — n razy TA SAMA referencja x, niemodyfikowalna lista; uważaj przy zmiennym x.
      *   • emptyList()/singletonList(x) — starsze odpowiedniki List.of()/List.of(x) (Collections08).
      *   • Arrays = narzędzia dla tablic, Collections = narzędzia dla kolekcji — API często lustrzane (sort, binarySearch).
      *   • Bez WYNIK: Collections.shuffle(list) bez Random — niedeterministyczne; z Random(seed) — powtarzalne.
@@ -335,7 +335,7 @@ public class Collections09CollectionsUtility {
      *          List<Integer> l = new ArrayList<>(List.of(9, 2, 5));
      *          int idx = Collections.binarySearch(l, 5);
      *   4. Co wypisze:  System.out.println(Collections.frequency(List.of(1, 1, 2, 3, 1), 1));  ?
-     *   5. Dlaczego Collections.nCopies bywa niebezpieczne z mutowalnymi elementami?
+     *   5. Dlaczego Collections.nCopies bywa niebezpieczne z zmiennymi elementami?
      *   6. Dlaczego klasy Collections i Arrays mają prywatne konstruktory?
      *   7. Kiedy wybrać Collections.max(list, comparator), a kiedy list.stream().max(comparator)?
      *   (odpowiedzi w zwiniętym bloku na samym końcu pliku)
@@ -443,14 +443,14 @@ public class Collections09CollectionsUtility {
     /*
      * ODPOWIEDZI:
      *   1. Collections.sort mutuje list W MIEJSCU (ta sama lista, void). stream().sorted().toList() zostawia list
-     *      bez zmian i zwraca ZUPEŁNIE NOWĄ, niemutowalną listę (t16_streams).
+     *      bez zmian i zwraca ZUPEŁNIE NOWĄ, niezmienną listę (t16_streams).
      *   2. „[2, 1, 3]” — reverse to zwykłe odwrócenie kolejności, a nie sortowanie malejące. Lista nie była
      *      posortowana, więc wynik nie jest uporządkowany malejąco.
      *   3. Wynik jest niewiarygodny: [9, 2, 5] nie jest posortowana, więc Collections.binarySearch nie ma prawa
      *      działać poprawnie — może zwrócić dowolny indeks albo (jak w sekcji 6) fałszywie ujemny wynik.
      *   4. „3” — 1 występuje trzy razy w [1, 1, 2, 3, 1].
      *   5. Wszystkie "kopie" w nCopies to w rzeczywistości JEDNA, wspólna referencja powtórzona n razy. Dla
-     *      mutowalnego obiektu zmiana jednej "kopii" (przez tę referencję) widoczna byłaby we WSZYSTKICH pozycjach
+     *      zmiennego obiektu zmiana jednej "kopii" (przez tę referencję) widoczna byłaby we WSZYSTKICH pozycjach
      *      na raz, bo to fizycznie ten sam obiekt.
      *   6. Nie reprezentują żadnego stanu — są tylko zbiorem funkcji statycznych. Utworzenie instancji nie miałoby
      *      sensu (co by taki obiekt "przechowywał"?), więc prywatny konstruktor jawnie to blokuje.

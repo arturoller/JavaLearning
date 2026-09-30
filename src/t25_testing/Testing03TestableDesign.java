@@ -21,7 +21,7 @@ import static helpers.Console.*;
  * W SKRÓCIE:
  *   Klasę da się przetestować albo NIE — zależy to od DECYZJI PROJEKTOWYCH podjętych, zanim jeszcze napiszesz
  *   pierwszy test. Cztery klasyczne błędy: wołanie LocalDate.now()/new Random() wprost w logice, tworzenie
- *   zależności przez `new` W ŚRODKU metody, globalny mutowalny singleton oraz drukowanie wyniku zamiast jego
+ *   zależności przez `new` W ŚRODKU metody, globalny zmienny singleton oraz drukowanie wyniku zamiast jego
  *   zwracania. Lekarstwo: wstrzykiwanie zależności (constructor injection), Clock jako parametr, i rozdzielenie
  *   CZYSTEGO obliczenia (functional core) od We/Wy (imperative shell) — obliczenie testujesz wprost, na wartościach.
  *
@@ -39,7 +39,7 @@ import static helpers.Console.*;
  * SŁÓWKA:
  *   testable design = projekt przyjazny testom; functional core = czysty rdzeń (obliczenia, bez efektów ubocznych);
  *   imperative shell = rozkazująca powłoka (We/Wy na zewnątrz rdzenia); singleton = pojedynczak (jedna, globalna
- *   instancja); shared mutable state = współdzielony, mutowalny stan; pure function = funkcja czysta (bez efektów
+ *   instancja); shared mutable state = współdzielony, zmienny stan; pure function = funkcja czysta (bez efektów
  *   ubocznych, ten sam wynik dla tych samych argumentów); testability smell = zapach nietestowalności.
  *
  * ZOBACZ TEŻ: t25_testing/Testing01Concepts (mini-runner), t25_testing/Testing02TestDoubles (stub/fake/spy/mock
@@ -93,7 +93,7 @@ public class Testing03TestableDesign {
      * PRZED — cztery pułapki naraz:
      * (1) LocalDate.now() wprost w logice — wynik zależy od DNIA uruchomienia.
      * (2) new EmailSenderImpl() W ŚRODKU metody — nie da się podstawić testu podwójnego bez zmiany kodu.
-     * (3) ReminderCounter.INSTANCE — globalny, mutowalny stan (singleton) współdzielony przez WSZYSTKIE wywołania.
+     * (3) ReminderCounter.INSTANCE — globalny, zmienny stan (singleton) współdzielony przez WSZYSTKIE wywołania.
      * (4) println zamiast return — wynik trafia TYLKO na konsolę, test nie ma jak go programowo sprawdzić.
      */
     static class MembershipReminderBad {
@@ -157,7 +157,7 @@ public class Testing03TestableDesign {
     // 3. PO — FUNCTIONAL CORE: CZYSTA FUNKCJA decide(...)
     // =================================================================================================
 
-    /** ReminderDecision = WYNIK czystego obliczenia: czy przypomnieć i z jakim komunikatem. Zwykły, niemutowalny rekord. */
+    /** ReminderDecision = WYNIK czystego obliczenia: czy przypomnieć i z jakim komunikatem. Zwykły, niezmienny rekord. */
     record ReminderDecision(boolean shouldRemind, String message) {
     }
 
@@ -324,7 +324,7 @@ public class Testing03TestableDesign {
         List<String> smells = List.of(
                 "bezpośrednie LocalDate.now()/Instant.now()/new Random() w logice biznesowej → wstrzyknij Clock/Random/Supplier",
                 "`new KonkretnaKlasa()` zależności W ŚRODKU metody/konstruktora → wstrzyknij interfejs przez konstruktor",
-                "statyczny singleton z mutowalnym stanem (X.INSTANCE) → przekaż instancję jako zwykłą zależność",
+                "statyczny singleton z zmiennym stanem (X.INSTANCE) → przekaż instancję jako zwykłą zależność",
                 "metoda void, która tylko wypisuje wynik (println) → zwróć wartość, wypisywanie zostaw wywołującemu",
                 "mieszanie obliczeń z We/Wy w jednej metodzie → rozdziel: functional core (obliczenia) / imperative shell (IO)",
                 "metoda, której nie da się wywołać bez uruchomienia całej aplikacji (baza, serwer) → wydziel logikę osobno",
@@ -334,7 +334,7 @@ public class Testing03TestableDesign {
         }
         // WYNIK:    1. bezpośrednie LocalDate.now()/Instant.now()/new Random() w logice biznesowej → wstrzyknij Clock/Random/Supplier
         // WYNIK:    2. `new KonkretnaKlasa()` zależności W ŚRODKU metody/konstruktora → wstrzyknij interfejs przez konstruktor
-        // WYNIK:    3. statyczny singleton z mutowalnym stanem (X.INSTANCE) → przekaż instancję jako zwykłą zależność
+        // WYNIK:    3. statyczny singleton z zmiennym stanem (X.INSTANCE) → przekaż instancję jako zwykłą zależność
         // WYNIK:    4. metoda void, która tylko wypisuje wynik (println) → zwróć wartość, wypisywanie zostaw wywołującemu
         // WYNIK:    5. mieszanie obliczeń z We/Wy w jednej metodzie → rozdziel: functional core (obliczenia) / imperative shell (IO)
         // WYNIK:    6. metoda, której nie da się wywołać bez uruchomienia całej aplikacji (baza, serwer) → wydziel logikę osobno

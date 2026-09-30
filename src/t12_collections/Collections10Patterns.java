@@ -104,7 +104,7 @@ public class Collections10Patterns {
 
         // PUŁAPKA: computeIfAbsent(klucz, k -> new ArrayList<>()) MUSI dostać funkcję TWORZĄCĄ nową listę za każdym
         //   razem (lambda), a nie gotowy obiekt (computeIfAbsent(klucz, new ArrayList<>())) — inaczej WSZYSTKIE
-        //   klucze dzieliłyby jedną, wspólną listę (ten sam błąd co nCopies z mutowalnym elementem — Collections09).
+        //   klucze dzieliłyby jedną, wspólną listę (ten sam błąd co nCopies z zmiennym elementem — Collections09).
     }
 
     // =================================================================================================

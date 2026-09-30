@@ -20,7 +20,7 @@ import static helpers.Console.*;
  *   HashMap.put/get w czasie O(1) to nie magia — to hashCode() klucza przepuszczony przez prostą funkcję
  *   rozpraszającą, zamieniony na indeks małej tablicy (kubełków), plus lista/drzewo wewnątrz kubełka na wypadek,
  *   gdy dwa różne klucze trafią w to samo miejsce (kolizja). Zrozumienie tego mechanizmu tłumaczy naraz: dlaczego
- *   klucze MUSZĄ mieć dobry hashCode, dlaczego mutowalny klucz jest niebezpieczny, i dlaczego HashSet to "HashMap
+ *   klucze MUSZĄ mieć dobry hashCode, dlaczego zmienny klucz jest niebezpieczny, i dlaczego HashSet to "HashMap
  *   przebrany za zbiór".
  *
  * ANALOGIA: szatnia z numerkami.
@@ -57,7 +57,7 @@ public class Collections11HashingInternals {
         collisionsAndChaining();       // collisions and chaining = kolizje i łańcuch
         loadFactorAndResize();         // load factor and resize = współczynnik wypełnienia i resize
         constantHashCodeCollision();   // constant hash code collision = stały hashCode = jeden kubełek
-        mutableKeyLostAfterChange();   // mutable key lost after change = mutowalny klucz zgubiony po zmianie
+        mutableKeyLostAfterChange();   // mutable key lost after change = zmienny klucz zgubiony po zmianie
         hashSetBuiltOnHashMap();       // hash set built on hash map = HashSet zbudowany na HashMap
         exercises();                    // exercises = ćwiczenia
     }
@@ -271,10 +271,10 @@ public class Collections11HashingInternals {
     }
 
     // =================================================================================================
-    // 7. PUŁAPKA: MUTOWALNY KLUCZ GUBI SIĘ PO ZMIANIE
+    // 7. PUŁAPKA: ZMIENNY KLUCZ GUBI SIĘ PO ZMIANIE
     // =================================================================================================
 
-    /** MutablePoint = punkt (x, y) z hashCode ZALEŻNYM od pól — celowo mutowalny, żeby pokazać pułapkę. */
+    /** MutablePoint = punkt (x, y) z hashCode ZALEŻNYM od pól — celowo zmienny, żeby pokazać pułapkę. */
     static final class MutablePoint {
         int x;
         int y;
@@ -306,7 +306,7 @@ public class Collections11HashingInternals {
      * niż przy put — i będzie szukać w NIEWŁAŚCIWYM kubełku. Wpis fizycznie zostaje w mapie, ale jest "zgubiony".
      */
     static void mutableKeyLostAfterChange() {
-        section("7. Pułapka: mutowalny klucz \"gubi się\" po zmianie");
+        section("7. Pułapka: zmienny klucz \"gubi się\" po zmianie");
 
         Map<MutablePoint, String> byPoint = new HashMap<>();
         MutablePoint key = new MutablePoint(1, 2);
@@ -329,7 +329,7 @@ public class Collections11HashingInternals {
         // PUŁAPKA: klucz JEST w mapie (size == 1), ale NIE DA SIĘ go już znaleźć — ani przez ten sam obiekt
         //   (referencyjnie!), ani przez nowy obiekt o starych współrzędnych. get liczy hashCode DZISIAJ i szuka
         //   w kubełku, w którym klucz BYŁBY z dzisiejszym hashCode — a wpis fizycznie leży w kubełku sprzed zmiany.
-        // DOBRA PRAKTYKA: klucze map / elementy setów powinny być NIEMUTOWALNE, albo przynajmniej: nie zmieniaj
+        // DOBRA PRAKTYKA: klucze map / elementy setów powinny być NIEZMIENNE, albo przynajmniej: nie zmieniaj
         //   pól użytych w equals/hashCode, gdy obiekt już jest w kolekcji. Rekordy (t09_records) są tu naturalnym
         //   wyborem — nie da się ich w ogóle zmienić po utworzeniu. Bezpieczny fix bez rekordu: remove przed
         //   zmianą, put po zmianie (ćwiczenie 4).
@@ -348,7 +348,7 @@ public class Collections11HashingInternals {
         note("final Object PRESENT = new Object();). set.add(x) to w środku map.put(x, PRESENT) != null; wcześniej");
         note("już tam było. set.contains(x) to map.containsKey(x). Dlatego HashSet dziedziczy WSZYSTKIE własności");
         note("HashMap z tej lekcji: hashCode → spread → kubełek, kolizje/łańcuch, load factor i resize, podatność");
-        note("na stały hashCode (sekcja 6) i na mutowalne elementy (sekcja 7 — tam \"klucz\", tu \"element\").");
+        note("na stały hashCode (sekcja 6) i na zmienne elementy (sekcja 7 — tam \"klucz\", tu \"element\").");
 
         Set<String> letters = new HashSet<>();
         letters.add("Aa");
@@ -369,7 +369,7 @@ public class Collections11HashingInternals {
      *   • Kubełek to lista węzłów; od 8 węzłów (i tablicy ≥ 64 kubełków) HashMap zamienia ją na drzewo (treeify).
      *   • load factor 0.75, domyślna capacity 16 → threshold 12. Przekroczenie progu = podwojenie tablicy + rehash.
      *   • Stały hashCode() spełnia kontrakt, ale niszczy wydajność (wszystko w jednym kubełku, O(n) zamiast O(1)).
-     *   • Mutowalny klucz zmieniony PO wstawieniu do mapy/setu "gubi się" — put i get liczą hashCode w różnych momentach.
+     *   • Zmienny klucz zmieniony PO wstawieniu do mapy/setu "gubi się" — put i get liczą hashCode w różnych momentach.
      *   • String.hashCode() ma wzór GWARANTOWANY przez Javadoc: s[0]*31^(n-1) + ... + s[n-1].
      *   • HashSet<E> = cienka nakładka na HashMap<E, Object> — dziedziczy wszystkie własności HashMap.
      *

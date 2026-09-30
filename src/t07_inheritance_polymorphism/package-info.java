@@ -9,7 +9,7 @@
  * Java 17), zasadę "kompozycja zamiast dziedziczenia" oraz pięć zasad SOLID na małych przykładach.</p>
  *
  * <p>Wymagania wstępne: t01_basics–t06_oop_basics (klasy, konstruktory, hermetyzacja, static, equals/hashCode,
- * niemutowalność, klasy zagnieżdżone, pakiety, obiekty wartości), t08_enums (enumy), t09_records (rekordy),
+ * niezmienność, klasy zagnieżdżone, pakiety, obiekty wartości), t08_enums (enumy), t09_records (rekordy),
  * t10_exceptions (wyjątki), t11_generics (generyki). Z kolekcji potrzebna jest tylko podstawowa znajomość
  * List/ArrayList/Map (pełny rozdział: t12_collections). Lambdy pojawiają się wyłącznie jako zapowiedź
  * (pełny rozdział: t13_lambdas).</p>
