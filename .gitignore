@@ -19,3 +19,6 @@ Thumbs.db
 
 # Logi
 *.log
+
+# Narzędzia i pliki robocze kursu (weryfikator, konspekty, rejestr lekcji) — tylko lokalnie
+temp/
