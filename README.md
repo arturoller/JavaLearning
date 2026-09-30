@@ -61,7 +61,7 @@ Legenda: ✅ gotowe · 🔶 w trakcie · ⏳ zaplanowane
 | Dział | Temat | Stan |
 |---|---|---|
 | `helpers/` | Wspólne narzędzia (`Console`, `Check`, `Sleep`, `TempDir`) i dane przykładowe (`SampleData`, `model/`) | ✅ |
-| `t00_start` | Jak korzystać z kursu, słowniczek, ścieżka nauki, dziennik powtórek (✅); debugowanie w IntelliJ (⏳ nowa lekcja) | 🔶 |
+| `t00_start` | Jak korzystać z kursu, słowniczek, ścieżka nauki, dziennik powtórek, debugowanie w IntelliJ (breakpointy, krokowanie, warunki, wyjątki) | ✅ |
 | `t01_basics` | Podstawy (11 lekcji): jak działa program, typy proste, zmienne, operatory, rzutowanie i przepełnienie, klasy opakowujące, Math i liczby losowe, pułapki double, referencje i przekazywanie przez wartość, Scanner, wypisywanie i printf | ✅ |
 | `t02_controlflow` | Sterowanie (5 lekcji): if/else i klauzule strażnika, switch (klasyczny i wyrażenie), pętle, break/continue/etykiety, wzorce pętli | ✅ |
 | `t03_arrays` | Tablice (5 lekcji): podstawy, tablice wielowymiarowe, klasa `Arrays`, algorytmy pisane ręcznie, varargs | ✅ |
