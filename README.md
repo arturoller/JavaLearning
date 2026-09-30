@@ -85,7 +85,7 @@ Legenda: ✅ gotowe · 🔶 w trakcie · ⏳ zaplanowane
 | `t21_concurrency` | Współbieżność (9): wątki, wyścigi, locki i deadlock, ExecutorService, CompletableFuture, kolekcje współbieżne, synchronizatory, wzorce bezpieczeństwa wątkowego, zadania cykliczne i ForkJoin | ⏳ |
 | `t22_design_patterns` | Wzorce projektowe (10): strategia, budowniczy, fabryka, singleton, metoda szablonowa, obserwator, dekorator, wstrzykiwanie zależności, polecenie, fasada | ⏳ |
 | `t23_modern_java` | Nowości Java 8→17 (i zapowiedź 21) | ⏳ |
-| `t24_algorithms` | Algorytmy (8): złożoność, sortowanie, wyszukiwanie, własne struktury danych, klasyki, rekurencja z nawrotami (backtracking), programowanie dynamiczne, grafy (BFS/DFS) | ⏳ |
+| `t24_algorithms` | Algorytmy i matematyka (16). Algorytmy: złożoność, sortowanie, wyszukiwanie, własne struktury danych, klasyki, rekurencja z nawrotami (backtracking), programowanie dynamiczne, grafy (BFS/DFS). Matematyka: teoria liczb (NWD, liczby pierwsze, sito Eratostenesa), arytmetyka modularna i sumy kontrolne (PESEL, NIP, Luhn, IBAN), kombinatoryka, systemy liczbowe i liczby rzymskie, metody numeryczne (Newton, bisekcja, całkowanie, Monte Carlo), statystyka, macierze i geometria, wielkie liczby | ⏳ |
 | `t25_testing` | Testowanie — pojęcia bez frameworka (3): rodzaje testów, dublery (fake/stub/mock), kod łatwy do testowania | ⏳ |
 | `t26_jvm` | JVM (4): pamięć, ładowanie klas, GC, narzędzia diagnostyczne (jcmd, jstack, JFR, VisualVM) | ⏳ |
 | `t27_clean_code_pitfalls` | Pułapki, code review, czysty kod, SOLID | ⏳ |
