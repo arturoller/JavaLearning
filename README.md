@@ -97,7 +97,7 @@ Legenda: ✅ gotowe · 🔶 w trakcie · ⏳ zaplanowane
 | `t31_jdk_toolbox` | **Nowy.** Przydatne narzędzia JDK (4): UUID i Base64, hashowanie i bezpieczeństwo (SHA-256, hasła PBKDF2, SecureRandom), wielojęzyczność (ResourceBundle, MessageFormat), logowanie (System.Logger, java.util.logging) | ⏳ |
 | `t32_junit_mockito` | **Nowy.** Testy w praktyce (5): JUnit 5, testy parametryzowane, AssertJ, Mockito, TDD na przykładzie (zależności testowe Maven) | ⏳ |
 | `t33_interview_prep` | **Nowy.** Rozmowa kwalifikacyjna (4): pytania z Javy z odpowiedziami, OOP i kolekcje „od kuchni”, zadania programistyczne, live coding krok po kroku | ⏳ |
-| `t34_toward_spring` | **Nowy.** Most do Springa (4): własny kontener IoC/DI, warstwy controller–service–repository, REST i HTTP, co daje Spring Boot; pełny kurs Springa: [SpringLearning](https://github.com/arturoller/SpringLearning) | ⏳ |
+| `t34_toward_spring` | Most do Springa (4 lekcje, czysta Java): własny kontener IoC/DI (adnotacje, wstrzykiwanie przez konstruktor, @Value, zasięgi, cykl życia, @Primary/@Qualifier, wykrywanie cykli, mini-AOP z proxy i pułapka samowywołania), warstwy controller–service–repository (DTO, granica transakcji, walidacja, tłumaczenie wyjątków na kody HTTP, testy warstw), REST od środka (routing z adnotacji, zmienne ścieżki, JSON, obsługa błędów, prawdziwy serwer HTTP), co daje Spring Boot (startery, warstwy konfiguracji, profile, auto-konfiguracja warunkowa, /health, zapytania z nazw metod jak w Spring Data); każdy temat z odpowiednikiem w Springu; pełny kurs: [SpringLearning](https://github.com/arturoller/SpringLearning) | ✅ |
 | `t35_capstone` | Mini-projekty łączące tematy (4): biblioteka, raport sprzedaży z CSV, stacje pogodowe (współbieżność), REST-owa lista zadań | ⏳ |
 
 ## Indeks haseł A–Z
