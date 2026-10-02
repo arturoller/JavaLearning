@@ -16,6 +16,7 @@
  *   <li>Pitfalls02CodeReview — typowe uwagi z code review: PRZED/PO z wyjaśnieniem, dlaczego to ma znaczenie</li>
  *   <li>CleanCode01Principles — nazewnictwo, małe funkcje, DRY/KISS/YAGNI, command-query separation, fail fast</li>
  *   <li>CleanCode02Solid — SOLID krok po kroku na jednym przykładzie (moduł fakturowania)</li>
+ *   <li>CleanCode03Architecture — od jednej klasy do aplikacji: warstwy, porty i adaptery, podstawy DDD</li>
  * </ol>
  *
  * <p>SŁÓWKA: code review = przegląd kodu; code smell = odór kodu (sygnał problemu); refactoring = refaktoryzacja;
