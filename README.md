@@ -139,3 +139,8 @@ Indeks jest uzupełniany wraz z kolejnymi lekcjami. Format: *hasło → plik (nu
 Ten kurs to czysta Java SE. Następny krok to **[SpringLearning](https://github.com/arturoller/SpringLearning)** — kurs Springa i Spring Boota po polsku, w tym samym stylu: komentarze z tłumaczeniami, ćwiczenia, pytania kontrolne i ściągi.
 - Zanim zaczniesz Springa, przerób przede wszystkim działy `t06`–`t16`, `t19_annotations_reflection`, `t22_design_patterns` i `t28`–`t34`.
 - Dział `t34_toward_spring` jest mostem: pokazuje w czystej Javie to, co Spring robi „magicznie” (kontener DI, warstwy, REST).
+
+## Licencja
+Kurs jest udostępniony na licencji **MIT** (plik [`LICENSE`](LICENSE)): możesz go swobodnie kopiować, przerabiać i używać
+do nauki — także we własnych projektach. Jedyny warunek: zachowaj informację o licencji. Kod powstał w dużej części
+z pomocą AI (Claude) i był sprawdzany weryfikatorem kursu; mimo to traktuj go jako materiał do nauki, bez gwarancji.
