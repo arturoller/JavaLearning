@@ -62,8 +62,8 @@ java -Dfile.encoding=UTF-8 -Dsun.stdout.encoding=UTF-8 tools/Verify.java --tag X
   Jeden PR = jeden dział (łatwy przegląd).
 
 ## 6. Stan i kolejność pracy (aktualizuj po każdym dziale)
-- **Gotowe (✅):** helpers, t00–t17, t19, t20, t24, t25, t26, t27.
-- **Do napisania, w tej kolejności:** t18_io_files (14), t21_concurrency (10), t22_design_patterns (15), t23_modern_java (7),
+- **Gotowe (✅):** helpers, t00–t17, t19, t20, t21, t24, t25, t26, t27.
+- **Do napisania, w tej kolejności:** t18_io_files (14), t22_design_patterns (15), t23_modern_java (7),
   t28_networking_http (6), t29_jdbc_databases (7), t30_build_modules (6), t31_jdk_toolbox (4), t32_junit_mockito (5),
   t33_interview_prep (4), t34_toward_spring (4), t35_capstone (4). Nazwy lekcji: `tools/lessons.txt`; tematy: README.
 - **Dodatki w gotowych działach (🔶 w README):** t00 Start06Git/Start07IntelliJRefactoring/Start08JShell, t04 Strings08RegexAdvanced/
