@@ -1,5 +1,57 @@
 # Assignments (one agent at a time; each agent reads AGENT_KIT.md + ONLY its own section here)
 
+## X — t30_build_modules (Opus, 1 batch)   · TAG `build` · scope `"t30_build_modules/*"`
+Folder `src/t30_build_modules/` (create). Package `t30_build_modules`. package-info.java + 6 lessons. Learner knows t01–t23 (incl.
+IO t18, annotation processing and javax.tools compiler from t19, concurrency t21). Theme: how Java code becomes a running program
+outside the IDE. RUNNABLE DEMOS use the JDK tools IN-PROCESS via java.util.spi.ToolProvider.findFirst("javac" / "jar" /
+"javadoc" / "jdeps") with output captured into a StringWriter (never to System.err), on small source files written into
+helpers.TempDir (deleted in finally); child JVMs only via ProcessBuilder with Path.of(System.getProperty("java.home"), "bin",
+"java").toString() (works on Windows too), output captured (redirectErrorStream(true)), waitFor with a timeout (10 s),
+destroyForcibly on timeout. Keep the total runtime per lesson < 15 s (at most ~4 child JVMs per lesson).
+DETERMINISM / PORTABILITY: never print absolute paths, temp dir names, java.home, versions with update numbers (print
+Runtime.version().feature() only), environment variable values (print only "PATH ustawione → true"), PIDs; classpath strings
+use File.pathSeparator (";" on Windows, ":" on Linux) → build them with it and never print them raw; tool output may contain
+paths and OS line endings → normalize "\r\n" → "\n", relativize/strip paths, or print only derived facts (exit code, "zawiera
+'error:' → true", list of entries in a jar sorted). javac diagnostics text is English and stable within JDK 17 — may be printed
+if it contains no paths (use DiagnosticCollector and print kind + code + line, or getMessage(Locale.ROOT)).
+Maven is NOT run from lessons (needs network/time) — Maven content is explanation + reading this project's ideas; ./mvnw commands
+in comments. Mention IntelliJ equivalents.
+1. Build01MavenBasics — why build tools (dependencies, repeatable builds), Maven coordinates (groupId:artifactId:version, SNAPSHOT),
+   pom.xml anatomy (shown as a text block and parsed with the JDK XML DOM parser — secure factory — to list dependencies sorted),
+   standard directory layout (and why this course uses src/ directly — sourceDirectory), lifecycle and phases (validate, compile,
+   test, package, verify, install, deploy) vs plugins/goals, dependency scopes (compile, provided, runtime, test) table,
+   transitive dependencies and conflicts (nearest wins; dependency:tree), version ranges pitfall, Maven Wrapper (mvnw, why this
+   project has it), local repository ~/.m2, Gradle comparison (Kotlin DSL sample in comments), Spring Boot starters/parent BOM.
+2. Build02JarClasspath — compile two classes in different packages with ToolProvider javac (-d out), run with a child JVM using
+   -cp, ClassNotFoundException / NoClassDefFoundError difference (demo with a missing dependency class at runtime — child output
+   shows the error TYPE; print only the type), jar tool: create jar with Main-Class in manifest (--main-class), list entries
+   (sorted), run java -jar, manifest Class-Path, fat/uber jar idea (Spring Boot executable jar), classpath order and duplicate
+   classes pitfall, resources inside jars (getResourceAsStream with leading "/" vs relative — demo).
+3. Build03Modules — JPMS (Java 9+): module-info.java (module, requires, exports, opens, requires transitive, uses/provides),
+   compile two modules into a temp module path with javac --module-source-path, run with java --module-path -m, strong
+   encapsulation demo (non-exported package → compile error captured; reflection into JDK internals →
+   InaccessibleObjectException — link t19), ServiceLoader with provides/uses (also works on the classpath via META-INF/services
+   — demo on classpath in-process), automatic and unnamed modules, split packages, jdeps (summary of a compiled class — print
+   only required module names, sorted), jlink (comment), why most apps (and Spring Boot) still run on the classpath.
+4. Build04CommandLineApps — main(String[] args), parsing arguments by hand (flags, --name=value, positional, -- terminator,
+   errors with usage text), a small CLI tool inside the lesson (e.g. "suma" with options) tested by calling its run(String[],
+   PrintStream out, PrintStream err) method directly (deterministic) AND once via a child JVM to show real exit codes
+   (System.exit(2) → exitValue 2), exit code conventions (0 ok, 1 error, 2 usage), stdin/stdout/stderr roles and piping
+   (comments), reading stdin (System.in) with a provided ByteArrayInputStream in tests, System.console() may be null (IDE),
+   picocli/JCommander mention, Spring Boot CommandLineRunner.
+5. Build05ProcessesEnv — ProcessBuilder (command list, directory, environment map — add a variable for the child and read it
+   back in the child), inheritIO vs redirect to file vs capture, redirectErrorStream, waitFor(timeout), exit codes,
+   destroy/destroyForcibly, deadlock pitfall when not reading the child's output (explain; demo reads it properly),
+   Runtime.exec(String) pitfalls (splitting, deprecated in 18), System.getenv vs System.getProperty (-D) — print only facts and
+   a lesson-specific property you set yourself, ProcessHandle (pid > 0 → true, info() optional fields), shell commands are OS
+   specific (cmd /c vs sh -c — explain, run only java children), security: never build commands from user input.
+6. Build06QualityToolsJavadoc — Javadoc comments (tags @param, @return, @throws, {@code}, {@link}), generating docs with
+   ToolProvider javadoc into the temp dir (print only exit code and whether index.html exists), doclint warnings (missing
+   @param) captured and counted, javac -Xlint warnings as quality gate (the verifier uses -Xlint:all — explain), static analysis
+   tools: Checkstyle (style), SpotBugs (bugs), PMD, SonarLint/SonarQube, Error Prone — what each finds with small code examples
+   in comments, IntelliJ inspections, formatting conventions, code coverage (JaCoCo), CI pipeline idea (build → test → analyze),
+   Maven plugins for these (snippets in text blocks).
+
 ## U — t23_modern_java (Sonnet, 1 batch)   · TAG `mod` · scope `"t23_modern_java/*"`
 Folder `src/t23_modern_java/` (create). Package `t23_modern_java`. package-info.java + 7 lessons. Learner knows t01–t22: MOST
 features below were already used in earlier lessons — this section is a REVIEW-AND-DEEPEN tour "what changed in Java 8 → 17 and
@@ -146,6 +198,7 @@ BATCH T3:
     alternative: sealed interface + records + instanceof pattern (Java 16+) or switch patterns "(Java 21+)" — compare,
     FileVisitor from t18_io_files/Io07WalkingDirectories as a JDK visitor; final summary table of all 15 patterns
     (problem → pattern → JDK/Spring example).
+
 
 
 ## S — t21_concurrency (Opus, 2 batches: S1 Concurrency01–05 + package-info, S2 Concurrency06–10)   · TAG `conc1`/`conc2` · scope `"t21_concurrency/*"`
