@@ -1,5 +1,36 @@
 # Assignments (one agent at a time; each agent reads AGENT_KIT.md + ONLY its own section here)
 
+## AB — t34_toward_spring (Opus, 1 batch)   · TAG `spr` · scope `"t34_toward_spring/*"`
+Folder `src/t34_toward_spring/` (create). Package `t34_toward_spring`. package-info.java + 4 lessons. Learner knows t01–t33
+(reflection and dynamic proxies t19, DI pattern t22_design_patterns/Patterns08DependencyInjection, HTTP server t28, JDBC t29,
+tests t32). Goal: build in PLAIN JAVA (no Spring dependency) the mechanisms Spring automates, so that SpringLearning
+(https://github.com/arturoller/SpringLearning) feels familiar; every section ends with "W Springu:" showing the equivalent
+annotation/code in a comment. com.sun.net.httpserver may be imported (supported JDK API) in Spring03. Determinism: sort
+everything discovered by reflection (fields/methods/classes) by name; HTTP servers on loopback port 0, never print ports,
+stop in finally; no stderr.
+1. Spring01IocContainer — IoC idea, a mini container: own annotations @Component, @Inject (constructor), @Value-like config
+   injection, @PostConstruct-like init; registration of a fixed list of classes (no classpath scanning — explain what scanning
+   does), constructor resolution via reflection, singleton vs prototype scope, dependency graph with cycle detection (clear
+   error message listing the cycle), interface → implementation resolution and ambiguity error (two implementations →
+   @Primary/@Qualifier idea), lifecycle order printed; a tiny AOP: wrapping beans that implement interfaces with a logging/
+   timing-free "transaction" proxy (Proxy from t19), self-invocation pitfall. Compare with ApplicationContext.
+2. Spring02Layers — controller–service–repository layering on a shop/orders domain: DTO vs entity (records), mapping, service with
+   business rules and transactions boundary (JDBC on H2 is NOT used here — in-memory repository + an interface so it can be
+   swapped), validation at the edge (own mini validator like Bean Validation), exceptions translated per layer (domain
+   exception → HTTP status idea), dependency direction rules (no controller in repository), package-by-layer vs
+   package-by-feature, testing each layer with fakes (Check), where @Transactional, @Service, @Repository, @RestController go.
+3. Spring03RestConcepts — REST principles (resources, URIs, methods, status codes, statelessness, idempotency, HATEOAS mention),
+   a mini "framework": annotation-based routing (@GetMapping/@PostMapping-like own annotations on controller methods,
+   path variables like /produkty/{sku}, query params), JSON (de)serialization of records with a small mapper (reflection over
+   record components), error handling → JSON error body (like @ControllerAdvice), served by com.sun.net.httpserver and called
+   with HttpClient in the same lesson; content negotiation and versioning described; compare with Spring MVC.
+4. Spring04WhatSpringGives — map of Spring Boot: auto-configuration (conditional beans — implement a tiny @ConditionalOnProperty-
+   like mechanism reading a Properties object), starters, externalized configuration (properties layering: defaults → file →
+   env → args, typed config record — link t18_io_files/Io06Properties), profiles (dev/test/prod), embedded server, actuator
+   health idea (implement /health in the mini framework), Spring Data repository idea (interface-based query methods via
+   dynamic proxy deriving a filter from the method name findByCategory — small demo), testing slices; a final
+   "co już umiesz, czego nauczy SpringLearning" table, and how to start a Spring Boot project (start.spring.io) in comments.
+
 ## W — t29_jdbc_databases (Opus, 1 batch)   · TAG `jdbc` · scope `"t29_jdbc_databases/*"`
 Folder `src/t29_jdbc_databases/` (create). Package `t29_jdbc_databases`. package-info.java + 7 lessons. Learner knows t01–t23
 (incl. exceptions, try-with-resources, records, collections, streams, BigDecimal, java.time, concurrency basics). Database: H2 in
@@ -97,6 +128,7 @@ server-side into thread-safe lists and printed after the request completes.
    connect vs request vs whole-operation (orTimeout), retries with limit and backoff counter (no real long sleeps), cancellation,
    server-side slow endpoint controlled by a latch (so the timeout is deterministic), limiting concurrency with a Semaphore,
    blocking vs async trade-offs, virtual threads note "(Java 21+)".
+
 
 ## X — t30_build_modules (Opus, 1 batch)   · TAG `build` · scope `"t30_build_modules/*"`
 Folder `src/t30_build_modules/` (create). Package `t30_build_modules`. package-info.java + 6 lessons. Learner knows t01–t23 (incl.
