@@ -1,5 +1,47 @@
 # Assignments (one agent at a time; each agent reads AGENT_KIT.md + ONLY its own section here)
 
+## Z — t32_junit_mockito (Opus, 1 batch)   · TAG `junit` · scope `"t32_junit_mockito/*"`
+Folder `src/t32_junit_mockito/` (create). Package `t32_junit_mockito`. package-info.java + 5 lessons. Learner knows t01–t31,
+incl. t25_testing (hand-made assertions and test ideas — link it; do not repeat basics of why to test). Libraries (in pom.xml and
+temp/lib, on the verifier classpath): JUnit Jupiter (api, params, engine), JUnit Platform Launcher, AssertJ, Mockito core.
+Imports of org.junit.*, org.assertj.*, org.mockito.* are ALLOWED in this section only.
+HOW LESSONS RUN (critical — the verifier runs `main` and compares output): each lesson declares its test classes as nested
+static classes (or package-private top-level classes in the same file) and runs them PROGRAMMATICALLY from main with the JUnit
+Platform Launcher (LauncherFactory.create(), LauncherDiscoveryRequestBuilder.request().selectors(selectClass(...)).build(),
+a SummaryGeneratingListener and/or an own TestExecutionListener that prints one deterministic line per test:
+"✔ nazwa testu" / "✘ nazwa testu — TypWyjątku: pierwsza linia komunikatu"), printed in a deterministic order (collect results,
+sort by display name or keep declaration order via @TestMethodOrder(MethodOrderer.OrderAnnotation.class) / DisplayName).
+Then print summary counts (found/succeeded/failed/skipped). Deliberately failing tests are allowed as demonstrations (show the
+AssertJ/JUnit failure message's FIRST LINE only, copied from a real run). Never print durations, stack traces, thread names.
+Nothing to System.err: JUnit/Mockito must not log warnings (if Mockito prints the inline-mock-maker/agent warning on this JDK,
+avoid it — explain in a comment; check by running). In IntelliJ the learner can ALSO run the nested test classes with the green
+arrow — mention it. Exercises: the learner writes test methods or production code; checks use Check.equal on the launcher
+summary (e.g. expected number of succeeded tests) or on production code results.
+1. JUnit01Basics — test anatomy (@Test, arrange-act-assert, given-when-then naming, @DisplayName), assertions (assertEquals with
+   message, assertTrue, assertNull, assertThrows returning the exception, assertAll grouping, assertTimeoutPreemptively — careful,
+   short), lifecycle (@BeforeEach/@AfterEach/@BeforeAll/@AfterAll, new instance per test — demo with a counter), @Disabled,
+   @Nested groups, @Tag, assumptions (assumeTrue), test independence and ordering pitfalls, Maven Surefire and src/test layout
+   (this course keeps tests inside lessons — say why), running from IntelliJ.
+2. JUnit02Parameterized — @ParameterizedTest with @ValueSource, @CsvSource (incl. textBlock), @CsvFileSource described,
+   @MethodSource (Stream<Arguments>), @EnumSource (names, mode), @NullAndEmptySource, display names with {0}/{arguments},
+   ArgumentsAccessor/aggregators briefly, @RepeatedTest, dynamic tests (@TestFactory) — on a PESEL/NIP-like validator or price
+   calculator; boundary-value analysis and equivalence classes as the way to choose cases.
+3. JUnit03AssertJ — fluent assertions: assertThat for strings, numbers (isCloseTo with offset), BigDecimal (isEqualByComparingTo —
+   PUŁAPKA scale), collections (containsExactly vs containsExactlyInAnyOrder, extracting, filteredOn, tuple), maps, Optional,
+   exceptions (assertThatThrownBy, isInstanceOf, hasMessageContaining), soft assertions (SoftAssertions.assertSoftly),
+   custom descriptions (as), recursive comparison of records/objects, readable failure messages compared with plain JUnit
+   (show first lines of both); on SampleData products/orders.
+4. JUnit04Mockito — test doubles taxonomy (dummy, stub, fake, spy, mock — link t22_design_patterns/Patterns08DependencyInjection),
+   mock(), when/thenReturn/thenThrow/thenAnswer, verify (times, never, inOrder), argument matchers (any, eq — all-or-none rule
+   PUŁAPKA), ArgumentCaptor, spy and doReturn, @Mock/@InjectMocks with MockitoExtension (@ExtendWith), strict stubs
+   (UnnecessaryStubbingException), mocking what you don't own / over-mocking pitfalls, prefer fakes for repositories,
+   Clock injection instead of mocking time; an OrderService with repository, payment gateway and mail sender.
+5. JUnit05Tdd — red-green-refactor shown step by step on a small kata (e.g. a shopping-cart discount rules or a bowling/
+   roman-numerals-like task with Polish domain): each step = a nested test class version + the production code version
+   (Step1..StepN), run in sequence showing ✘ then ✔; test naming, triangulation, refactoring under green tests, test smells
+   (logic in tests, too many mocks, flaky time), coverage vs quality (link t30 Build06), how Spring Boot tests look
+   (@SpringBootTest, @WebMvcTest, MockMvc — comments; SpringLearning).
+
 ## Y — t31_jdk_toolbox (Sonnet, 1 batch)   · TAG `tool` · scope `"t31_jdk_toolbox/*"`
 Folder `src/t31_jdk_toolbox/` (create). Package `t31_jdk_toolbox`. package-info.java + 4 lessons. Learner knows t01–t30 (incl. IO,
 charsets t18_io_files/Io12Charsets, own logger t18_io_files/Io10SimpleLogger, concurrency, build tools). Practical "small but
