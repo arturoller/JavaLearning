@@ -1,5 +1,51 @@
 # Assignments (one agent at a time; each agent reads AGENT_KIT.md + ONLY its own section here)
 
+## V — t28_networking_http (Sonnet, 1 batch)   · TAG `net` · scope `"t28_networking_http/*"`
+Folder `src/t28_networking_http/` (create). Package `t28_networking_http`. package-info.java + 6 lessons. Learner knows t01–t23
+(incl. IO t18, concurrency t21: executors, CompletableFuture). Reading order: Net01SocketsTcpUdp, Http01UriUrl, Http02HttpClient,
+Http03LocalServer, Http04JsonApi, Http05AsyncTimeouts (list it so in package-info).
+NETWORK RULES (critical): NO internet — only localhost/127.0.0.1 (InetAddress.getLoopbackAddress()). Every server binds to port 0
+(the OS picks a free port) and the port is NEVER printed (it changes every run). Servers run in the same JVM on own named
+threads/executors and are ALWAYS stopped in finally (server.stop(0), close sockets, shutdown executors) — otherwise the JVM does
+not exit and the verifier times out (30 s). Socket timeouts everywhere (setSoTimeout, HttpClient connectTimeout, request
+timeout) — generous (2 s) so slow machines pass. Never print to System.err (HttpServer/HttpClient do not log by default — keep it
+so). Exception messages of networking errors are OS- and language-dependent (e.g. "Connection refused" vs Polish Windows text) →
+print exception TYPES only (ConnectException, HttpTimeoutException, SocketTimeoutException, UnknownHostException is not demoed
+— needs DNS). Do not print HTTP headers that contain dates or JDK version (Date, Server, User-Agent "Java-http-client/17.0.x").
+The JDK HTTP server is com.sun.net.httpserver.HttpServer (module jdk.httpserver — a supported, exported JDK API; explain that
+the com.sun.* name is historical) — import it, it compiles with --release 17. Determinism: responses and logs collected
+server-side into thread-safe lists and printed after the request completes.
+1. Net01SocketsTcpUdp — what IP, port, TCP vs UDP are (table: connection, order, delivery guarantee), loopback; TCP echo server
+   with ServerSocket(0) + Socket, reading lines with BufferedReader/PrintWriter on UTF-8 (explicit charset!), a tiny text
+   protocol (commands ECHO/UPPER/QUIT), serving several clients with an executor, half-close/shutdownOutput, try-with-resources;
+   connecting to a closed port → ConnectException (type only); UDP DatagramSocket echo with a datagram size limit and no delivery
+   guarantee (explain; demo on loopback is reliable); how this relates to HTTP (text over TCP).
+2. Http01UriUrl — URI anatomy (scheme, user-info, host, port, path, query, fragment) with getters, relative resolution
+   (resolve, relativize), normalize, URLEncoder/URLDecoder with UTF-8 (Polish letters, spaces as + vs %20 — pitfall: URLEncoder
+   is for form/query encoding, not paths), building query strings safely, URI vs URL (URL.equals does DNS lookup — pitfall,
+   explain but do not run; new URL(String) deprecated in Java 20 → URI.create(...).toURL()), URISyntaxException vs
+   IllegalArgumentException from URI.create; HTTP basics: methods (GET/POST/PUT/PATCH/DELETE, safe/idempotent table), status
+   codes (2xx/3xx/4xx/5xx with common ones), headers, body, content types.
+3. Http02HttpClient — HttpClient (Java 11+) builder (connectTimeout, followRedirects, version), HttpRequest builder (GET, POST
+   with BodyPublishers.ofString UTF-8, headers), BodyHandlers.ofString/ofLines/discarding, status code and selected headers,
+   redirect following (local server returns 302), 404/500 are NOT exceptions (check statusCode — pitfall), reuse one client
+   (thread-safe, connection pool), request timeout → HttpTimeoutException (server delays via latch, not long sleep).
+   All against a small local HttpServer started inside the lesson.
+4. Http03LocalServer — HttpServer.create(new InetSocketAddress(loopback, 0), 0), contexts and HttpHandler, reading method/path/
+   query/body, writing responses (sendResponseHeaders with exact byte length of UTF-8 body — pitfall: length in chars vs bytes
+   with Polish letters; -1 for no body), status codes, Content-Type with charset, routing by method and path, a tiny REST-ish
+   in-memory resource /produkty (GET list, GET /{sku}, POST, DELETE) on SampleData.products, executor for the server, stop(0);
+   simple access log collected in a list; mention jwebserver (Java 18+) and that Spring Boot uses Tomcat — SpringLearning.
+5. Http04JsonApi — client + server exchanging JSON: a minimal JSON writer/reader INSIDE the lesson (small, for flat objects
+   and arrays — link t18_io_files/Io05JsonManual for the full one), records ↔ JSON, Content-Type application/json; charset=utf-8,
+   validation errors → 400 with a JSON error body, 404 for unknown id, 201 + Location header for created resources,
+   idempotency of PUT vs POST demo (calling twice), API versioning in path (/api/v1), what Jackson/Spring MVC automate.
+6. Http05AsyncTimeouts — sendAsync returning CompletableFuture, several requests in parallel with allOf (results printed in
+   request order), thenApply chains, error handling (exceptionally unwrapping CompletionException — type only), timeouts:
+   connect vs request vs whole-operation (orTimeout), retries with limit and backoff counter (no real long sleeps), cancellation,
+   server-side slow endpoint controlled by a latch (so the timeout is deterministic), limiting concurrency with a Semaphore,
+   blocking vs async trade-offs, virtual threads note "(Java 21+)".
+
 ## X — t30_build_modules (Opus, 1 batch)   · TAG `build` · scope `"t30_build_modules/*"`
 Folder `src/t30_build_modules/` (create). Package `t30_build_modules`. package-info.java + 6 lessons. Learner knows t01–t23 (incl.
 IO t18, annotation processing and javax.tools compiler from t19, concurrency t21). Theme: how Java code becomes a running program
