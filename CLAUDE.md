@@ -65,7 +65,7 @@ java -Dfile.encoding=UTF-8 -Dsun.stdout.encoding=UTF-8 tools/Verify.java --tag X
 - **Gotowe (✅):** helpers, wszystkie działy t00–t35.
 - **Do napisania:** nic — wszystkie działy z planu są gotowe. Nazwy lekcji: `tools/lessons.txt`; tematy: README.
 - **Dodatki w gotowych działach:** wszystkie gotowe (t00, t04, t06, t15, t17, t27 — konspekt w `tools/ASSIGNMENTS.md`, sekcja AD).
-- **Na koniec:** indeks haseł A–Z w README; przegląd wszystkich odpowiedzi „Co wypisze?” (uruchomieniem); licencja: MIT (plik LICENSE);
+- **Na koniec:** indeks haseł A–Z w README — gotowy (581 haseł; przy nowej lekcji dopisz jej hasła); przegląd wszystkich odpowiedzi „Co wypisze?” (uruchomieniem); licencja: MIT (plik LICENSE);
   do decyzji ucznia: `.gitattributes`.
 - **Uwagi do działów:** t28 i t34/t35 (HTTP) — tylko localhost, port 0, bez internetu; t29 — H2 w pom.xml, w kodzie tylko
   java.sql; t32 — JUnit 5/AssertJ/Mockito w pom.xml, testy uruchamiane z `main` przez JUnit Platform Launcher. Po każdej
