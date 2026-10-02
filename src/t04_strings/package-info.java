@@ -15,6 +15,8 @@
  *   <li>Strings05Regex — wyrażenia regularne: matches, Pattern, Matcher, grupy</li>
  *   <li>Strings06CharUnicode — typ char, klasa Character, Unicode i polskie znaki</li>
  *   <li>Strings07TextAlgorithms — algorytmy na tekście: palindromy, anagramy, liczenie słów</li>
+ *   <li>Strings08RegexAdvanced — regex dla zaawansowanych: grupy nazwane, lookaround, flagi, Unicode, walidatory</li>
+ *   <li>Strings09FormatterCheatsheet — ściąga z Formattera: konwersje, flagi, szerokość, precyzja, daty, wyjątki</li>
  * </ol>
  *
  * <p>SŁÓWKA: string = napis, łańcuch znaków; immutable = niezmienny; pool = pula; builder = budowniczy;

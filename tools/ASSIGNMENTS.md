@@ -1,5 +1,93 @@
 # Assignments (one agent at a time; each agent reads AGENT_KIT.md + ONLY its own section here)
 
+## AD — dodatki 🔶 w gotowych działach (one agent per section-addition, Sonnet unless noted)   · TAG `addNN`
+Each item = new lessons ADDED to an existing, finished section (package already exists — do NOT modify existing lessons or
+package-info except appending the new lessons to the reading order in package-info.java). Learner level: the lesson sits at
+the END of its section but may reference later sections ("zobacz tNN_..." with registry names) — keep the examples
+understandable with that section's knowledge. Do not repeat what the neighbouring lessons already teach (named below).
+AD1 — t04_strings (Strings01–07 exist: basics, methods, StringBuilder, Strings04Formatting = String.format flags/width/
+precision/argument index/Locale/text blocks, Strings05Regex = matches/find/groups/replaceAll/split basics, char/Unicode,
+text algorithms):
+  Strings08RegexAdvanced — named groups (?<name>) and group("name"), backreferences \1 and \k<name>, non-capturing (?:),
+  greedy vs reluctant vs possessive quantifiers (show the difference on "<b>x</b><b>y</b>"), lookahead/lookbehind (positive
+  and negative — password rules, number formatting with thousands separators via regex), flags (CASE_INSENSITIVE +
+  UNICODE_CASE for Polish letters, MULTILINE ^$, DOTALL, COMMENTS with (?x) for readable patterns), Pattern.quote and
+  Matcher.quoteReplacement ($ in replacement PUŁAPKA), replaceAll with a Function<MatchResult,String> (Java 9+), results()
+  stream (Java 9+), splitAsStream, Unicode classes \p{L}, \p{Lu}, \p{IsAlphabetic} vs [a-zA-Z] (Polish letters!), compiling
+  once (static final Pattern), catastrophic backtracking (explain with a SMALL safe example and timing-free count/description
+  — never run an exponential case), validators: postal code, PESEL format (+ checksum in Java, not regex), NIP, IBAN-like
+  format, e-mail (why "perfect e-mail regex" is a trap), when NOT to use regex (parsing JSON/HTML/CSV).
+  Strings09FormatterCheatsheet — a complete reference of java.util.Formatter conversions as a printed table: %s %S %d %x %X
+  %o %e %E %f %g %a %c %b %h %n %%, date/time conversions %tY %tm %td %tH %tM %tS %tB %tA with explicit Locale (pl-PL and
+  ROOT) on a fixed LocalDateTime, flags (- # + space 0 , ( ), width/precision rules for each conversion (precision on %s
+  truncates!), argument index and relative index (%<s), BigDecimal formatting with %f (no binary error) vs double, Formatter
+  into StringBuilder, String.format vs formatted vs printf vs MessageFormat (when which — link t31_jdk_toolbox/Toolbox03I18n)
+  vs DecimalFormat/NumberFormat (link t15_numbers/Numbers04FormattingParsing), IllegalFormatException family
+  (MissingFormatArgumentException, IllegalFormatConversionException — demo with expectThrows), %n vs \n (system line
+  separator → print only "\n" variants in WYNIK), U+00A0/U+202F in Polish grouping replaced before printing.
+AD2 — t06_oop_basics (Oop05ObjectMethods = equals/hashCode/toString, Oop06Immutability = immutable objects and defensive
+copies exist):
+  Oop10Copying — shallow vs deep copy with diagrams (references in fields), copy constructor and static copy factory (preferred),
+  Cloneable/clone(): how Object.clone works (field-by-field shallow copy, no constructor call), CloneNotSupportedException,
+  covariant return, cloning arrays (clone() of int[] is fine; of Object[] is shallow; 2D arrays pitfall), why clone is
+  considered broken (Effective Java item 13: final fields, checked exception, no constructor), deep copy of nested collections,
+  copying collections (new ArrayList<>(x), List.copyOf, Collections.unmodifiableList — view vs copy), records and "with"
+  methods as an alternative, serialization-based deep copy only mentioned (link t18_io_files/Io09Serialization), identity vs
+  equality checks after copying (== false, equals true).
+AD3 — t15_numbers (BigDecimal, money, BigInteger, formatting/parsing, integer tricks exist):
+  Numbers06MathCheatsheet — java.lang.Math tour as a cheatsheet with printed tables: abs (and Math.abs(Integer.MIN_VALUE)
+  pitfall, absExact Java 15+), min/max, pow/sqrt/cbrt/hypot, exp/log/log10/log1p/expm1, trigonometry in radians (toRadians,
+  sin/cos/tan, atan2 for angles), rounding family: round (HALF_UP toward +∞ for .5: round(-2.5) = -2!), floor, ceil, rint
+  (banker's rounding), floorDiv/floorMod vs / and % for negatives, exact arithmetic (addExact, multiplyExact, toIntExact →
+  ArithmeticException), signum, copySign, ulp and nextUp (why 0.1+0.2 != 0.3 explained with ulp), fma (Java 9+), random()
+  vs Random with seed vs RandomGenerator (link), StrictMath vs Math (reproducibility; since Java 17 all floating point is
+  strict — JEP 306), clamp (Java 21+ only in comment), constants PI/E, NaN and Infinity behaviour (0.0/0.0, 1/0.0, NaN != NaN,
+  Double.compare), formatting doubles with explicit Locale.
+AD4 — t17_datetime (DateTime03Formatting = ofPattern, Polish names, STRICT, YYYY/mm pitfalls exist):
+  DateTime06FormatterAdvanced — predefined ISO formatters (ISO_LOCAL_DATE, ISO_DATE_TIME, ISO_INSTANT, ISO_OFFSET_DATE_TIME,
+  BASIC_ISO_DATE, RFC_1123_DATE_TIME) with outputs, ofLocalizedDate/Time/DateTime with FormatStyle SHORT/MEDIUM/LONG/FULL in
+  pl-PL and en-US (replace U+00A0/U+202F; FULL/LONG for time need a zone — show the exception), DateTimeFormatterBuilder
+  (appendPattern, optional sections [ ], parseDefaulting, appendValue with width/SignStyle, appendText with a custom map for
+  Polish month names in nominative vs genitive — "styczeń" vs "stycznia" LLLL vs MMMM), parseCaseInsensitive, accepting
+  several input formats (optional sections and a list of formatters tried in order), ResolverStyle STRICT/SMART/LENIENT
+  (uuuu vs yyyy with STRICT), parsing to TemporalAccessor and query (TemporalQueries / LocalDate::from), formatting
+  Duration/Period manually (no built-in formatter), thread-safety (immutable — vs SimpleDateFormat), legacy interop
+  (Date.from(instant), toInstant) briefly.
+AD5 — t27_clean_code_pitfalls (CleanCode01Principles, CleanCode02Solid = SOLID on an invoicing module, Pitfalls01/02 exist)
+— Opus:
+  CleanCode03Architecture — from one class to an application: layers (presentation/application/domain/infrastructure) with
+  dependency rule, package-by-layer vs package-by-feature, hexagonal architecture (ports & adapters) built in miniature in
+  one file: domain (records + rules, no framework), inbound port (use case interface), outbound ports (repository, payment,
+  notification), adapters (in-memory repo, fake payment, console notifier), wiring in a composition root, tests of the use
+  case with fakes (Check); DDD basics: ubiquitous language, entities vs value objects, aggregates and invariants (Order with
+  lines), domain events, bounded contexts (described), anemic vs rich domain model (PRZED/PO); when this is overkill (CRUD
+  apps), how Spring maps onto it (SpringLearning); link t22_design_patterns/Patterns08DependencyInjection and Patterns11Adapter,
+  t34_toward_spring/Spring02Layers.
+AD6 — t00_start (Start01–05 exist: how to use the course, glossary, learning path, review tracker, IntelliJ debugging):
+  Start06Git — Git from zero for a beginner on Windows/IntelliJ: repository, working tree, staging, commit, log, diff,
+  branches, merge (fast-forward vs merge commit), conflicts and how to resolve them, rebase (what it does, when not to on
+  shared branches), remote/clone/fetch/pull/push, pull request flow on GitHub, .gitignore, good commit messages, undoing
+  (restore, reset --soft/--mixed/--hard with warnings, revert), stash, tags; IntelliJ Git tool window equivalents. RUNNABLE
+  part: a tiny in-memory model of Git written in the lesson (commits as records with parent ids and content hash via
+  SHA-256 of a fixed text — deterministic, branches as a Map name → commit id, HEAD, merge base search, fast-forward
+  detection, a 3-way merge of a single-line "file" producing a conflict marker) to show the mechanics; all git commands only
+  in comments/text blocks (git is NOT executed).
+  Start07IntelliJRefactoring — automated refactorings with shortcuts (Windows keymap): Rename (Shift+F6), Extract Variable
+  (Ctrl+Alt+V), Extract Method (Ctrl+Alt+M), Extract Constant (Ctrl+Alt+C), Introduce Parameter (Ctrl+Alt+P), Inline
+  (Ctrl+Alt+N), Change Signature (Ctrl+F6), Move (F6), Extract Interface, Convert to record, Replace loop with stream
+  (intention Alt+Enter); each as PRZED/PO code inside the lesson with both versions RUN to prove identical output; plus
+  everyday shortcuts table (Search Everywhere, Go to class/file, Find usages Alt+F7, Reformat Ctrl+Alt+L, Optimize imports,
+  Generate Alt+Insert, Surround with, Live templates sout/psvm/fori, Recent files, multi-cursor), safe refactoring habits
+  (tests first, small steps, version control). Be careful: shortcuts must be correct for IntelliJ IDEA default Windows keymap.
+  Start08JShell — JShell (Java 9+, JEP 222): starting it (jshell in terminal, IntelliJ JShell console), snippets without
+  class/main, implicit imports, /vars /methods /list /edit /save /open /reset /help commands, tab completion, $1 scratch
+  variables, forward references, redefining methods, when to use (experiments, checking API behaviour, quick math) vs
+  when not. RUNNABLE part: evaluate snippets with the jdk.jshell API in-process — JShell.builder().executionEngine("local")
+  .out(PrintStream of a ByteArrayOutputStream).err(same).build(); eval() each snippet and print SnippetEvent status/value
+  deterministically (no timing, no stderr; close the JShell instance in finally). Compile with --release 17 (jdk.jshell
+  module is part of the JDK — check it compiles; if module access fails, explain and fall back to comments).
+
+
 ## AC — t35_capstone (Opus, 1 batch)   · TAG `cap` · scope `"t35_capstone/*"`
 Folder `src/t35_capstone/` (create). Package `t35_capstone`. package-info.java + 4 lessons. Learner knows the WHOLE course t01–t34.
 Each lesson is a MINI-PROJECT that combines many earlier topics into one small, clean application (one file, nested types),
