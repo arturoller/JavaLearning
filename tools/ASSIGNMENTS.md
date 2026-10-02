@@ -1,5 +1,33 @@
 # Assignments (one agent at a time; each agent reads AGENT_KIT.md + ONLY its own section here)
 
+## AA — t33_interview_prep (Sonnet, 1 batch)   · TAG `intv` · scope `"t33_interview_prep/*"`
+Folder `src/t33_interview_prep/` (create). Package `t33_interview_prep`. package-info.java + 4 lessons. Learner knows t01–t32.
+Goal: junior Java developer interview in Poland. Format per lesson: many short Q&A cards — each card = question, a crisp
+model answer (2–6 lines, in comments), and wherever possible a RUNNABLE PROOF printed with WYNIK (e.g. == vs equals, Integer
+cache, String pool, HashMap with bad hashCode) — so the learner sees the answer is true. Mark each card with difficulty
+(★ / ★★ / ★★★) and a cross-reference to the lesson that explains it in depth (tools/lessons.txt names). Accuracy is critical —
+answers must be correct for Java 17 (mention when Java 21 changes something). Include "trap questions" interviewers like.
+1. Interview01JavaQuestions — ~25 cards: JDK/JRE/JVM, compile vs runtime, primitives vs wrappers, autoboxing and Integer cache
+   (-128..127), == vs equals, String immutability and pool, StringBuilder vs StringBuffer, final/finally/finalize, static,
+   pass-by-value (also for references — proof), checked vs unchecked, try-with-resources, overloading vs overriding,
+   access modifiers, interface vs abstract class (Java 8+ default methods), records, var, switch expressions, generics
+   erasure, lambdas and effectively final, Optional misuse, streams laziness, JVM memory (stack/heap), GC basics.
+2. Interview02OopCollections — ~20 cards: four OOP pillars with short code, composition vs inheritance, SOLID one-liners,
+   equals/hashCode contract with a broken example in a HashSet (proof), Comparable vs Comparator, List/Set/Map/Queue choice
+   table, ArrayList vs LinkedList (complexities), HashMap internals (buckets, treeification at 8, resize, null key), why
+   String/Integer are good keys, mutable keys pitfall (proof), TreeMap ordering, ConcurrentHashMap vs synchronizedMap,
+   fail-fast iterators (ConcurrentModificationException proof), immutability (List.of vs unmodifiableList), Big-O table.
+3. Interview03CodingTasks — 8–10 classic tasks with clean solutions + complexity + tests via Check: FizzBuzz (and why it's asked),
+   reverse string/words, palindrome (Unicode-aware note), anagram, first non-repeating character, two-sum with HashMap,
+   balanced brackets with Deque, count words with streams, find duplicates, merge sorted arrays, binary search — each with a
+   naive and an improved version, edge cases list, and how to talk about it.
+4. Interview04LiveCoding — how to behave in live coding: clarify requirements, examples first, think aloud, start simple,
+   test with edge cases, refactor; ONE realistic task solved step by step in the lesson (e.g. "parse order lines from CSV text
+   and compute totals per customer, sorted" — versions V1..V4 printed with the thought process in comments), common mistakes
+   (silent catch, no null handling, mutable shared state), questions to ask the interviewer, a 30-item final checklist; soft
+   questions (projects, learning) mentioned briefly with advice to be honest.
+Exercises: 3–5 per lesson (lesson 3: the tasks themselves are exercises with reference solutions).
+
 ## AB — t34_toward_spring (Opus, 1 batch)   · TAG `spr` · scope `"t34_toward_spring/*"`
 Folder `src/t34_toward_spring/` (create). Package `t34_toward_spring`. package-info.java + 4 lessons. Learner knows t01–t33
 (reflection and dynamic proxies t19, DI pattern t22_design_patterns/Patterns08DependencyInjection, HTTP server t28, JDBC t29,
@@ -128,6 +156,7 @@ server-side into thread-safe lists and printed after the request completes.
    connect vs request vs whole-operation (orTimeout), retries with limit and backoff counter (no real long sleeps), cancellation,
    server-side slow endpoint controlled by a latch (so the timeout is deterministic), limiting concurrency with a Semaphore,
    blocking vs async trade-offs, virtual threads note "(Java 21+)".
+
 
 
 ## X — t30_build_modules (Opus, 1 batch)   · TAG `build` · scope `"t30_build_modules/*"`

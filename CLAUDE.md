@@ -62,9 +62,9 @@ java -Dfile.encoding=UTF-8 -Dsun.stdout.encoding=UTF-8 tools/Verify.java --tag X
   Jeden PR = jeden dział (łatwy przegląd).
 
 ## 6. Stan i kolejność pracy (aktualizuj po każdym dziale)
-- **Gotowe (✅):** helpers, t00–t30, t34.
+- **Gotowe (✅):** helpers, t00–t30, t33, t34.
 - **Do napisania, w tej kolejności:** t31_jdk_toolbox (4), t32_junit_mockito (5),
-  t33_interview_prep (4), t35_capstone (4). Nazwy lekcji: `tools/lessons.txt`; tematy: README.
+  t35_capstone (4). Nazwy lekcji: `tools/lessons.txt`; tematy: README.
 - **Dodatki w gotowych działach (🔶 w README):** t00 Start06Git/Start07IntelliJRefactoring/Start08JShell, t04 Strings08RegexAdvanced/
   Strings09FormatterCheatsheet, t06 Oop10Copying, t15 Numbers06MathCheatsheet, t17 DateTime06FormatterAdvanced, t27 CleanCode03Architecture.
 - **Na koniec:** indeks haseł A–Z w README; przegląd wszystkich odpowiedzi „Co wypisze?” (uruchomieniem); decyzje ucznia:
