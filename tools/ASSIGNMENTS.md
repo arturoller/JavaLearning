@@ -1,5 +1,40 @@
 # Assignments (one agent at a time; each agent reads AGENT_KIT.md + ONLY its own section here)
 
+## Y — t31_jdk_toolbox (Sonnet, 1 batch)   · TAG `tool` · scope `"t31_jdk_toolbox/*"`
+Folder `src/t31_jdk_toolbox/` (create). Package `t31_jdk_toolbox`. package-info.java + 4 lessons. Learner knows t01–t30 (incl. IO,
+charsets t18_io_files/Io12Charsets, own logger t18_io_files/Io10SimpleLogger, concurrency, build tools). Practical "small but
+everywhere" JDK APIs. Determinism: random values (UUID.randomUUID, SecureRandom, salts) are NEVER printed — print only facts
+(length, version digit, format matches regex, two values differ → true); use fixed inputs for hashes (SHA-256 of a known text
+is deterministic — print hex via HexFormat); PBKDF2 with a FIXED salt and small iteration count in demos (say why production
+uses random salt and ≥ 600 000 iterations for PBKDF2-HMAC-SHA256 per current OWASP guidance — phrase as "rzędu setek tysięcy",
+not an exact standard); Locale always explicit; no now().
+1. Toolbox01UuidBase64 — UUID: versions (random v4, name-based v3 via nameUUIDFromBytes — deterministic, print it), structure
+   (8-4-4-4-12, version() and variant()), fromString/validation, UUID as database key pros/cons (size, index locality — v7 idea
+   in comments, not in JDK 17), uniqueness probability in words; Base64: basic/URL-safe/MIME encoders, padding and withoutPadding,
+   encoding text needs a charset (UTF-8 bytes first), decoding errors (IllegalArgumentException), Base64 is NOT encryption
+   (PUŁAPKA), data URLs and Basic auth header format as examples; HexFormat (Java 17) recap; CRC32 vs hash (link t18 Io13).
+2. Toolbox02HashingSecurity — MessageDigest (SHA-256, SHA-512; MD5/SHA-1 broken for security — why), hex output, hashing a
+   file in chunks with DigestInputStream or update loop, verifying downloads (checksum compare), constant-time comparison
+   (MessageDigest.isEqual) and why; passwords: never store plain or plain-hash, salt + slow KDF (PBKDF2WithHmacSHA256 via
+   SecretKeyFactory; bcrypt/scrypt/Argon2 via libraries, Spring Security PasswordEncoder mention), storing "algorithm$iterations
+   $salt$hash" format and verify method; SecureRandom vs Random (predictability), generating tokens (Base64 URL-safe of 32
+   random bytes — print only length), HMAC (Mac HmacSHA256 with fixed key — deterministic) for message integrity;
+   what NOT to do: own crypto, ECB mode (only mentioned), keys in source code. Encryption (AES-GCM) only described in comments.
+3. Toolbox03I18n — Locale (language, country, forLanguageTag), number/currency/date formatting per locale (pl-PL vs en-US vs
+   de-DE; replace U+00A0/U+202F with ' ' before printing and explain), ResourceBundle: properties-based bundles defined INSIDE
+   the lesson as ListResourceBundle subclasses (nested static classes, fallback chain base → pl → pl_PL, missing key →
+   MissingResourceException), MessageFormat with placeholders {0}, number/date formats inside patterns, the apostrophe-quoting
+   PUŁAPKA (''), ChoiceFormat and Polish plural forms (1 plik, 2 pliki, 5 plików — implement a correct pluralization function,
+   ChoiceFormat cannot express Polish rules fully — explain), Collator for Polish sorting (link t12 Comparators), text
+   direction/encoding notes, Spring MessageSource mention.
+4. Toolbox04Logging — (builds on t18_io_files/Io10SimpleLogger; do not repeat basics) System.Logger (Java 9+, JEP 264):
+   System.getLogger, levels, lazy Supplier messages, parameters, which backend it uses (JUL by default; SLF4J bridge); JUL
+   configuration programmatically and via a logging.properties text loaded with LogManager.readConfiguration(InputStream)
+   (all handlers writing to System.out or to a file in TempDir — NEVER System.err; reset LogManager at the end), logger
+   hierarchy and level inheritance, Filters, custom Formatter with fixed timestamp source (LogRecord.setInstant with a fixed
+   Instant), MDC idea (ThreadLocal context — own mini MDC), structured logging (key=value / JSON lines), log levels policy,
+   performance (isLoggable guards), SLF4J + Logback in Spring Boot (logback-spring.xml sample in a text block).
+
 ## AA — t33_interview_prep (Sonnet, 1 batch)   · TAG `intv` · scope `"t33_interview_prep/*"`
 Folder `src/t33_interview_prep/` (create). Package `t33_interview_prep`. package-info.java + 4 lessons. Learner knows t01–t32.
 Goal: junior Java developer interview in Poland. Format per lesson: many short Q&A cards — each card = question, a crisp
