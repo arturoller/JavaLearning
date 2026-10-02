@@ -1,5 +1,39 @@
 # Assignments (one agent at a time; each agent reads AGENT_KIT.md + ONLY its own section here)
 
+## AC — t35_capstone (Opus, 1 batch)   · TAG `cap` · scope `"t35_capstone/*"`
+Folder `src/t35_capstone/` (create). Package `t35_capstone`. package-info.java + 4 lessons. Learner knows the WHOLE course t01–t34.
+Each lesson is a MINI-PROJECT that combines many earlier topics into one small, clean application (one file, nested types),
+built in visible steps: (1) requirements and examples, (2) domain model (records, enums, sealed where it fits, validation in
+compact constructors), (3) core logic as pure, testable methods, (4) infrastructure (files/HTTP/threads) at the edges behind
+interfaces, (5) tests of behaviour with Check (and a few edge cases), (6) "co dalej" — how the same app would look in Spring
+(SpringLearning) and which lessons to revisit. Code quality matters more than size: meaningful names, small methods,
+immutability, no static mutable state, explicit Locale/charset, BigDecimal for money, Clock for time. Every lesson lists in its
+header which course topics it uses, with cross-references (tools/lessons.txt names). PUŁAPKA/DOBRA PRAKTYKA where a design
+decision is made ("dlaczego tak"). Determinism: all course rules (TempDir for files, loopback + port 0 for HTTP, never print
+ports/paths/timings, sorted output, seeds, Clock.fixed, no stderr, executors shut down in finally).
+1. Capstone01Library — library lending system: Book/Member/Loan records, availability, borrowing rules (limits per member,
+   due dates with Clock and Period, late fees in BigDecimal per day), search (streams, Comparator, Optional), reservations queue
+   (Deque), domain exceptions, a simple text command interface processed from a scripted list of commands (like a CLI, no
+   real stdin), persistence of the state to a CSV/properties-like text file in TempDir and reloading it (round trip).
+2. Capstone02SalesReport — reads SampleData.salesCsvLines() (write them to a file first), parses with validation (8 valid, 4
+   invalid with reasons and line numbers), aggregates: revenue per category (EnumMap/TreeMap, BigDecimal), per day, top products,
+   average basket; produces a formatted text report (String.format with Locale pl-PL, replacing U+00A0/U+202F) and a JSON
+   summary (small writer), writes both to TempDir and prints them; compares a stream-based and a loop-based implementation;
+   checks totals cross-wise (sum of categories = total).
+3. Capstone03WeatherStations — simulated weather stations producing measurements (deterministic: Random with fixed seeds per
+   station, no sleeps needed) processed concurrently: producer–consumer with BlockingQueue and poison pills, an ExecutorService
+   of workers, aggregation into thread-safe statistics (ConcurrentHashMap + merge or LongAdder/DoubleSummaryStatistics merged
+   per station after join), alerts for thresholds via an observer, final report sorted by station; then the same computed with
+   parallel streams and CompletableFuture to compare; prove determinism by printing results that do not depend on scheduling
+   (sums, min/max, counts), never ordering of events.
+4. Capstone04RestTodo — a small REST "TODO" service: domain (Task record with status enum, validation), repository interface
+   with in-memory implementation, service with rules (no duplicate titles, status transitions table), HTTP layer on
+   com.sun.net.httpserver.HttpServer (import allowed here) with routing for GET /tasks, GET /tasks/{id}, POST, PUT, PATCH status,
+   DELETE, JSON in/out (small mapper), proper status codes (200/201+Location/204/400/404/409), error body; a client part using
+   HttpClient that runs a scripted scenario end-to-end and prints each request/response line (method, path, status, body);
+   finally the mapping to Spring Boot (@RestController, @Service, @Repository, ResponseEntity, @Valid) in comments.
+Exercises: 3–4 per lesson — extensions of the project (a new rule, a new report line, a new endpoint), checked with Check.
+
 ## Z — t32_junit_mockito (Opus, 1 batch)   · TAG `junit` · scope `"t32_junit_mockito/*"`
 Folder `src/t32_junit_mockito/` (create). Package `t32_junit_mockito`. package-info.java + 5 lessons. Learner knows t01–t31,
 incl. t25_testing (hand-made assertions and test ideas — link it; do not repeat basics of why to test). Libraries (in pom.xml and
@@ -41,6 +75,7 @@ summary (e.g. expected number of succeeded tests) or on production code results.
    (Step1..StepN), run in sequence showing ✘ then ✔; test naming, triangulation, refactoring under green tests, test smells
    (logic in tests, too many mocks, flaky time), coverage vs quality (link t30 Build06), how Spring Boot tests look
    (@SpringBootTest, @WebMvcTest, MockMvc — comments; SpringLearning).
+
 
 ## Y — t31_jdk_toolbox (Sonnet, 1 batch)   · TAG `tool` · scope `"t31_jdk_toolbox/*"`
 Folder `src/t31_jdk_toolbox/` (create). Package `t31_jdk_toolbox`. package-info.java + 4 lessons. Learner knows t01–t30 (incl. IO,

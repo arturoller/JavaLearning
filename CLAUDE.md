@@ -62,15 +62,15 @@ java -Dfile.encoding=UTF-8 -Dsun.stdout.encoding=UTF-8 tools/Verify.java --tag X
   Jeden PR = jeden dział (łatwy przegląd).
 
 ## 6. Stan i kolejność pracy (aktualizuj po każdym dziale)
-- **Gotowe (✅):** helpers, t00–t34.
-- **Do napisania, w tej kolejności:** t35_capstone (4). Nazwy lekcji: `tools/lessons.txt`; tematy: README.
+- **Gotowe (✅):** helpers, wszystkie działy t00–t35.
+- **Do napisania:** nic — wszystkie działy z planu są gotowe. Nazwy lekcji: `tools/lessons.txt`; tematy: README.
 - **Dodatki w gotowych działach (🔶 w README):** t00 Start06Git/Start07IntelliJRefactoring/Start08JShell, t04 Strings08RegexAdvanced/
   Strings09FormatterCheatsheet, t06 Oop10Copying, t15 Numbers06MathCheatsheet, t17 DateTime06FormatterAdvanced, t27 CleanCode03Architecture.
 - **Na koniec:** indeks haseł A–Z w README; przegląd wszystkich odpowiedzi „Co wypisze?” (uruchomieniem); decyzje ucznia:
   licencja, `.gitattributes`.
-- **Uwagi do działów:** t28 — tylko localhost i wolne porty, bez internetu; t29 — dodaj H2 do pom.xml (+ ponów
-  copy-dependencies); t32 — JUnit 5/AssertJ/Mockito jako zależności; lekcje muszą dalej działać przez `main` (np. uruchamianie
-  testów programowo przez JUnit Platform Launcher), żeby weryfikator je sprawdzał — ustal to w konspekcie przed pisaniem.
+- **Uwagi do działów:** t28 i t34/t35 (HTTP) — tylko localhost, port 0, bez internetu; t29 — H2 w pom.xml, w kodzie tylko
+  java.sql; t32 — JUnit 5/AssertJ/Mockito w pom.xml, testy uruchamiane z `main` przez JUnit Platform Launcher. Po każdej
+  zmianie zależności w pom.xml ponów copy-dependencies do temp/lib.
 
 ## 7. Pułapki środowiska
 - Komputer ucznia: Windows 10, PowerShell 5.1, IntelliJ IDEA 2026.1. Bitdefender blokuje pliki `.ps1` (i `.txt` ze skryptami
