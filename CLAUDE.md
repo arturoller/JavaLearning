@@ -64,8 +64,8 @@ java -Dfile.encoding=UTF-8 -Dsun.stdout.encoding=UTF-8 tools/Verify.java --tag X
 ## 6. Stan i kolejność pracy (aktualizuj po każdym dziale)
 - **Gotowe (✅):** helpers, wszystkie działy t00–t35.
 - **Do napisania:** nic — wszystkie działy z planu są gotowe. Nazwy lekcji: `tools/lessons.txt`; tematy: README.
-- **Dodatki w gotowych działach (🔶 w README):** t00 Start06Git/Start07IntelliJRefactoring/Start08JShell, t04 Strings08RegexAdvanced/
-  Strings09FormatterCheatsheet, t06 Oop10Copying, t15 Numbers06MathCheatsheet, t17 DateTime06FormatterAdvanced, t27 CleanCode03Architecture.
+- **Dodatki w gotowych działach (🔶 w README):** t00 Start06Git/Start07IntelliJRefactoring/Start08JShell,
+  t06 Oop10Copying, t15 Numbers06MathCheatsheet, t17 DateTime06FormatterAdvanced, t27 CleanCode03Architecture.
 - **Na koniec:** indeks haseł A–Z w README; przegląd wszystkich odpowiedzi „Co wypisze?” (uruchomieniem); decyzje ucznia:
   licencja, `.gitattributes`.
 - **Uwagi do działów:** t28 i t34/t35 (HTTP) — tylko localhost, port 0, bez internetu; t29 — H2 w pom.xml, w kodzie tylko
