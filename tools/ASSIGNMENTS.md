@@ -1,5 +1,94 @@
 # Assignments (one agent at a time; each agent reads AGENT_KIT.md + ONLY its own section here)
 
+## S — t21_concurrency (Opus, 2 batches: S1 Concurrency01–05 + package-info, S2 Concurrency06–10)   · TAG `conc1`/`conc2` · scope `"t21_concurrency/*"`
+Folder `src/t21_concurrency/` (create). Package `t21_concurrency`. package-info.java (batch S1) + 10 lessons. Learner knows t01–t20
+(OOP, records, enums, exceptions, generics, collections, lambdas, Optional, streams incl. parallel streams basics, java.time, IO,
+reflection, Lombok). Accuracy is critical: state only what the Java Memory Model and the java.util.concurrent Javadoc GUARANTEE;
+when something "usually" happens on HotSpot/x86 but is not guaranteed, say exactly that.
+DETERMINISM = the hardest rule here (the verifier compares output and its ORDER; timeout 30 s per lesson; any stderr = failure):
+- Never print from several threads in a way whose order matters. Pattern: threads write results into a thread-safe structure
+  (or return them via Future), main thread joins/awaits, then prints SORTED or in submission order (Future list order).
+- Thread names: give your own names (new Thread(r, "pracownik-1"), own ThreadFactory) — default names like pool-3-thread-2 and
+  thread ids depend on what ran before. Never print Thread ids, hash codes, timings, nanoTime differences, CPU counts
+  (availableProcessors() > 0 → true is fine).
+- Race-condition demos: the lost-update count varies and may even be 0 on some runs → print only guaranteed facts
+  ("wynik ≤ 200000 → true", "AtomicInteger daje dokładnie → 200000"), or the deterministic "with the fix" result, and
+  describe the typical bad number in a comment marked "(wynik zależy od uruchomienia)". To SHOW an interleaving
+  deterministically, force it with CountDownLatch/CyclicBarrier/Phaser in a step-by-step scenario.
+- Deadlock: never leave a real deadlock hanging. Demonstrate with tryLock(timeout) detecting it, or a real deadlock of two
+  DAEMON threads detected via ThreadMXBean.findDeadlockedThreads() and then abandoned (main ends normally) — names sorted.
+- Sleeps: helpers.Sleep.ms only to make a scenario readable, total sleeping per lesson < 3 s; correctness must never rely on
+  sleep (use latches/join). Timeouts in demos: generous (≥ 2 s) so slow CI machines pass; use orTimeout/get(timeout) with
+  tasks that block on a latch that is never released when a timeout must happen.
+- Always shut down executors (try/finally shutdown + awaitTermination, or try-with-resources only in a "(Java 19+)" comment),
+  otherwise the JVM does not exit (non-daemon threads) and the verifier times out.
+- Uncaught exceptions in threads print a stack trace to STDERR → always catch inside the task, or set an
+  UncaughtExceptionHandler that prints to System.out a deterministic line. CompletableFuture exceptions: print
+  getClass().getSimpleName() + getMessage() of the cause (CompletionException wraps it — show the unwrapping).
+- Virtual threads, structured concurrency, scoped values = Java 21+ → comments only, marked "(Java 21+)".
+Common content rules: each lesson ties to real use (Spring web server = thread pool per request, @Async, @Scheduled, singleton
+beans must be thread-safe — SpringLearning). PUŁAPKA/DOBRA PRAKTYKA with "dlaczego". 3–4 exercises per lesson, deterministic
+(return values computed by concurrent code but with a single correct answer, e.g. sum computed by N tasks).
+
+BATCH S1:
+1. Concurrency01Threads — process vs thread, why concurrency (waiting on IO, using cores), Thread with Runnable/lambda, start vs
+   run (run = same thread — demo with Thread.currentThread().getName()), join (and join(timeout)), thread states (NEW, RUNNABLE,
+   TIMED_WAITING, TERMINATED — print getState at deterministic moments), daemon threads (JVM does not wait for them),
+   interrupt(): interrupting sleep → InterruptedException, restoring the flag (Thread.currentThread().interrupt()), cooperative
+   cancellation (loop checking isInterrupted), never stop()/suspend() (deprecated — why), UncaughtExceptionHandler, sleep vs
+   busy waiting, priorities are only hints, cost of threads (memory per stack) → pools in Concurrency04.
+2. Concurrency02RaceConditions — shared mutable state, count++ is read-modify-write (three steps — show bytecode idea in a
+   comment), lost update (facts only, see DETERMINISM), check-then-act (if (!map.containsKey) put) race, forced interleaving demo
+   with latches that deterministically loses an update, fixes: synchronized method/block (monitor, one object = one lock),
+   AtomicInteger/AtomicLong (incrementAndGet, compareAndSet loop, updateAndGet), LongAdder for counters, immutability and
+   confinement (no sharing = no problem); synchronized on the wrong object (new Object() each time, on a boxed Integer/String
+   literal) as PUŁAPKA; visibility issue preview (volatile stop flag) → Concurrency10.
+3. Concurrency03Locks — intrinsic lock re-entrancy, ReentrantLock (lock/unlock in finally, tryLock, tryLock(timeout),
+   lockInterruptibly, fairness), Condition (await/signal; while-loop for spurious wakeups) in a bounded buffer, ReadWriteLock
+   (many readers, one writer), StampedLock briefly (optimistic read), wait/notify classic (always in while, holding the monitor;
+   IllegalMonitorStateException demo), deadlock (4 conditions; lock ordering fix; tryLock with timeout detecting it; detection
+   via ThreadMXBean — see DETERMINISM), livelock and starvation described.
+4. Concurrency04Executors — why pools (thread reuse, limit), Executors.newFixedThreadPool with own ThreadFactory (names),
+   submit Runnable vs Callable, Future (get, get(timeout) → TimeoutException, cancel(true), isDone), invokeAll (results in task
+   order), invokeAny, shutdown vs shutdownNow vs awaitTermination (lifecycle; RejectedExecutionException after shutdown),
+   ThreadPoolExecutor parameters (core, max, queue, rejection policies) and why newCachedThreadPool / unbounded queues are
+   dangerous, exception inside a task is captured in Future (ExecutionException.getCause) — and lost with execute()+no handler,
+   sizing rule of thumb (CPU-bound ≈ cores, IO-bound more), Spring's ThreadPoolTaskExecutor / @Async mention.
+5. Concurrency05CompletableFuture — supplyAsync (always pass own executor — common ForkJoinPool caveat), thenApply / thenAccept /
+   thenRun, thenCompose (flatMap) vs thenApply, thenCombine, allOf (collect results in order) / anyOf, exceptionally / handle /
+   whenComplete, CompletionException wrapping, orTimeout / completeOnTimeout (Java 9+), join vs get (checked vs unchecked),
+   *Async variants and which thread runs callbacks (not guaranteed — never print it), a realistic pipeline: fetch price and
+   stock "services" (simulated with latches/short sleeps) in parallel, combine, fallback on failure; comparison with
+   synchronous code (PRZED/PO); WebClient/reactive mention.
+package-info.java: reading order of all 10 lessons with one-line descriptions.
+
+BATCH S2:
+6. Concurrency06ConcurrentCollections — why Collections.synchronizedList is not enough (compound actions, iteration needs
+   manual synchronized), ConcurrentHashMap (atomic merge/compute/computeIfAbsent/putIfAbsent, no null keys/values, weakly
+   consistent iterators — no ConcurrentModificationException, size is an estimate under contention), word counting with N tasks
+   (deterministic result printed via TreeMap), CopyOnWriteArrayList (listeners; cheap reads, expensive writes),
+   BlockingQueue (ArrayBlockingQueue, LinkedBlockingQueue; put/take vs offer/poll with timeout) — producer–consumer with poison
+   pill, ConcurrentLinkedQueue, ConcurrentSkipListMap (sorted), PUŁAPKA: get-then-put on ConcurrentHashMap is still a race.
+7. Concurrency07Synchronizers — CountDownLatch (start gate, finish gate; one-shot), CyclicBarrier (phases, barrier action),
+   Semaphore (limit concurrent access — e.g. max 2 connections; count max concurrency observed → deterministic ≤ 2),
+   Phaser briefly, Exchanger briefly, which to choose (table), all demos with deterministic printing after the fact.
+8. Concurrency08ThreadSafetyPatterns — strategies: immutability (records, final, defensive copies), confinement (local
+   variables, ThreadLocal — and its leak in pools; remove() in finally), synchronization, atomic variables, concurrent
+   collections; thread-safe lazy init (holder idiom, enum singleton), safe publication (final fields guarantee), stateless
+   services (Spring singleton beans — instance fields with request data are a bug, demo), SimpleDateFormat not thread-safe vs
+   DateTimeFormatter immutable, documenting thread safety (@ThreadSafe idea in comments), checklist for code review.
+9. Concurrency09ScheduledForkJoin — ScheduledExecutorService (schedule, scheduleAtFixedRate vs scheduleWithFixedDelay — explain
+   difference; demo with a counter and latch, print counts only), exception in periodic task silently stops the schedule
+   (PUŁAPKA — demo), Timer as legacy; ForkJoinPool and RecursiveTask (divide and conquer sum of array, threshold), work
+   stealing explained, parallel streams use the common pool (ForkJoinPool.commonPool) — when they help and when they hurt
+   (shared state, small data, blocking IO), Spring @Scheduled / cron mention.
+10. Concurrency10MemoryModel — visibility, reordering, atomicity as three separate problems; happens-before rules (program order,
+    monitor unlock→lock, volatile write→read, Thread.start, Thread.join, executor submit, final fields); volatile stop flag
+    (correct) vs non-volatile (may never stop — explain JIT hoisting, do NOT run a loop that could hang: show only the correct
+    version running, the broken one in comments), volatile does not make count++ atomic (facts-only demo), double-checked
+    locking broken without volatile and correct with it (code + explanation), long/double tearing (non-volatile 64-bit
+    writes may be split — JLS 17.7), false sharing mentioned, summary table "co gwarantuje co".
+
 ## R — t18_io_files (Sonnet, 4 batches: R1 Io01–04 + package-info, R2 Io05–08, R3 Io09–11, R4 Io12–14)   · TAG `io1`…`io4` · scope `"t18_io_files/*"`
 Folder `src/t18_io_files/` (create). Package `t18_io_files`. package-info.java (batch R1) + 14 lessons. Learner knows t01–t17
 (OOP, records, enums, exceptions incl. try-with-resources and wrapping, generics, collections, lambdas, Optional, BigDecimal,
