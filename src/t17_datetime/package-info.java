@@ -15,6 +15,7 @@
  *   <li>DateTime03Formatting — DateTimeFormatter: wzorce, polskie nazwy, parsowanie, błędy</li>
  *   <li>DateTime04ZonesInstant — ZoneId, ZonedDateTime, Instant, zmiana czasu letni/zimowy</li>
  *   <li>DateTime05Practical — praktyka: dni robocze, terminy, harmonogramy, raporty</li>
+ *   <li>DateTime06FormatterAdvanced — dodatek: formatery ISO i lokalne, Builder, ResolverStyle, parsowanie, Duration/Period, stary kod</li>
  * </ol>
  *
  * <p>SŁÓWKA: date = data; time = czas (godzina); local = lokalny (bez strefy); period = okres; duration = czas trwania;
