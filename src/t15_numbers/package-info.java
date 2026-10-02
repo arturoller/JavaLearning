@@ -18,6 +18,7 @@
  *   <li>Numbers03BigInteger — silnia, potęgi, reszta z dzielenia, liczby pierwsze</li>
  *   <li>Numbers04FormattingParsing — String.format, NumberFormat, DecimalFormat, wczytywanie „1 234,56”</li>
  *   <li>Numbers05IntegerTricks — przepełnienie, Math.addExact, dzielenie z resztą, systemy liczbowe, bity</li>
+ *   <li>Numbers06MathCheatsheet — ściągawka klasy Math: zaokrąglanie, floorMod, wersje Exact, ulp, NaN, tabele wyników</li>
  * </ol>
  *
  * <p>SŁÓWKA: number = liczba; decimal = dziesiętny; big = duży; money = pieniądze; value object = obiekt-wartość;
