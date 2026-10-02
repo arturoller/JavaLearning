@@ -101,31 +101,678 @@ Legenda: ✅ gotowe · 🔶 w trakcie · ⏳ zaplanowane
 | `t35_capstone` | Mini-projekty łączące cały kurs (4 lekcje): biblioteka (wypożyczenia, terminy i opłaty z Clock i BigDecimal, kolejka rezerwacji, powłoka poleceń, zapis i odczyt stanu z pliku), raport sprzedaży z CSV (walidacja z numerami linii, agregacje EnumMap/TreeMap, kontrola krzyżowa sum, raport pl-PL i JSON), stacje pogodowe (producent–konsument, pula wątków, statystyki bezpieczne wątkowo, alarmy przez obserwatora, strumień równoległy i CompletableFuture), REST-owa lista zadań (model z tabelą przejść, serwis z regułami, routing i kody HTTP, prawdziwy serwer i klient, przełożenie na Spring Boot) | ✅ |
 
 ## Indeks haseł A–Z
-Indeks jest uzupełniany wraz z kolejnymi lekcjami. Format: *hasło → plik (numer sekcji)*.
+Format: *hasło → plik (numer sekcji)*; przy kilku miejscach pierwsze jest główne. Brak numeru = temat całej lekcji. Czego tu nie ma, znajdziesz w IntelliJ: Ctrl+Shift+F (szukanie w całym projekcie).
 
+### A
+
+- **ACID** → `t29_jdbc_databases/Jdbc04Transactions` (5)
+- **/actuator/health** → `t34_toward_spring/Spring04WhatSpringGives` (7)
+- **Adapter (wzorzec)** → `t22_design_patterns/Patterns11Adapter`
+- **adnotacja** → `t19_annotations_reflection/Annotations01BuiltIn` (1)
+- **agregat (DDD)** → `t27_clean_code_pitfalls/CleanCode03Architecture` (5)
+- **algorytm Dijkstry** → `t24_algorithms/Algorithms08Graphs` (6)
 - **allMatch / anyMatch / noneMatch** → `t16_streams/Streams06TerminalOps` (6)
+- **allOf / anyOf** → `t21_concurrency/Concurrency05CompletableFuture` (5); `t28_networking_http/Http05AsyncTimeouts` (2)
+- **anagram** → `t04_strings/Strings07TextAlgorithms` (2); `t33_interview_prep/Interview03CodingTasks` (4)
+- **analiza statyczna kodu** → `t30_build_modules/Build06QualityToolsJavadoc` (5)
+- **API JSON (klient i serwer)** → `t28_networking_http/Http04JsonApi`
+- **aplikacja konsolowa (main, args)** → `t30_build_modules/Build04CommandLineApps` (1, 2)
+- **architektura warstwowa** → `t27_clean_code_pitfalls/CleanCode03Architecture` (2, 3); `t34_toward_spring/Spring02Layers` (1)
+- **Arrange-Act-Assert (AAA)** → `t25_testing/Testing01Concepts` (3)
+- **ArrayDeque** → `t12_collections/Collections06QueuesDeques` (2, 3)
+- **ArrayList** → `t12_collections/Collections02Lists` (1, 2)
+- **ArrayList kontra LinkedList** → `t12_collections/Collections02Lists` (9); `t12_collections/Collections13Performance` (5)
+- **Arrays.asList** → `t03_arrays/Arrays03Utility` (7); `t12_collections/Collections02Lists` (8); `t12_collections/Collections08ImmutableUnmodifiable` (4)
+- **Arrays.binarySearch** → `t03_arrays/Arrays03Utility` (3); `t24_algorithms/Algorithms03Searching` (8)
+- **Arrays.deepToString** → `t03_arrays/Arrays02MultiDim` (1)
+- **Arrays.equals / deepEquals** → `t03_arrays/Arrays03Utility` (6)
+- **Arrays.sort** → `t03_arrays/Arrays03Utility` (1, 2)
 - **Arrays.stream** → `t16_streams/Streams02Creation` (3)
-- **BigDecimal.compareTo** → `t16_streams/Streams03FilterMap` (1)
+- **assert (domyślnie wyłączony)** → `t25_testing/Testing01Concepts` (8)
+- **AssertJ (assertThat)** → `t32_junit_mockito/JUnit03AssertJ`
+- **AssertJ: usingRecursiveComparison** → `t32_junit_mockito/JUnit03AssertJ` (8)
+- **AtomicInteger / AtomicLong** → `t21_concurrency/Concurrency02RaceConditions` (5)
+- **auto-konfiguracja warunkowa** → `t34_toward_spring/Spring04WhatSpringGives` (6)
+- **autoboxing i unboxing** → `t01_basics/Basics06Wrappers` (2)
+
+### B
+
+- **backoff (wykładnicze ponawianie)** → `t28_networking_http/Http05AsyncTimeouts` (7)
+- **Base64** → `t31_jdk_toolbox/Toolbox01UuidBase64` (6, 7, 9); `t23_modern_java/Modern01Java8` (8)
+- **bezpieczeństwo wątkowe (thread safety)** → `t21_concurrency/Concurrency08ThreadSafetyPatterns`
+- **BFS (przeszukiwanie wszerz)** → `t24_algorithms/Algorithms08Graphs` (2)
+- **BigDecimal** → `t15_numbers/Numbers01BigDecimal`
+- **BigDecimal: dzielenie, MathContext** → `t15_numbers/Numbers01BigDecimal` (4); `t24_algorithms/Math08BigNumbers` (6, 7)
+- **BigDecimal: equals kontra compareTo** → `t15_numbers/Numbers01BigDecimal` (7); `t16_streams/Streams15BigDecimalMoney` (8)
+- **BigDecimal.compareTo** → `t15_numbers/Numbers01BigDecimal` (7); `t16_streams/Streams15BigDecimalMoney` (8)
+- **BigDecimal w strumieniach** → `t16_streams/Streams15BigDecimalMoney`
+- **BigInteger** → `t15_numbers/Numbers03BigInteger`; `t24_algorithms/Math08BigNumbers` (2)
+- **BlockingQueue** → `t21_concurrency/Concurrency06ConcurrentCollections` (7)
+- **blok tekstu (text block)** → `t23_modern_java/Modern04TextBlocks`; `t01_basics/Basics11ConsoleOutput` (6)
+- **blokowanie optymistyczne** → `t29_jdbc_databases/Jdbc04Transactions` (7)
+- **blokowanie pesymistyczne** → `t29_jdbc_databases/Jdbc04Transactions` (8)
+- **błąd o jeden (off-by-one)** → `t02_controlflow/Control03Loops` (6); `t00_start/Start05Debugging`
+- **BodyHandlers** → `t28_networking_http/Http02HttpClient` (4)
 - **boxed** → `t16_streams/Streams02Creation` (4)
+- **break** → `t02_controlflow/Control04BreakContinueLabels` (1)
+- **breakpoint (punkt zatrzymania)** → `t00_start/Start05Debugging` (1)
+- **breakpoint warunkowy** → `t00_start/Start05Debugging` (3)
+- **BufferedReader.readLine** → `t18_io_files/Io02ReadingText` (4)
+- **Builder (wzorzec)** → `t22_design_patterns/Patterns02Builder`
+
+### C
+
+- **catch: kolejność od szczegółu do ogółu** → `t10_exceptions/Exceptions01Basics` (7); `t10_exceptions/Exceptions03MultiCatch` (1)
+- **Caused by / getCause (przyczyna)** → `t10_exceptions/Exceptions06ChainingWrapping` (1, 2, 3)
+- **Chain of Responsibility** → `t22_design_patterns/Patterns14ChainOfResponsibility`
+- **char to liczba** → `t01_basics/Basics02PrimitiveTypes` (4); `t04_strings/Strings06CharUnicode` (1)
 - **chars()** → `t16_streams/Streams02Creation` (7)
-- **Files.lines** → `t16_streams/Streams02Creation` (9)
+- **checked i unchecked (wyjątki sprawdzane)** → `t10_exceptions/Exceptions02CheckedUnchecked`
+- **ciało stałej enuma** → `t08_enums/Enums03ConstantBodies` (1, 2)
+- **class loader** → `t26_jvm/Jvm02ClassLoadingInit` (8)
+- **Class<T>** → `t11_generics/Generics06ErasureLimits` (7)
+- **ClassCastException** → `t07_inheritance_polymorphism/Inherit05Polymorphism` (5)
+- **ClassNotFoundException kontra NoClassDefFoundError** → `t30_build_modules/Build02JarClasspath` (7)
+- **Clock (testowalne teraz)** → `t17_datetime/DateTime01LocalDateTime` (8); `t25_testing/Testing02TestDoubles` (8)
+- **Cloneable / clone** → `t06_oop_basics/Oop10Copying` (7, 8)
+- **code review: typowe uwagi** → `t27_clean_code_pitfalls/Pitfalls02CodeReview`
+- **Collator (sortowanie po polsku)** → `t31_jdk_toolbox/Toolbox03I18n` (7); `t12_collections/Collections07ComparableComparator` (7); `t16_streams/Streams05SortDistinctLimit` (1)
+- **collectingAndThen** → `t16_streams/Streams13AdvancedCollectors` (2)
+- **Collection i Map — jak wybrać** → `t12_collections/Collections01Overview` (2, 7)
+- **Collections.binarySearch** → `t12_collections/Collections09CollectionsUtility` (6)
+- **Collections.synchronizedList** → `t21_concurrency/Concurrency06ConcurrentCollections` (1)
+- **Collections.unmodifiableList** → `t12_collections/Collections08ImmutableUnmodifiable` (2)
+- **Collectors.counting / summingInt / averagingInt** → `t16_streams/Streams09CollectorsBasic` (5, 6)
+- **Collectors.joining** → `t16_streams/Streams09CollectorsBasic` (4)
+- **Collectors.teeing** → `t16_streams/Streams13AdvancedCollectors` (5); `t23_modern_java/Modern06ApiAdditions` (7)
+- **Collectors.toMap** → `t16_streams/Streams10CollectorsToMap`
+- **Command (wzorzec)** → `t22_design_patterns/Patterns09Command`
+- **Command-Query Separation** → `t27_clean_code_pitfalls/CleanCode01Principles` (6)
+- **Comparable** → `t07_inheritance_polymorphism/Inherit04Interfaces` (5); `t12_collections/Collections07ComparableComparator` (1)
+- **Comparator** → `t12_collections/Collections07ComparableComparator` (3)
+- **Comparator.comparing / thenComparing / reversed** → `t12_collections/Collections07ComparableComparator` (3, 4, 5); `t13_lambdas/Lambda05Composition` (6)
+- **compareTo (String)** → `t04_strings/Strings01Basics` (6)
+- **compareTo zgodne z equals** → `t12_collections/Collections07ComparableComparator` (2)
+- **CompletableFuture** → `t21_concurrency/Concurrency05CompletableFuture`
+- **Composite (wzorzec)** → `t22_design_patterns/Patterns12Composite`
+- **computeIfAbsent** → `t12_collections/Collections05Maps` (4); `t12_collections/Collections10Patterns` (2)
+- **ConcurrentHashMap** → `t21_concurrency/Concurrency06ConcurrentCollections` (2, 3, 4)
+- **ConcurrentModificationException** → `t12_collections/Collections03IterationModification` (3); `t16_streams/Streams17SideEffectsPitfalls` (2)
+- **Condition (await / signal)** → `t21_concurrency/Concurrency03Locks` (5)
+- **contains / indexOf / startsWith** → `t04_strings/Strings02Methods` (3)
+- **continue** → `t02_controlflow/Control04BreakContinueLabels` (2, 8)
+- **CountDownLatch** → `t21_concurrency/Concurrency07Synchronizers` (1, 2)
+- **Created (201) i nagłówek Location** → `t28_networking_http/Http04JsonApi` (5)
+- **CSV** → `t18_io_files/Io04Csv`
+- **CyclicBarrier** → `t21_concurrency/Concurrency07Synchronizers` (3, 4)
+- **cztery filary OOP** → `t33_interview_prep/Interview02OopCollections` (1)
+- **czysta funkcja** → `t05_methods/Methods04GoodPractices` (5); `t25_testing/Testing03TestableDesign` (3)
+- **czysty kod (nazewnictwo, małe funkcje)** → `t27_clean_code_pitfalls/CleanCode01Principles` (1, 2)
+
+### D
+
+- **DAO / repozytorium** → `t29_jdbc_databases/Jdbc05Dao` (1)
+- **DateTimeFormatter** → `t17_datetime/DateTime03Formatting`; `t17_datetime/DateTime06FormatterAdvanced`
+- **DateTimeFormatter: bezpieczeństwo wątkowe** → `t17_datetime/DateTime06FormatterAdvanced` (10); `t21_concurrency/Concurrency08ThreadSafetyPatterns` (8)
+- **DateTimeFormatter: SMART / STRICT / LENIENT** → `t17_datetime/DateTime03Formatting` (5); `t17_datetime/DateTime06FormatterAdvanced` (7)
+- **DDD (domain-driven design)** → `t27_clean_code_pitfalls/CleanCode03Architecture` (4)
+- **debugowanie (debugger)** → `t00_start/Start05Debugging`
+- **Decorator (wzorzec)** → `t22_design_patterns/Patterns07Decorator`
+- **Dependency Injection (wstrzykiwanie zależności)** → `t22_design_patterns/Patterns08DependencyInjection`
+- **Deque** → `t12_collections/Collections06QueuesDeques`
+- **DFS (przeszukiwanie w głąb)** → `t24_algorithms/Algorithms08Graphs` (3, 4)
+- **diament <>** → `t11_generics/Generics01Why` (4)
+- **do-while** → `t02_controlflow/Control03Loops` (4)
+- **domknięcie (closure)** → `t13_lambdas/Lambda06ClosuresScope`
+- **double-checked locking** → `t21_concurrency/Concurrency10MemoryModel` (6); `t22_design_patterns/Patterns04Singleton` (5)
+- **DRY** → `t05_methods/Methods04GoodPractices` (6); `t27_clean_code_pitfalls/CleanCode01Principles` (3)
+- **drzewo poszukiwań binarnych (BST)** → `t24_algorithms/Algorithms04DataStructures` (5)
+- **dublery testowe (dummy, stub, fake, spy, mock)** → `t25_testing/Testing02TestDoubles`
+- **Duration** → `t17_datetime/DateTime02PeriodDuration` (3, 6)
+- **dwa wskaźniki (two pointers)** → `t24_algorithms/Algorithms05Classics` (1, 2)
+- **dynamic dispatch** → `t07_inheritance_polymorphism/Inherit05Polymorphism` (2)
+- **dynamiczne proxy (java.lang.reflect.Proxy)** → `t19_annotations_reflection/Annotations06DynamicProxy`
+- **dziedziczenie (extends)** → `t07_inheritance_polymorphism/Inherit01Basics` (1, 2)
+- **dzielenie całkowite** → `t01_basics/Basics04Operators` (1)
+
+### E
+
+- **efekt uboczny (side effect)** → `t05_methods/Methods04GoodPractices` (5); `t13_lambdas/Lambda08Pitfalls` (4); `t16_streams/Streams17SideEffectsPitfalls` (1)
+- **effectively final (efektywnie finalna)** → `t13_lambdas/Lambda06ClosuresScope` (2, 3); `t23_modern_java/Modern01Java8` (9)
+- **emoji i para zastępcza (surrogate pair)** → `t04_strings/Strings06CharUnicode` (6); `t18_io_files/Io12Charsets` (7)
+- **enum (typ wyliczeniowy)** → `t08_enums/Enums01Basics`
+- **enum implementujący interfejs** → `t08_enums/Enums03ConstantBodies` (4)
+- **enum jako singleton** → `t08_enums/Enums03ConstantBodies` (6); `t22_design_patterns/Patterns04Singleton` (4)
+- **EnumMap** → `t08_enums/Enums04EnumMapSet` (3, 4)
+- **EnumSet** → `t08_enums/Enums04EnumMapSet` (1, 2)
+- **equals** → `t06_oop_basics/Oop05ObjectMethods` (4)
+- **equals bez hashCode** → `t06_oop_basics/Oop05ObjectMethods` (8); `t12_collections/Collections04Sets` (5)
+- **etykiety (break / continue z etykietą)** → `t02_controlflow/Control04BreakContinueLabels` (5, 7)
+- **Evaluate Expression i Watches** → `t00_start/Start05Debugging` (4)
+- **exception breakpoint** → `t00_start/Start05Debugging` (5)
+- **ExecutorService** → `t21_concurrency/Concurrency04Executors`
+
+### F
+
+- **Facade (wzorzec)** → `t22_design_patterns/Patterns10Facade`
+- **Factory (wzorzec)** → `t22_design_patterns/Patterns03Factory`
+- **fail fast** → `t05_methods/Methods04GoodPractices` (4); `t10_exceptions/Exceptions07BestPractices` (3); `t27_clean_code_pitfalls/CleanCode01Principles` (7)
+- **fall-through (brak break w switchu)** → `t02_controlflow/Control02Switch` (2)
+- **Fibonacci: rekurencja, iteracja, memoizacja** → `t05_methods/Methods03Recursion` (3); `t24_algorithms/Math09InterviewClassics` (2); `t24_algorithms/Algorithms07DynamicProgramming` (1)
+- **Files.lines** → `t16_streams/Streams02Creation` (9); `t18_io_files/Io02ReadingText` (3)
+- **Files.readString / readAllLines** → `t18_io_files/Io02ReadingText` (1, 2)
+- **Files.walk / list / find** → `t18_io_files/Io07WalkingDirectories` (1, 2, 3)
+- **Files.writeString / write** → `t18_io_files/Io03WritingText` (1, 3)
 - **filter** → `t16_streams/Streams03FilterMap` (1)
-- **findFirst** → `t16_streams/Streams01Intro` (7)
-- **helpful NullPointerException** → `t16_streams/Streams03FilterMap` (8)
-- **IllegalStateException (ponowne użycie streamu)** → `t16_streams/Streams01Intro` (8)
+- **final / finally / finalize** → `t33_interview_prep/Interview01JavaQuestions` (4)
+- **finally** → `t10_exceptions/Exceptions01Basics` (4); `t10_exceptions/Exceptions03MultiCatch` (5)
+- **findFirst** → `t16_streams/Streams01Intro` (7); `t16_streams/Streams06TerminalOps` (5)
+- **FizzBuzz** → `t02_controlflow/Control05LoopPatterns` (7); `t24_algorithms/Math09InterviewClassics` (8); `t33_interview_prep/Interview03CodingTasks` (1)
+- **flatMap** → `t16_streams/Streams04FlatMap`
+- **floorDiv / floorMod** → `t15_numbers/Numbers05IntegerTricks` (6); `t15_numbers/Numbers06MathCheatsheet` (6); `t24_algorithms/Math02ModularChecksums` (1)
+- **for-each** → `t02_controlflow/Control03Loops` (5); `t12_collections/Collections03IterationModification` (1)
+- **ForkJoinPool / RecursiveTask** → `t21_concurrency/Concurrency09ScheduledForkJoin` (5, 6)
+- **format: flagi i numerowane argumenty** → `t04_strings/Strings04Formatting` (1, 2)
+- **Function: andThen / compose / identity** → `t13_lambdas/Lambda05Composition` (4)
+- **@FunctionalInterface** → `t13_lambdas/Lambda02FunctionalInterfaces` (2); `t19_annotations_reflection/Annotations01BuiltIn` (5)
+- **funkcja wyższego rzędu** → `t13_lambdas/Lambda07HigherOrderFunctions`
+- **funkcje okna (ROW_NUMBER)** → `t29_jdbc_databases/Jdbc07SqlAggregationIndexes` (6)
+- **funkcyjny rdzeń, imperatywna powłoka** → `t25_testing/Testing03TestableDesign` (3, 4)
+- **Future** → `t21_concurrency/Concurrency04Executors` (3)
+
+### G
+
+- **generyczne repozytorium** → `t11_generics/Generics07Repository`
+- **generyki (generics)** → `t11_generics/Generics01Why`
+- **Git — od zera** → `t00_start/Start06Git`
+- **Git: commit i jego skrót** → `t00_start/Start06Git` (1)
+- **Git: gałąź (branch)** → `t00_start/Start06Git` (4)
+- **Git: rebase** → `t00_start/Start06Git` (8)
+- **Git: scalanie (merge), fast-forward** → `t00_start/Start06Git` (5, 6)
+- **gniazda (Socket, ServerSocket)** → `t28_networking_http/Net01SocketsTcpUdp`
+- **graf (lista sąsiedztwa)** → `t24_algorithms/Algorithms08Graphs` (1)
+- **granica transakcji** → `t34_toward_spring/Spring02Layers` (5)
+- **GROUP BY / HAVING** → `t29_jdbc_databases/Jdbc07SqlAggregationIndexes` (2, 3)
+- **groupingBy** → `t16_streams/Streams11GroupingBy`
+- **gruby JAR (fat JAR)** → `t30_build_modules/Build02JarClasspath` (8)
+- **grupy nazwane i niezachwytujące** → `t04_strings/Strings08RegexAdvanced` (1)
+
+### H
+
+- **happens-before** → `t21_concurrency/Concurrency10MemoryModel` (2)
+- **hashCode (kontrakt)** → `t06_oop_basics/Oop05ObjectMethods` (5); `t12_collections/Collections11HashingInternals` (1, 2)
+- **HashMap — jak działa** → `t12_collections/Collections11HashingInternals`; `t12_collections/Collections05Maps` (1)
+- **HashSet** → `t12_collections/Collections04Sets` (1, 6)
+- **hasła: PBKDF2, sól** → `t31_jdk_toolbox/Toolbox02HashingSecurity` (6, 7)
+- **helpful NullPointerException (pomocne komunikaty NPE)** → `t23_modern_java/Modern06ApiAdditions` (8); `t16_streams/Streams03FilterMap` (8)
+- **hermetyzacja (encapsulation)** → `t06_oop_basics/Oop03Encapsulation`
+- **HMAC** → `t31_jdk_toolbox/Toolbox02HashingSecurity` (9)
+- **HTTP: 404 i 500 to nie wyjątki** → `t28_networking_http/Http02HttpClient` (5)
+- **HttpClient** → `t28_networking_http/Http02HttpClient`
+- **HttpServer (com.sun.net.httpserver)** → `t28_networking_http/Http03LocalServer`
+
+### I
+
+- **idempotentność** → `t34_toward_spring/Spring03RestConcepts` (6); `t28_networking_http/Http01UriUrl` (7)
+- **if / else if / else** → `t02_controlflow/Control01IfElse`
+- **ifPresent / ifPresentOrElse** → `t14_optional/Optional01Basics` (8)
+- **IllegalStateException (ponowne użycie streamu)** → `t16_streams/Streams01Intro` (8); `t16_streams/Streams17SideEffectsPitfalls` (3)
+- **import static** → `t06_oop_basics/Oop04Static` (6); `t06_oop_basics/Oop08PackagesAccess` (3)
+- **indeks w bazie danych** → `t29_jdbc_databases/Jdbc07SqlAggregationIndexes` (7, 8, 9)
+- **Infinity i NaN** → `t01_basics/Basics08FloatingPoint` (5); `t15_numbers/Numbers06MathCheatsheet` (10)
+- **inicjalizacja klas (leniwa)** → `t26_jvm/Jvm02ClassLoadingInit` (1, 2)
+- **inkrementacja (i++ kontra ++i)** → `t01_basics/Basics04Operators` (2)
+- **INNER JOIN** → `t29_jdbc_databases/Jdbc06SqlJoins` (1)
+- **instanceof ze wzorcem (pattern matching)** → `t07_inheritance_polymorphism/Inherit05Polymorphism` (4); `t23_modern_java/Modern05RecordsSealedPatterns` (2, 3)
+- **Instant** → `t17_datetime/DateTime04ZonesInstant` (1)
+- **Integer cache (== na Integer)** → `t01_basics/Basics06Wrappers` (3); `t27_clean_code_pitfalls/Pitfalls01Classic` (1); `t33_interview_prep/Interview01JavaQuestions` (2)
+- **interfejs** → `t07_inheritance_polymorphism/Inherit04Interfaces`
+- **interfejs funkcyjny** → `t13_lambdas/Lambda02FunctionalInterfaces` (1, 4)
+- **interfejs kontra klasa abstrakcyjna** → `t07_inheritance_polymorphism/Inherit03AbstractClasses` (6); `t07_inheritance_polymorphism/Inherit04Interfaces` (1)
+- **interfejs znacznikowy** → `t07_inheritance_polymorphism/Inherit04Interfaces` (7)
+- **intern** → `t26_jvm/Jvm01Memory` (5)
+- **internacjonalizacja (i18n)** → `t31_jdk_toolbox/Toolbox03I18n`
+- **interrupt (przerywanie wątku)** → `t21_concurrency/Concurrency01Threads` (7, 8)
 - **IntStream.range / rangeClosed** → `t16_streams/Streams02Creation` (4)
-- **leniwość (lazy)** → `t16_streams/Streams01Intro` (5)
+- **InvocationTargetException** → `t19_annotations_reflection/Annotations03ReflectionBasics` (4); `t19_annotations_reflection/Annotations05MiniFramework` (7); `t19_annotations_reflection/Annotations06DynamicProxy` (6)
+- **Iterable / Iterator (własny)** → `t12_collections/Collections12CustomIterable`
+- **iterator fail-fast** → `t12_collections/Collections03IterationModification` (3); `t33_interview_prep/Interview02OopCollections` (8)
+
+### J
+
+- **Java 9–17: małe perełki API** → `t23_modern_java/Modern06ApiAdditions`
+- **Java 21: switch ze wzorcami** → `t23_modern_java/Modern07WhatsNextJava21` (4)
+- **java.util.Formatter** → `t04_strings/Strings09FormatterCheatsheet`
+- **java.util.function** → `t13_lambdas/Lambda03JavaUtilFunction`
+- **JavaBeans (gettery i settery)** → `t06_oop_basics/Oop03Encapsulation` (6); `t22_design_patterns/Patterns02Builder` (2)
+- **Javadoc** → `t30_build_modules/Build06QualityToolsJavadoc` (1, 2)
+- **jcmd** → `t26_jvm/Jvm04ToolsProfiling` (1)
+- **JDBC** → `t29_jdbc_databases/Jdbc02Connection`
+- **jedna metoda = jedna odpowiedzialność** → `t05_methods/Methods04GoodPractices` (1); `t07_inheritance_polymorphism/Inherit08Solid` (1)
+- **JIT (kompilacja w czasie działania)** → `t26_jvm/Jvm04ToolsProfiling` (6)
+- **JShell** → `t00_start/Start08JShell`
+- **JSON ręczny (własny parser)** → `t18_io_files/Io05JsonManual`; `t28_networking_http/Http04JsonApi` (1, 2)
+- **JUnit 5** → `t32_junit_mockito/JUnit01Basics`
+- **JVM, JDK, JRE** → `t01_basics/Basics01HelloJvm`; `t33_interview_prep/Interview01JavaQuestions` (1)
+
+### K
+
+- **katastrofalne cofanie (ReDoS)** → `t04_strings/Strings08RegexAdvanced` (8)
+- **klasa abstrakcyjna** → `t07_inheritance_polymorphism/Inherit03AbstractClasses`
+- **klasa anonimowa** → `t06_oop_basics/Oop07NestedClasses` (5, 6); `t13_lambdas/Lambda01FromAnonymousToLambda` (3)
+- **klasa narzędziowa (utility class)** → `t06_oop_basics/Oop04Static` (5)
+- **klasa wewnętrzna (inner) i Outer.this** → `t06_oop_basics/Oop07NestedClasses` (2, 3, 7)
+- **klasa zagnieżdżona (nested)** → `t06_oop_basics/Oop07NestedClasses`
+- **klasyczne pułapki Javy** → `t27_clean_code_pitfalls/Pitfalls01Classic`
+- **kod uzupełnień do dwóch** → `t24_algorithms/Math04NumberSystems` (5)
+- **kod wyjścia (exit code)** → `t30_build_modules/Build04CommandLineApps` (5)
+- **kodowanie na żywo (live coding)** → `t33_interview_prep/Interview04LiveCoding`
+- **kodowanie znaków (charset)** → `t18_io_files/Io12Charsets`
+- **kody statusu HTTP** → `t28_networking_http/Http01UriUrl` (8); `t34_toward_spring/Spring03RestConcepts` (2)
+- **kolejność inicjalizacji** → `t06_oop_basics/Oop02Constructors` (8); `t26_jvm/Jvm02ClassLoadingInit` (2)
+- **kolekcje sekwencyjne (Java 21)** → `t23_modern_java/Modern07WhatsNextJava21` (6)
+- **kombinacje (symbol Newtona)** → `t24_algorithms/Math03Combinatorics` (3); `t24_algorithms/Algorithms06Backtracking` (3)
+- **kombinatoryka** → `t24_algorithms/Math03Combinatorics`
+- **komparator przez odejmowanie (błąd)** → `t12_collections/Collections07ComparableComparator` (8); `t15_numbers/Numbers05IntegerTricks` (9)
+- **kompozycja kontra dziedziczenie** → `t07_inheritance_polymorphism/Inherit06CompositionVsInheritance`
+- **konflikt diamentu** → `t07_inheritance_polymorphism/Inherit04Interfaces` (4)
+- **konkatenacja w pętli (+= kontra StringBuilder)** → `t04_strings/Strings03StringBuilder` (1); `t02_controlflow/Control05LoopPatterns` (5); `t27_clean_code_pitfalls/Pitfalls02CodeReview` (7)
+- **konstruktor** → `t06_oop_basics/Oop02Constructors`
+- **konstruktor kopiujący** → `t06_oop_basics/Oop02Constructors` (9); `t06_oop_basics/Oop10Copying` (3)
+- **konstruktor w hierarchii (łańcuch konstruktorów)** → `t07_inheritance_polymorphism/Inherit01Basics` (4)
+- **kontener IoC (mini-Spring)** → `t34_toward_spring/Spring01IocContainer`
+- **konwencje nazewnicze** → `t01_basics/Basics01HelloJvm` (5)
+- **kopia obronna (defensive copy)** → `t06_oop_basics/Oop06Immutability` (4, 5); `t09_records/Records02Constructors` (3); `t12_collections/Collections08ImmutableUnmodifiable` (7)
+- **kopia płytka i głęboka** → `t06_oop_basics/Oop10Copying` (2); `t03_arrays/Arrays03Utility` (9)
+- **kopiec binarny (heap)** → `t24_algorithms/Algorithms04DataStructures` (4)
+- **kopiowanie obiektów** → `t06_oop_basics/Oop10Copying`
+- **korzeń kompozycji (composition root)** → `t22_design_patterns/Patterns08DependencyInjection` (4)
+- **krucha klasa bazowa** → `t07_inheritance_polymorphism/Inherit06CompositionVsInheritance` (2); `t22_design_patterns/Patterns05TemplateMethod` (8)
+- **kubełek (bucket) i kolizje** → `t12_collections/Collections11HashingInternals` (2, 4, 6)
+- **kwantyfikatory zachłanne / leniwe / zaborcze** → `t04_strings/Strings05Regex` (8); `t04_strings/Strings08RegexAdvanced` (2)
+
+### L
+
+- **lambda** → `t13_lambdas/Lambda01FromAnonymousToLambda` (4, 5)
+- **LEFT JOIN** → `t29_jdbc_databases/Jdbc06SqlJoins` (2, 3)
+- **leniwa inicjalizacja** → `t21_concurrency/Concurrency08ThreadSafetyPatterns` (5); `t22_design_patterns/Patterns04Singleton` (3)
+- **leniwość (lazy)** → `t16_streams/Streams01Intro` (5); `t16_streams/Streams16Laziness`
+- **liczby magiczne (stałe zamiast nich)** → `t01_basics/Basics03Variables` (5); `t27_clean_code_pitfalls/Pitfalls02CodeReview` (1)
+- **liczby pierwsze (test pierwszości)** → `t24_algorithms/Math01NumberTheory` (5); `t24_algorithms/Math09InterviewClassics` (3)
+- **LinkedHashMap** → `t12_collections/Collections05Maps` (8)
+- **List.copyOf** → `t12_collections/Collections08ImmutableUnmodifiable` (3); `t23_modern_java/Modern06ApiAdditions` (4)
+- **List<Integer>: remove(int) kontra remove(Object)** → `t01_basics/Basics06Wrappers` (7); `t12_collections/Collections02Lists` (3); `t11_generics/Generics01Why` (6)
+- **List.of / Set.of / Map.of** → `t12_collections/Collections01Overview` (6); `t12_collections/Collections08ImmutableUnmodifiable` (1); `t23_modern_java/Modern06ApiAdditions` (1)
+- **ListIterator** → `t12_collections/Collections03IterationModification` (6)
+- **LocalDate / LocalTime / LocalDateTime** → `t17_datetime/DateTime01LocalDateTime`
+- **Locale** → `t15_numbers/Numbers04FormattingParsing` (1); `t31_jdk_toolbox/Toolbox03I18n` (1)
+- **Lombok** → `t20_lombok/Lombok01Accessors` (1); `t19_annotations_reflection/Annotations07Processors` (8)
+- **Lombok: @Builder / @Singular** → `t20_lombok/Lombok03DataValueBuilder` (5, 6)
+- **Lombok: @Data** → `t20_lombok/Lombok03DataValueBuilder` (1)
+- **Lombok: @Getter / @Setter** → `t20_lombok/Lombok01Accessors` (2, 3)
+- **Lombok: @SneakyThrows** → `t20_lombok/Lombok04Other` (2)
+- **Lombok: @Value** → `t20_lombok/Lombok03DataValueBuilder` (3, 4)
+- **lookahead / lookbehind** → `t04_strings/Strings08RegexAdvanced` (3)
+
+### Ł
+
+- **ładowanie klas (class loading)** → `t26_jvm/Jvm02ClassLoadingInit` (1, 8)
+- **łańcuch wyjątków (cause)** → `t10_exceptions/Exceptions06ChainingWrapping`
+
+### M
+
 - **map** → `t16_streams/Streams03FilterMap` (3, 4)
+- **Map.merge (zliczanie)** → `t12_collections/Collections05Maps` (5); `t12_collections/Collections10Patterns` (1)
+- **mapMulti** → `t16_streams/Streams04FlatMap` (8); `t23_modern_java/Modern06ApiAdditions` (9)
 - **mapToInt / mapToDouble / mapToObj** → `t16_streams/Streams03FilterMap` (5)
+- **maszyna stanów (state machine)** → `t08_enums/Enums04EnumMapSet` (6, 7); `t22_design_patterns/Patterns13State` (4, 5)
+- **Math.addExact / multiplyExact / toIntExact** → `t01_basics/Basics05Casting` (7); `t15_numbers/Numbers05IntegerTricks` (3)
+- **Math kontra StrictMath** → `t15_numbers/Numbers06MathCheatsheet` (9)
+- **Math.random** → `t01_basics/Basics07MathRandom` (5)
+- **Math.round / floor / ceil** → `t01_basics/Basics07MathRandom` (2); `t15_numbers/Numbers06MathCheatsheet` (5)
+- **Maven** → `t30_build_modules/Build01MavenBasics`
+- **Maven: zakresy zależności (scope)** → `t30_build_modules/Build01MavenBasics` (6)
+- **memoizacja** → `t13_lambdas/Lambda07HigherOrderFunctions` (7)
+- **MessageDigest (SHA-256)** → `t31_jdk_toolbox/Toolbox02HashingSecurity` (1, 2)
+- **metoda default w interfejsie** → `t07_inheritance_polymorphism/Inherit04Interfaces` (3); `t23_modern_java/Modern01Java8` (3)
+- **metoda Newtona** → `t24_algorithms/Math05NumericalMethods` (2)
+- **metody HTTP: bezpieczne i idempotentne** → `t28_networking_http/Http01UriUrl` (7); `t34_toward_spring/Spring03RestConcepts` (2, 6)
+- **metody with... (wither)** → `t06_oop_basics/Oop06Immutability` (3); `t09_records/Records02Constructors` (6); `t20_lombok/Lombok03DataValueBuilder` (7)
+- **mini framework (router komend)** → `t19_annotations_reflection/Annotations05MiniFramework`
+- **mock** → `t25_testing/Testing02TestDoubles` (7); `t32_junit_mockito/JUnit04Mockito` (2)
+- **Mockito** → `t32_junit_mockito/JUnit04Mockito`
+- **Mockito: ArgumentCaptor** → `t32_junit_mockito/JUnit04Mockito` (5)
+- **model anemiczny kontra bogaty** → `t27_clean_code_pitfalls/CleanCode03Architecture` (6)
+- **model pamięci Javy** → `t21_concurrency/Concurrency10MemoryModel`
+- **moduły JPMS (module-info.java)** → `t30_build_modules/Build03Modules`
+- **modyfikatory dostępu** → `t06_oop_basics/Oop08PackagesAccess` (6); `t06_oop_basics/Oop03Encapsulation` (9)
+- **Money (pieniądze jako obiekt-wartość)** → `t15_numbers/Numbers02MoneyValueObject`
+- **multi-catch** → `t10_exceptions/Exceptions03MultiCatch` (2)
+
+### N
+
+- **nadpisywalna metoda wołana z konstruktora** → `t07_inheritance_polymorphism/Inherit02Override` (8); `t22_design_patterns/Patterns05TemplateMethod` (4)
+- **nadpisywanie metod (override)** → `t07_inheritance_polymorphism/Inherit02Override`; `t07_inheritance_polymorphism/Inherit02Override` (2)
+- **nawracanie (backtracking)** → `t24_algorithms/Algorithms06Backtracking`
+- **niezmienność (immutable)** → `t06_oop_basics/Oop06Immutability`; `t09_records/Records01Basics` (5); `t12_collections/Collections08ImmutableUnmodifiable`
+- **non-sealed** → `t07_inheritance_polymorphism/Inherit07SealedClasses` (5)
+- **normalizacja i klucze obce** → `t29_jdbc_databases/Jdbc06SqlJoins` (10)
+- **normalizacja Unicode** → `t18_io_files/Io12Charsets` (11); `t31_jdk_toolbox/Toolbox03I18n` (8)
+- **null — błąd za miliard dolarów** → `t14_optional/Optional01Basics` (1)
+- **null rozpakowany do int** → `t01_basics/Basics06Wrappers` (4)
+- **null w kolekcjach** → `t12_collections/Collections01Overview` (5); `t08_enums/Enums04EnumMapSet` (5)
+- **null zamiast pustej kolekcji** → `t27_clean_code_pitfalls/Pitfalls02CodeReview` (4); `t14_optional/Optional03BestPractices` (3)
+- **NullPointerException** → `t01_basics/Basics09PassByValue` (8); `t06_oop_basics/Oop01ClassesObjects` (7)
+- **NumberFormat** → `t15_numbers/Numbers04FormattingParsing` (3, 6); `t31_jdk_toolbox/Toolbox03I18n` (2)
+- **NumberFormatException** → `t01_basics/Basics06Wrappers` (5); `t15_numbers/Numbers04FormattingParsing` (8)
+- **NWD (algorytm Euklidesa)** → `t24_algorithms/Math01NumberTheory` (2, 3)
+
+### O
+
+- **obiekt-wartość (value object)** → `t06_oop_basics/Oop09ValueObjects`; `t15_numbers/Numbers02MoneyValueObject`
 - **Objects::nonNull** → `t16_streams/Streams03FilterMap` (8)
-- **peek** → `t16_streams/Streams03FilterMap` (7)
-- **Predicate: and / or / negate / not** → `t16_streams/Streams03FilterMap` (2)
-- **przetwarzanie pionowe (i wyjątek: sorted)** → `t16_streams/Streams01Intro` (6)
+- **Objects.requireNonNull** → `t10_exceptions/Exceptions07BestPractices` (3)
+- **obliczanie na skróty (&&, ||)** → `t01_basics/Basics04Operators` (5)
+- **Observer (wzorzec)** → `t22_design_patterns/Patterns06Observer`
+- **obsesja typów prostych (primitive obsession)** → `t06_oop_basics/Oop09ValueObjects` (1)
+- **odśmiecanie pamięci (garbage collection)** → `t26_jvm/Jvm03GarbageCollection`
+- **OffsetDateTime** → `t17_datetime/DateTime04ZonesInstant` (5)
+- **ograniczenie typu (<T extends ...>)** → `t11_generics/Generics04Bounded`
+- **operator trójargumentowy ? :** → `t01_basics/Basics04Operators` (6); `t02_controlflow/Control01IfElse` (8)
+- **operatory bitowe** → `t01_basics/Basics04Operators` (8); `t15_numbers/Numbers05IntegerTricks` (8)
+- **Optional** → `t14_optional/Optional01Basics`
+- **Optional.get (pułapka)** → `t14_optional/Optional01Basics` (5); `t16_streams/Streams14OptionalInStreams` (9)
+- **Optional.of / ofNullable / empty** → `t14_optional/Optional01Basics` (3)
+- **Optional w strumieniach** → `t16_streams/Streams14OptionalInStreams`
+- **orElseThrow** → `t14_optional/Optional01Basics` (7)
+- **@Override** → `t06_oop_basics/Oop05ObjectMethods` (2); `t07_inheritance_polymorphism/Inherit02Override` (1); `t19_annotations_reflection/Annotations01BuiltIn` (2)
+
+### P
+
+- **pakiet (package)** → `t06_oop_basics/Oop08PackagesAccess` (1)
+- **palindrom** → `t04_strings/Strings07TextAlgorithms` (1); `t33_interview_prep/Interview03CodingTasks` (3)
+- **pamięć JVM (stos, sterta)** → `t26_jvm/Jvm01Memory`
+- **parallelStream** → `t16_streams/Streams18Parallel`
+- **@ParameterizedTest** → `t32_junit_mockito/JUnit02Parameterized` (1)
+- **partitioningBy** → `t16_streams/Streams12PartitioningBy`
+- **Path** → `t18_io_files/Io01PathFiles` (1, 2, 3)
+- **Pattern.quote / Matcher.quoteReplacement** → `t04_strings/Strings05Regex` (7); `t04_strings/Strings08RegexAdvanced` (5)
+- **PECS (Producer Extends, Consumer Super)** → `t11_generics/Generics05Wildcards` (6, 7)
+- **peek** → `t16_streams/Streams03FilterMap` (7); `t16_streams/Streams16Laziness` (10)
+- **Period** → `t17_datetime/DateTime02PeriodDuration` (1, 2, 5)
+- **permutacje** → `t24_algorithms/Algorithms06Backtracking` (2); `t24_algorithms/Math03Combinatorics` (2)
+- **PESEL (cyfra kontrolna)** → `t24_algorithms/Math02ModularChecksums` (4)
+- **pętla kontra stream** → `t16_streams/Streams01Intro` (1, 9); `t16_streams/Streams17SideEffectsPitfalls` (10)
+- **pętla zwrotna (localhost)** → `t28_networking_http/Net01SocketsTcpUdp` (1, 9)
+- **pieniądze w groszach (long)** → `t15_numbers/Numbers05IntegerTricks` (10)
+- **plik JAR i manifest** → `t30_build_modules/Build02JarClasspath` (3, 4)
+- **podwójna dyspozycja (double dispatch)** → `t22_design_patterns/Patterns15Visitor` (3)
+- **podzapytania (IN, EXISTS)** → `t29_jdbc_databases/Jdbc06SqlJoins` (9)
+- **pokrycie kodu testami** → `t30_build_modules/Build06QualityToolsJavadoc` (7); `t32_junit_mockito/JUnit05Tdd` (7)
+- **pola nie są polimorficzne (cieniowanie)** → `t07_inheritance_polymorphism/Inherit02Override` (7)
+- **polimorfizm** → `t07_inheritance_polymorphism/Inherit05Polymorphism`
+- **połykanie wyjątku** → `t10_exceptions/Exceptions07BestPractices` (1); `t33_interview_prep/Interview04LiveCoding` (7)
+- **pom.xml** → `t30_build_modules/Build01MavenBasics` (3)
+- **porównanie: == kontra equals** → `t01_basics/Basics09PassByValue` (7); `t04_strings/Strings01Basics` (4); `t06_oop_basics/Oop05ObjectMethods` (3)
+- **porównanie liczb zmiennoprzecinkowych z tolerancją** → `t01_basics/Basics08FloatingPoint` (3); `t24_algorithms/Math05NumericalMethods` (1)
+- **porównanie w stałym czasie** → `t31_jdk_toolbox/Toolbox02HashingSecurity` (5)
+- **porty i adaptery (architektura heksagonalna)** → `t22_design_patterns/Patterns11Adapter` (9); `t27_clean_code_pitfalls/CleanCode03Architecture` (8)
+- **potęgowanie modularne** → `t24_algorithms/Math02ModularChecksums` (2)
+- **poziomy izolacji transakcji** → `t29_jdbc_databases/Jdbc04Transactions` (6)
+- **Prawo Demeter** → `t27_clean_code_pitfalls/Pitfalls02CodeReview` (6)
+- **Predicate: and / or / negate / not** → `t16_streams/Streams03FilterMap` (2); `t13_lambdas/Lambda05Composition` (1, 3)
+- **Predicate.not** → `t23_modern_java/Modern06ApiAdditions` (6); `t13_lambdas/Lambda05Composition` (3)
+- **PreparedStatement** → `t29_jdbc_databases/Jdbc03PreparedStatement` (1, 8, 9)
+- **@Primary / @Qualifier** → `t34_toward_spring/Spring01IocContainer` (7)
+- **printf / String.format** → `t01_basics/Basics11ConsoleOutput` (3); `t04_strings/Strings04Formatting`; `t04_strings/Strings09FormatterCheatsheet`
+- **PriorityQueue** → `t12_collections/Collections06QueuesDeques` (4, 5, 6)
+- **problem N+1 zapytań** → `t29_jdbc_databases/Jdbc05Dao` (7)
+- **problem plecakowy** → `t24_algorithms/Algorithms07DynamicProgramming` (6)
+- **procesor adnotacji (AbstractProcessor)** → `t19_annotations_reflection/Annotations07Processors`
+- **ProcessBuilder** → `t30_build_modules/Build05ProcessesEnv` (1, 2)
+- **ProcessHandle** → `t30_build_modules/Build05ProcessesEnv` (4); `t23_modern_java/Modern06ApiAdditions` (3)
+- **producent–konsument** → `t21_concurrency/Concurrency06ConcurrentCollections` (8); `t21_concurrency/Concurrency03Locks` (5); `t35_capstone/Capstone03WeatherStations` (5)
+- **profile Spring** → `t34_toward_spring/Spring04WhatSpringGives` (5)
+- **programowanie do interfejsu** → `t12_collections/Collections01Overview` (3)
+- **programowanie dynamiczne** → `t24_algorithms/Algorithms07DynamicProgramming`
+- **projekt: raport sprzedaży z CSV** → `t35_capstone/Capstone02SalesReport`
+- **projekt: REST lista zadań** → `t35_capstone/Capstone04RestTodo`
+- **projekt: stacje pogodowe** → `t35_capstone/Capstone03WeatherStations`
+- **projekt: wypożyczalnia książek** → `t35_capstone/Capstone01Library`
+- **projektowanie pod testowalność** → `t25_testing/Testing03TestableDesign`
+- **Properties (plik .properties)** → `t18_io_files/Io06Properties`
+- **przeciążanie metod (overloading)** → `t05_methods/Methods02Overloading`; `t07_inheritance_polymorphism/Inherit02Override` (4)
+- **przekazywanie przez wartość (pass by value)** → `t01_basics/Basics09PassByValue` (3, 5)
+- **przepełnienie (overflow)** → `t01_basics/Basics05Casting` (4, 5); `t15_numbers/Numbers05IntegerTricks` (1, 2)
+- **przesłanianie nazw (shadowing)** → `t01_basics/Basics03Variables` (3); `t06_oop_basics/Oop02Constructors` (6)
+- **przesuwne okno (sliding window)** → `t24_algorithms/Algorithms05Classics` (3); `t12_collections/Collections10Patterns` (7)
+- **przetwarzanie pionowe (i wyjątek: sorted)** → `t16_streams/Streams01Intro` (6); `t16_streams/Streams16Laziness` (2, 3)
+- **przypadek bazowy rekurencji** → `t05_methods/Methods03Recursion` (6)
+- **przypadki brzegowe (edge cases)** → `t25_testing/Testing01Concepts` (7); `t33_interview_prep/Interview04LiveCoding` (4)
+- **pula napisów (string pool)** → `t04_strings/Strings01Basics` (3); `t26_jvm/Jvm01Memory` (5)
+- **pułapki lambd** → `t13_lambdas/Lambda08Pitfalls`
+- **pytania rekrutacyjne o Javę** → `t33_interview_prep/Interview01JavaQuestions`
+
+### Q
+
+- **Queue: offer / poll / peek** → `t12_collections/Collections06QueuesDeques` (1)
+
+### R
+
+- **ramka stosu** → `t26_jvm/Jvm01Memory` (3)
+- **Random z ziarnem (seed)** → `t01_basics/Basics07MathRandom` (3)
+- **RandomGenerator / HexFormat (Java 17)** → `t23_modern_java/Modern06ApiAdditions` (10)
+- **record (rekord)** → `t09_records/Records01Basics`
+- **reduce** → `t16_streams/Streams07Reduce`
+- **ReentrantLock** → `t21_concurrency/Concurrency03Locks` (2)
+- **refaktoryzacja w IntelliJ** → `t00_start/Start07IntelliJRefactoring`
+- **referencja do konstruktora (Klasa::new)** → `t13_lambdas/Lambda04MethodReferences` (5)
+- **referencja do metody (Klasa::metoda)** → `t13_lambdas/Lambda04MethodReferences`
+- **referencje słabe, miękkie, fantomowe** → `t26_jvm/Jvm03GarbageCollection` (6)
+- **refleksja (reflection)** → `t19_annotations_reflection/Annotations03ReflectionBasics`
+- **rekord: konstruktor kompaktowy** → `t09_records/Records02Constructors` (1, 2)
+- **rekord: płytka niezmienność** → `t09_records/Records01Basics` (6)
+- **rekord jako klucz mapy** → `t09_records/Records03Advanced` (4)
+- **rekurencja** → `t05_methods/Methods03Recursion`
+- **removeIf** → `t12_collections/Collections02Lists` (7); `t13_lambdas/Lambda01FromAnonymousToLambda` (8)
+- **Rename (Shift+F6)** → `t00_start/Start07IntelliJRefactoring` (1)
+- **ResourceBundle** → `t31_jdk_toolbox/Toolbox03I18n` (4)
+- **REST (zasady)** → `t34_toward_spring/Spring03RestConcepts`
+- **ResultSet** → `t29_jdbc_databases/Jdbc02Connection` (4, 5)
+- **Runnable / Callable** → `t13_lambdas/Lambda03JavaUtilFunction` (8); `t21_concurrency/Concurrency04Executors` (2)
+- **rzutowanie (cast)** → `t01_basics/Basics05Casting` (1, 2)
+
+### S
+
+- **Scanner** → `t01_basics/Basics10ScannerInput`; `t18_io_files/Io02ReadingText` (8)
+- **ScheduledExecutorService** → `t21_concurrency/Concurrency09ScheduledForkJoin` (1, 2, 3)
+- **sealed (klasy zapieczętowane)** → `t07_inheritance_polymorphism/Inherit07SealedClasses`; `t23_modern_java/Modern05RecordsSealedPatterns` (4)
+- **SecureRandom** → `t31_jdk_toolbox/Toolbox02HashingSecurity` (8)
+- **Semaphore** → `t21_concurrency/Concurrency07Synchronizers` (5)
+- **serializacja (Serializable)** → `t18_io_files/Io09Serialization`
+- **serialVersionUID** → `t18_io_files/Io09Serialization` (4)
+- **Service Locator (antywzorzec)** → `t22_design_patterns/Patterns08DependencyInjection` (6)
+- **ServiceLoader** → `t30_build_modules/Build03Modules` (7)
+- **short-circuit (krótkie spięcie)** → `t16_streams/Streams01Intro` (7); `t16_streams/Streams16Laziness` (4)
+- **silna enkapsulacja modułów** → `t30_build_modules/Build03Modules` (5)
+- **silnia** → `t05_methods/Methods03Recursion` (2); `t24_algorithms/Math03Combinatorics` (1); `t24_algorithms/Math09InterviewClassics` (1)
+- **Singleton: lazy holder** → `t22_design_patterns/Patterns04Singleton` (3); `t26_jvm/Jvm02ClassLoadingInit` (7)
+- **Singleton (wzorzec)** → `t22_design_patterns/Patterns04Singleton`
+- **sito Eratostenesa** → `t24_algorithms/Math01NumberTheory` (6)
 - **słowa kluczowe, literały, słowa kontekstowe** → `t00_start/Start02Glossary`
+- **SOLID** → `t07_inheritance_polymorphism/Inherit08Solid`; `t27_clean_code_pitfalls/CleanCode02Solid`
+- **sortowanie bąbelkowe** → `t24_algorithms/Algorithms02Sorting` (1); `t03_arrays/Arrays04Algorithms` (5)
+- **sortowanie przez scalanie (merge sort)** → `t24_algorithms/Algorithms02Sorting` (5)
+- **split** → `t04_strings/Strings02Methods` (7); `t04_strings/Strings05Regex` (6)
+- **Spring Data (zapytania z nazw metod)** → `t34_toward_spring/Spring04WhatSpringGives` (8)
+- **spy** → `t25_testing/Testing02TestDoubles` (6); `t32_junit_mockito/JUnit04Mockito` (6)
+- **SQL: NULL (logika trójwartościowa)** → `t29_jdbc_databases/Jdbc01SqlBasics` (6)
+- **SQL: podstawy** → `t29_jdbc_databases/Jdbc01SqlBasics`
+- **SQLException** → `t29_jdbc_databases/Jdbc02Connection` (8)
+- **StackOverflowError** → `t05_methods/Methods03Recursion` (6); `t26_jvm/Jvm01Memory` (3)
+- **startery Spring Boot** → `t34_toward_spring/Spring04WhatSpringGives` (2)
+- **State (wzorzec)** → `t22_design_patterns/Patterns13State`
+- **static (pole, metoda, blok)** → `t06_oop_basics/Oop04Static`
+- **statyczna metoda fabrykująca** → `t06_oop_basics/Oop09ValueObjects` (4); `t22_design_patterns/Patterns03Factory` (2)
+- **statystyka opisowa (średnia, mediana, dominanta)** → `t24_algorithms/Math06Statistics`
+- **Step Over / Step Into (F8 / F7)** → `t00_start/Start05Debugging` (1, 2)
+- **stos i sterta (stack / heap)** → `t01_basics/Basics09PassByValue`; `t26_jvm/Jvm01Memory` (1)
+- **stos wywołań (call stack)** → `t05_methods/Methods01Basics` (6); `t10_exceptions/Exceptions01Basics` (3)
+- **strategia jako lambda** → `t13_lambdas/Lambda07HigherOrderFunctions` (4); `t22_design_patterns/Patterns01Strategy` (4)
+- **Strategy (wzorzec)** → `t22_design_patterns/Patterns01Strategy`
+- **Stream (strumień) — wprowadzenie** → `t16_streams/Streams01Intro` (1, 2, 3)
 - **Stream.builder / concat** → `t16_streams/Streams02Creation` (8)
 - **Stream.iterate / generate** → `t16_streams/Streams02Creation` (5, 6)
 - **Stream.of / empty / ofNullable** → `t16_streams/Streams02Creation` (2)
-- **toList() (niemodyfikowalna, Java 16+)** → `t16_streams/Streams01Intro` (1, 2)
+- **String — niezmienność** → `t04_strings/Strings01Basics` (2); `t01_basics/Basics09PassByValue` (6)
+- **StringBuilder** → `t04_strings/Strings03StringBuilder` (1, 2, 3)
+- **StringJoiner** → `t04_strings/Strings03StringBuilder` (5)
+- **stronicowanie w SQL (LIMIT / OFFSET)** → `t29_jdbc_databases/Jdbc05Dao` (8); `t29_jdbc_databases/Jdbc01SqlBasics` (4)
+- **struktury danych ręcznie** → `t24_algorithms/Algorithms04DataStructures`
+- **strumień prymitywny (IntStream, LongStream, DoubleStream)** → `t16_streams/Streams08PrimitiveStreams`
+- **subList (widok)** → `t12_collections/Collections02Lists` (4)
+- **summaryStatistics** → `t16_streams/Streams08PrimitiveStreams` (5); `t24_algorithms/Math06Statistics` (8)
+- **sumy prefiksowe** → `t24_algorithms/Algorithms05Classics` (4)
+- **super** → `t07_inheritance_polymorphism/Inherit01Basics` (3); `t07_inheritance_polymorphism/Inherit02Override` (3)
+- **Supplier (leniwa wartość domyślna)** → `t13_lambdas/Lambda07HigherOrderFunctions` (5); `t16_streams/Streams16Laziness` (7)
+- **surowy typ (raw type)** → `t11_generics/Generics01Why` (1)
+- **switch** → `t02_controlflow/Control02Switch`
+- **switch: null** → `t02_controlflow/Control02Switch` (8); `t23_modern_java/Modern03SwitchExpressions` (6)
+- **switch: wyczerpywalność (exhaustiveness)** → `t02_controlflow/Control02Switch` (7); `t23_modern_java/Modern03SwitchExpressions` (4)
+- **switch jako wyrażenie** → `t02_controlflow/Control02Switch` (5); `t23_modern_java/Modern03SwitchExpressions` (3)
+- **symbole wieloznaczne (wildcards)** → `t11_generics/Generics05Wildcards`
+- **synchronized** → `t21_concurrency/Concurrency02RaceConditions` (4, 8); `t21_concurrency/Concurrency03Locks` (1)
+- **System.arraycopy** → `t03_arrays/Arrays03Utility` (8)
+- **System.gc / finalize / Cleaner** → `t26_jvm/Jvm03GarbageCollection` (5)
+- **System.getenv kontra System.getProperty** → `t30_build_modules/Build05ProcessesEnv` (6)
+- **systemy liczbowe (dwójkowy, szesnastkowy)** → `t24_algorithms/Math04NumberSystems`
+
+### Ś
+
+- **ścieżka nauki, powtórki w odstępach (spaced repetition)** → `t00_start/Start03LearningPath`; `t00_start/Start04ReviewTracker` (2)
+- **ślad stosu (stack trace)** → `t10_exceptions/Exceptions01Basics` (5); `t10_exceptions/Exceptions06ChainingWrapping` (3)
+
+### T
+
+- **tablica (array)** → `t03_arrays/Arrays01Basics`
+- **tablica wielowymiarowa** → `t03_arrays/Arrays02MultiDim`
+- **tasowanie listy (shuffle)** → `t01_basics/Basics07MathRandom` (6); `t12_collections/Collections09CollectionsUtility` (2)
+- **TDD (czerwony, zielony, refaktoryzacja)** → `t32_junit_mockito/JUnit05Tdd`
+- **Tell, don't ask** → `t06_oop_basics/Oop03Encapsulation` (7)
+- **TemporalAdjusters** → `t17_datetime/DateTime01LocalDateTime` (6)
+- **testowanie (po co, piramida testów)** → `t25_testing/Testing01Concepts` (1, 2)
+- **thenApply / thenCompose / thenCombine** → `t21_concurrency/Concurrency05CompletableFuture` (2, 3, 4); `t28_networking_http/Http05AsyncTimeouts` (3)
+- **this** → `t06_oop_basics/Oop01ClassesObjects` (8)
+- **this(...) — łańcuch konstruktorów** → `t06_oop_basics/Oop02Constructors` (5)
+- **ThreadLocal** → `t21_concurrency/Concurrency08ThreadSafetyPatterns` (2, 3)
+- **throws** → `t10_exceptions/Exceptions02CheckedUnchecked` (2)
+- **toList() (niemodyfikowalna, Java 16+)** → `t16_streams/Streams06TerminalOps` (8); `t23_modern_java/Modern06ApiAdditions` (9)
+- **toMap: duplikat klucza** → `t16_streams/Streams10CollectorsToMap` (2); `t16_streams/Streams17SideEffectsPitfalls` (5)
+- **toString** → `t06_oop_basics/Oop05ObjectMethods` (1); `t06_oop_basics/Oop01ClassesObjects` (9)
+- **toUpperCase / toLowerCase (Locale)** → `t04_strings/Strings02Methods` (4); `t27_clean_code_pitfalls/Pitfalls01Classic` (6)
+- **@Transactional (idea)** → `t19_annotations_reflection/Annotations06DynamicProxy` (9); `t34_toward_spring/Spring01IocContainer` (9)
+- **transakcja (commit, rollback)** → `t29_jdbc_databases/Jdbc04Transactions` (2, 3)
+- **transient** → `t18_io_files/Io09Serialization` (3)
+- **transpozycja** → `t03_arrays/Arrays02MultiDim` (8); `t24_algorithms/Math07MatricesGeometry` (4)
+- **trasowanie (routing) z adnotacji** → `t34_toward_spring/Spring03RestConcepts` (3)
+- **TreeMap** → `t12_collections/Collections05Maps` (7)
+- **TreeSet** → `t12_collections/Collections04Sets` (3)
+- **try / catch (obsługa wyjątków)** → `t10_exceptions/Exceptions01Basics` (2)
+- **try-with-resources** → `t10_exceptions/Exceptions04TryWithResources`; `t18_io_files/Io11IoExceptions` (6)
+- **turecka lokalizacja (Locale i toUpperCase)** → `t27_clean_code_pitfalls/Pitfalls01Classic` (6)
+- **Two-sum** → `t12_collections/Collections10Patterns` (6); `t33_interview_prep/Interview03CodingTasks` (6)
+- **typy całkowite: zakresy (byte, short, int, long)** → `t01_basics/Basics02PrimitiveTypes` (1, 2)
+
+### U
+
+- **ukrywanie metod statycznych (hiding)** → `t07_inheritance_polymorphism/Inherit02Override` (6)
+- **UncheckedIOException** → `t18_io_files/Io11IoExceptions` (5)
+- **Unicode** → `t04_strings/Strings06CharUnicode`; `t18_io_files/Io12Charsets` (1)
+- **upcasting i downcasting** → `t07_inheritance_polymorphism/Inherit05Polymorphism` (3, 4)
+- **URI (anatomia adresu)** → `t28_networking_http/Http01UriUrl` (1, 2)
+- **URI kontra URL** → `t28_networking_http/Http01UriUrl` (5)
+- **usuwanie ogonków** → `t04_strings/Strings06CharUnicode` (7); `t31_jdk_toolbox/Toolbox03I18n` (8)
+- **UTF-8** → `t18_io_files/Io12Charsets` (1, 2, 9); `t23_modern_java/Modern07WhatsNextJava21` (2)
+- **UUID** → `t31_jdk_toolbox/Toolbox01UuidBase64` (1, 2, 3)
+
+### V
+
+- **values / name / ordinal** → `t08_enums/Enums01Basics` (2)
+- **var (typ odgadnięty przez kompilator)** → `t01_basics/Basics03Variables` (6); `t23_modern_java/Modern02Var`
+- **varargs (zmienna liczba argumentów)** → `t03_arrays/Arrays05Varargs`
+- **Visitor (wzorzec)** → `t22_design_patterns/Patterns15Visitor`
+- **volatile** → `t21_concurrency/Concurrency10MemoryModel` (3, 4)
+
+### W
+
+- **walidator oparty na adnotacjach** → `t19_annotations_reflection/Annotations04Validator`
+- **walidatory (kod pocztowy, PESEL, NIP, IBAN)** → `t04_strings/Strings08RegexAdvanced` (9); `t24_algorithms/Math02ModularChecksums` (4, 5, 6)
+- **walkFileTree / SimpleFileVisitor** → `t18_io_files/Io07WalkingDirectories` (7); `t22_design_patterns/Patterns15Visitor` (7)
+- **wariancja i odchylenie standardowe** → `t24_algorithms/Math06Statistics` (5)
+- **warstwy: kontroler, serwis, repozytorium** → `t34_toward_spring/Spring02Layers`
+- **wartości domyślne pól** → `t01_basics/Basics02PrimitiveTypes` (6); `t06_oop_basics/Oop01ClassesObjects` (2); `t03_arrays/Arrays01Basics` (3)
+- **wątek (Thread)** → `t21_concurrency/Concurrency01Threads`
+- **wątki wirtualne (Java 21)** → `t23_modern_java/Modern07WhatsNextJava21` (5)
+- **WeakHashMap** → `t26_jvm/Jvm03GarbageCollection` (7)
+- **wersjonowanie API** → `t28_networking_http/Http04JsonApi` (8); `t34_toward_spring/Spring03RestConcepts` (9)
+- **while** → `t02_controlflow/Control03Loops` (3)
+- **widok kontra kopia** → `t12_collections/Collections02Lists` (4); `t12_collections/Collections08ImmutableUnmodifiable` (2); `t06_oop_basics/Oop10Copying` (6)
+- **withRetry (ponawianie)** → `t13_lambdas/Lambda07HigherOrderFunctions` (9); `t18_io_files/Io11IoExceptions` (9); `t28_networking_http/Http05AsyncTimeouts` (7)
+- **własna adnotacja** → `t19_annotations_reflection/Annotations02Custom` (1, 2)
+- **własny wyjątek** → `t10_exceptions/Exceptions05CustomExceptions`
+- **wnioskowanie typu** → `t11_generics/Generics03Methods` (2)
+- **współczynnik wypełnienia 0.75 i resize** → `t12_collections/Collections11HashingInternals` (5)
+- **wstrzykiwanie przez konstruktor** → `t34_toward_spring/Spring01IocContainer` (3); `t22_design_patterns/Patterns08DependencyInjection` (2)
+- **wyciek pamięci** → `t26_jvm/Jvm01Memory` (7, 8)
+- **wyciek wnętrza przez getter** → `t06_oop_basics/Oop03Encapsulation` (8)
+- **wyjątek: co jest w obiekcie (getMessage, stos)** → `t10_exceptions/Exceptions01Basics` (5)
+- **wyjątki sprawdzane w lambdach** → `t10_exceptions/Exceptions02CheckedUnchecked` (4); `t13_lambdas/Lambda08Pitfalls` (1, 2)
+- **wyjątki stłumione (suppressed)** → `t10_exceptions/Exceptions04TryWithResources` (4); `t18_io_files/Io11IoExceptions` (7)
+- **wymazywanie typów (type erasure)** → `t11_generics/Generics06ErasureLimits`
+- **wyrażenia regularne (regex)** → `t04_strings/Strings05Regex`; `t04_strings/Strings08RegexAdvanced`
+- **wyszukiwanie binarne** → `t24_algorithms/Algorithms03Searching` (2, 4); `t03_arrays/Arrays04Algorithms` (4)
+- **wyszukiwanie binarne po odpowiedzi** → `t24_algorithms/Algorithms03Searching` (6, 7)
+- **wyścig (race condition)** → `t21_concurrency/Concurrency02RaceConditions`
+- **wywołanie wewnętrzne omija proxy (samowywołanie)** → `t19_annotations_reflection/Annotations06DynamicProxy` (8); `t34_toward_spring/Spring01IocContainer` (9)
+- **wzorce pętli (suma, minimum, zliczanie)** → `t02_controlflow/Control05LoopPatterns`
+
+### X
+
+- **XML: DOM, StAX, XPath** → `t18_io_files/Io14Xml`
+- **XXE (bezpieczne parsowanie XML)** → `t18_io_files/Io14Xml` (2)
+
+### Y
+
+- **yield** → `t02_controlflow/Control02Switch` (6); `t23_modern_java/Modern03SwitchExpressions` (3)
+
+### Z
+
+- **zadania programistyczne z rozmów** → `t33_interview_prep/Interview03CodingTasks`
+- **zakleszczenie (deadlock)** → `t21_concurrency/Concurrency03Locks` (9); `t26_jvm/Jvm04ToolsProfiling` (4)
+- **zanieczyszczenie sterty (heap pollution)** → `t11_generics/Generics06ErasureLimits` (6)
+- **zasada podstawienia Liskov (LSP)** → `t07_inheritance_polymorphism/Inherit08Solid` (3); `t07_inheritance_polymorphism/Inherit06CompositionVsInheritance` (5); `t27_clean_code_pitfalls/CleanCode02Solid` (3)
+- **zasięg zmiennej** → `t01_basics/Basics03Variables` (2); `t02_controlflow/Control03Loops` (7)
+- **zasięgi: singleton i prototyp** → `t34_toward_spring/Spring01IocContainer` (5)
+- **zbalansowane nawiasy** → `t33_interview_prep/Interview03CodingTasks` (7)
+- **ZIP (ZipOutputStream, ZipFile)** → `t18_io_files/Io13ZipArchives` (1, 2, 3)
+- **zip slip** → `t18_io_files/Io13ZipArchives` (7)
+- **złożoność kolekcji (Big-O)** → `t12_collections/Collections13Performance` (1, 2)
+- **złożoność obliczeniowa (notacja O)** → `t24_algorithms/Algorithms01Complexity`
+- **zmiana czasu (DST)** → `t17_datetime/DateTime04ZonesInstant` (4)
+- **zmienna lokalna (deklaracja i przypisanie)** → `t01_basics/Basics03Variables` (1)
+- **zmienne pole w hashCode** → `t06_oop_basics/Oop05ObjectMethods` (9); `t26_jvm/Jvm01Memory` (8)
+- **zmiennoprzecinkowe: 0.1 + 0.2 ≠ 0.3** → `t01_basics/Basics08FloatingPoint` (1, 2)
+- **ZoneId / ZonedDateTime** → `t17_datetime/DateTime04ZonesInstant` (2, 3)
+- **zrzut sterty (heap dump)** → `t26_jvm/Jvm04ToolsProfiling` (5)
+- **zrzut wątków (thread dump)** → `t26_jvm/Jvm04ToolsProfiling` (3)
+
+### Ź
+
+- **źródła strumieni (kolekcje, tablice, pliki)** → `t16_streams/Streams02Creation` (1, 3, 9)
+
+### Ż
+
+- **żądania asynchroniczne i równoległe (sendAsync)** → `t28_networking_http/Http05AsyncTimeouts` (1, 2)
 
 ## Uruchamianie i ustawienia IntelliJ
 - **Uruchomienie lekcji:** kliknij zielony trójkąt ▶ obok `main`.
