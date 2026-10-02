@@ -14,7 +14,9 @@ Samodzielny kurs Javy SE 17 w 36 działach (`t00`–`t35`). Każda lekcja to pli
 2. Sklonuj repozytorium i otwórz folder projektu w IntelliJ IDEA (File → Open → wskaż `pom.xml` → Open as Project).
 3. Otwórz dowolną lekcję, np. `src/t01_basics/Basics01HelloJvm.java`, i kliknij zielony trójkąt ▶ obok `main`.
 
-Maven jest opcjonalny. IntelliJ pobierze zależności sam (tylko Lombok, potrzebny wyłącznie w `t20_lombok`). Z linii poleceń: `mvn compile`.
+Mavena nie trzeba instalować. IntelliJ pobierze zależności sam (Lombok jest potrzebny tylko w `t20_lombok`). Z linii poleceń służy Maven Wrapper, który sam pobiera właściwą wersję Mavena: `./mvnw compile` (Windows: `mvnw.cmd compile`).
+
+Folder `tools/` zawiera narzędzia autorów kursu (weryfikator lekcji, rejestr lekcji, instrukcje dla agentów AI). Do nauki nie jest potrzebny.
 
 ## Struktura
 ```
