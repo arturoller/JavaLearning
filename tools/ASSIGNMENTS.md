@@ -1,5 +1,57 @@
 # Assignments (one agent at a time; each agent reads AGENT_KIT.md + ONLY its own section here)
 
+## W — t29_jdbc_databases (Opus, 1 batch)   · TAG `jdbc` · scope `"t29_jdbc_databases/*"`
+Folder `src/t29_jdbc_databases/` (create). Package `t29_jdbc_databases`. package-info.java + 7 lessons. Learner knows t01–t23
+(incl. exceptions, try-with-resources, records, collections, streams, BigDecimal, java.time, concurrency basics). Database: H2 in
+memory (dependency com.h2database:h2 is in pom.xml and its jar in temp/lib — on the verifier classpath). Use ONLY java.sql.* /
+javax.sql.* in code — NO import of org.h2 classes; connect with DriverManager.getConnection("jdbc:h2:mem:<unique-name-per-lesson>;
+DB_CLOSE_DELAY=-1") or without DB_CLOSE_DELAY when one connection is enough; each lesson creates its own schema and data from
+SQL in text blocks (shop: customers, products, orders, order_lines — mirror SampleData where handy, map with code). SQL in
+standard style compatible with H2 2.x (and mention PostgreSQL/MySQL differences in comments).
+DETERMINISM: always ORDER BY when printing query results; H2 error messages contain the H2 version and internal codes
+(e.g. "...[23505-232]") → never print getMessage(); print getSQLState() (and/or getErrorCode()) plus your own Polish description;
+DATE/TIMESTAMP via LocalDate/LocalDateTime (getObject(col, LocalDate.class)), never now(); money as DECIMAL(10,2) ↔ BigDecimal
+(compare with compareTo); generated keys start at 1 in a fresh in-memory DB (fine to print). Always close Connection/Statement/
+ResultSet with try-with-resources. No stderr output (H2 does not log to stderr by default — keep it so; no TRACE_LEVEL settings).
+Spring link: JdbcTemplate, Spring Data JPA — SpringLearning; JPA/Hibernate only described.
+1. Jdbc01SqlBasics — what a relational database is (tables, rows, columns, primary key, types), SQL categories DDL/DML/DQL,
+   CREATE TABLE with constraints (PRIMARY KEY, NOT NULL, UNIQUE, CHECK, DEFAULT), INSERT, SELECT (WHERE, ORDER BY, LIMIT/OFFSET,
+   LIKE with Polish text, IN, BETWEEN, IS NULL — pitfall: = NULL), UPDATE/DELETE without WHERE pitfall (row counts printed),
+   NULL semantics (three-valued logic), executed through a small helper that prints result sets as aligned tables.
+2. Jdbc02Connection — JDBC architecture (API, driver, DriverManager, DataSource), connection URL anatomy, Connection/Statement/
+   ResultSet lifecycle and closing order (try-with-resources with several resources), ResultSet navigation and getters
+   (getInt vs getObject and wasNull pitfall for NULL numbers), metadata (ResultSetMetaData column names/types, DatabaseMetaData
+   product name — print only "zawiera H2 → true"), execute vs executeQuery vs executeUpdate, SQLException anatomy (SQLState,
+   error code, chaining getNextException), connection pools (HikariCP — why; described), credentials not in code.
+3. Jdbc03PreparedStatement — PreparedStatement with ? parameters as THE rule for every value that comes from outside
+   (setString/setInt/setBigDecimal/setObject for LocalDate, setNull); one general sentence on why (never build SQL text from
+   user data — the database must receive values separately from the query) WITHOUT any attack examples or attack strings;
+   reusing one PreparedStatement for many rows, precompiled plan, batch inserts (addBatch/executeBatch with counts),
+   getGeneratedKeys, IN-lists with a variable number of parameters (build placeholders), LIKE with user text and escaping
+   % and _, identifiers (table/column names, ORDER BY column) cannot be parameters → choose from a fixed whitelist
+   (enum/Map), clearParameters, parameter indexes from 1, common errors (wrong index, missing parameter → SQLState only).
+4. Jdbc04Transactions — auto-commit, setAutoCommit(false), commit/rollback, money transfer between accounts with a CHECK
+   (balance >= 0) violation causing rollback, try/catch/finally pattern restoring auto-commit, savepoints, ACID explained,
+   isolation levels and anomalies (dirty read, non-repeatable read, phantom) — demonstrate ONE anomaly deterministically with two
+   connections to the same named in-memory DB (step-by-step, no threads), lost update and optimistic locking with a version
+   column (UPDATE ... WHERE id=? AND version=? → 0 rows), pessimistic SELECT ... FOR UPDATE described; @Transactional in Spring.
+5. Jdbc05Dao — DAO/repository pattern: interface ProductRepository (findById → Optional, findAll, save, update, delete,
+   findByCategory), JDBC implementation with row mapper (ResultSet → record), exceptions translated to an own unchecked
+   DataAccessException (keep SQLState), connection passing / unit of work, in-memory fake implementation for tests (same
+   behaviour checked by the same checks — contract test idea), JdbcTemplate/Spring Data comparison (comments), N+1 queries
+   problem (count queries in a demo), pagination.
+6. Jdbc06SqlJoins — schema customers/orders/order_lines/products; INNER JOIN, LEFT JOIN (customers without orders — Ewa Lis),
+   RIGHT/FULL (mention, H2 supports FULL? — check and say), self-join (employee–manager), join conditions vs WHERE (pitfall:
+   filtering a LEFT JOIN in WHERE turns it into INNER), aliases, many-to-many via junction table, mapping join rows to nested
+   objects in Java (order with lines), duplicates from joins, subqueries (IN, EXISTS, scalar), basic relational design
+   (normalization 1NF–3NF briefly, foreign keys with ON DELETE behaviour demo).
+7. Jdbc07SqlAggregationIndexes — COUNT/SUM/AVG/MIN/MAX (COUNT(*) vs COUNT(col) with NULLs), GROUP BY, HAVING vs WHERE, ORDER BY
+   aggregate, aggregation with joins (revenue per customer/category with BigDecimal), DISTINCT, CASE WHEN, window functions
+   briefly (ROW_NUMBER, SUM OVER — check H2 support), indexes: what they are (B-tree), CREATE INDEX, EXPLAIN output from H2
+   (print only whether the plan mentions the index name → true/false), composite index column order, when indexes hurt
+   (writes), unique indexes; compare SQL aggregation with Java streams groupingBy (t16_streams/Streams11GroupingBy) on the same
+   data — same results.
+
 ## V — t28_networking_http (Sonnet, 1 batch)   · TAG `net` · scope `"t28_networking_http/*"`
 Folder `src/t28_networking_http/` (create). Package `t28_networking_http`. package-info.java + 6 lessons. Learner knows t01–t23
 (incl. IO t18, concurrency t21: executors, CompletableFuture). Reading order: Net01SocketsTcpUdp, Http01UriUrl, Http02HttpClient,

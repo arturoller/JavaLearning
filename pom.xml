@@ -18,6 +18,12 @@
     </properties>
 
     <dependencies>
+        <!-- H2 = baza danych SQL w pamięci, dla działu t29_jdbc_databases (łączymy się przez JDBC, bez importu klas H2) -->
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>2.3.232</version>
+        </dependency>
         <!-- Lombok jest potrzebny wyłącznie w dziale t20_lombok. Reszta kursu to czysta Java. -->
         <dependency>
             <groupId>org.projectlombok</groupId>
