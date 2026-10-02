@@ -24,6 +24,7 @@
  *   <li>Oop07NestedClasses — klasy zagnieżdżone, wewnętrzne, lokalne i anonimowe</li>
  *   <li>Oop08PackagesAccess — pakiety, importy, konflikty nazw, widoczność pakietowa</li>
  *   <li>Oop09ValueObjects — obiekty wartości kontra encje, fabryki of, walidacja</li>
+ *   <li>Oop10Copying — kopia płytka i głęboka, konstruktor kopiujący, clone(), kopiowanie tablic i kolekcji</li>
  * </ol>
  *
  * <p>SŁÓWKA: class = klasa; object = obiekt; instance = egzemplarz (instancja); field = pole;
