@@ -1,5 +1,102 @@
 # Assignments (one agent at a time; each agent reads AGENT_KIT.md + ONLY its own section here)
 
+## T — t22_design_patterns (Sonnet, 3 batches: T1 Patterns01–05 + package-info, T2 Patterns06–10, T3 Patterns11–15)   · TAG `pat1`…`pat3` · scope `"t22_design_patterns/*"`
+Folder `src/t22_design_patterns/` (create). Package `t22_design_patterns`. package-info.java (batch T1) + 15 lessons. Learner knows
+t01–t21 (OOP, inheritance, interfaces, records, enums, sealed, exceptions, generics, collections, lambdas, Optional, streams,
+java.time, IO, reflection and dynamic proxies (t19), Lombok, concurrency basics). Patterns are taught on ONE realistic domain per
+lesson (shop, orders, invoices, notifications, documents — SampleData products/orders/customers where it fits), never on
+"Animal/Dog" toys.
+EVERY LESSON follows the same arc (sections):
+  (1) PROBLEM first: code WITHOUT the pattern that hurts (if/switch growing, duplicated code, hard-wired dependency) — show why
+      (a new requirement forces edits in many places);
+  (2) the pattern step by step: roles (names from the GoF book in English + Polish), a small ASCII diagram in the Javadoc;
+  (3) the MODERN Java version (lambdas / functional interfaces / enum / records / sealed + switch pattern only as
+      "(Java 21+)" comment) and when the classic class-based version is still better;
+  (4) where the learner ALREADY MET it in the JDK (Comparator = strategy, Collections.unmodifiableList = decorator/proxy,
+      InputStream wrappers = decorator, Runnable = command, Iterator, Arrays.asList = adapter, StringBuilder = builder,
+      List.of / Optional.of = static factories) and in Spring (SpringLearning: beans = singletons, @Autowired = DI,
+      JdbcTemplate = template method, ApplicationEvent = observer, HandlerInterceptor/filters = chain, proxies = decorator);
+  (5) PUŁAPKA: overuse (pattern where an if would do — YAGNI), typical mistakes of that pattern;
+  (6) testability: how the pattern makes a unit test easy (show a tiny fake/stub, deterministic);
+  (7) "kiedy używać / kiedy nie" table.
+Determinism: no HashMap/HashSet printing, Clock instead of now(), no real threads except Patterns04 (singleton thread-safety:
+deterministic facts only, e.g. 8 tasks get the same instance → true). Exercises: 3–4 per lesson, last one = implement/refactor
+to the pattern with a Check on behaviour (not on class names). Cross-reference t27_clean_code_pitfalls/CleanCode02Solid (SOLID)
+where the pattern embodies a principle (OCP for strategy/decorator, DIP for DI).
+
+BATCH T1:
+1. Patterns01Strategy — discount/shipping-cost calculation: switch on type → interface DiscountPolicy with implementations →
+   lambdas and Map<String, Strategy>/enum with lambda field; choosing a strategy at runtime (config string), Comparator as
+   strategy, strategy + DI preview; PUŁAPKA: strategy with one implementation forever.
+2. Patterns02Builder — telescoping constructors problem (Pizza/Order with 8 params; boolean traps new X(true, false, true)),
+   JavaBeans setters (half-built objects, mutability), Builder as static nested class with fluent methods, validation in
+   build(), required params in the builder constructor, immutable result (record + builder), toBuilder/with-copy, step builder
+   (compile-time required order) briefly, Lombok @Builder recap (t20_lombok/Lombok03DataValueBuilder), StringBuilder /
+   HttpRequest.newBuilder() / Stream.builder() in the JDK.
+3. Patterns03Factory — static factory methods (of, from, valueOf, parse — names; can cache, return subtypes, have names: Effective
+   Java item 1), Simple Factory (switch on type in one place), Factory Method (subclass decides — e.g. ReportExporter with
+   createFormatter()), Abstract Factory (families: PL vs EN invoice parts) briefly, registry of suppliers Map<String,
+   Supplier<T>> (sorted keys printed), factory hiding sealed hierarchy; PUŁAPKA: factory that only calls new.
+4. Patterns04Singleton — one instance: eager static final, lazy holder idiom, enum singleton (serialization and reflection safe),
+   double-checked locking with volatile (link t21_concurrency/Concurrency10MemoryModel), why singletons are hated (global
+   state, hidden dependencies, hard to test — demo test pollution between two "tests"), "singleton by DI container" instead
+   (Spring bean scope singleton ≠ GoF singleton — explain), stateless singletons are fine; reflection attack on private
+   constructor (setAccessible) vs enum (IllegalArgumentException: Cannot reflectively create enum objects — copy real message).
+5. Patterns05TemplateMethod — report generation / CSV-JSON exporters / data import with fixed steps: abstract class with final
+   template method and abstract/hook steps, Hollywood principle ("nie dzwoń do nas, my zadzwonimy"), modern alternative:
+   passing lambdas (template as a method with Function parameters — like JdbcTemplate + RowMapper), inheritance pitfalls
+   (fragile base class), AbstractList in the JDK (implement get/size → you get iterator, contains, indexOf...).
+package-info.java: reading order of all 15 lessons with one-line descriptions, and a short "jak czytać wzorce" note.
+
+BATCH T2:
+6. Patterns06Observer — order status changes notifying email/SMS/stock listeners: tight coupling problem, Subject + listener
+   interface (Consumer<Event>), event records, unsubscribe, order of notification (List → deterministic), exception in one
+   listener must not stop others (decide and show), memory leak of forgotten listeners, synchronous vs asynchronous (mention
+   t21), java.util.Observer deprecated (since 9) — why, PropertyChangeListener, Spring ApplicationEventPublisher /
+   @EventListener, observer vs pub/sub (message broker).
+7. Patterns07Decorator — adding behaviour without subclass explosion: price calculation / text pipeline / DataSource with
+   logging-caching-retry decorators; same interface, wraps a delegate, order matters (demo: compress-then-encrypt vs reverse
+   with deterministic toy transforms), functional decorators (Function.andThen, UnaryOperator chains), java.io streams
+   (t18_io_files/Io08BinaryStreams), Collections.unmodifiableList / synchronizedList, decorator vs proxy (t19 dynamic proxy)
+   vs inheritance; PUŁAPKA: equals/identity of wrapped objects, too many layers.
+8. Patterns08DependencyInjection — hard-wired `new` inside a service (untestable: real clock, real mail sender), constructor
+   injection (final fields), setter and field injection (why worse), composition root (wiring in main), interfaces + fakes in
+   tests (fake Clock, in-memory repository, recording mail sender), DI vs Service Locator, a tiny hand-written container (Map
+   of suppliers, singleton vs prototype scope, resolving constructor dependencies — keep reflection minimal; t34 builds the full
+   one), what Spring does (@Component, @Autowired, constructor injection by default — SpringLearning), DIP link to CleanCode02Solid.
+9. Patterns09Command — operations as objects: text editor or bank account with undo/redo (Deque history), command interface
+   execute/undo, macro (composite command), queue of commands (deferred execution), Runnable / lambdas as commands, command
+   records + handler (CQRS mention), logging/auditing commands; PUŁAPKA: undo that cannot restore state (store what's needed).
+10. Patterns10Facade — ordering process touching inventory, payment, invoice, shipping, notification: client code knowing all
+    subsystems (problem) → OrderFacade.placeOrder(...) hiding steps and order; facade does not forbid direct access; facade vs
+    "god class"; service layer in Spring as a facade over repositories (link t27_clean_code_pitfalls and t34); SLF4J as a
+    facade over logging libraries (name!); java.nio.file.Files as a facade.
+
+BATCH T3:
+11. Patterns11Adapter — incompatible interfaces: old payment API / external weather or currency provider returning different
+    types/units (Fahrenheit, cents as long, XML-ish strings) adapted to our interface; object adapter (composition) vs class
+    adapter (inheritance) — prefer composition; adapters at system boundaries (ports & adapters/hexagonal mention, t27 link),
+    JDK: Arrays.asList, InputStreamReader (bytes → chars), Collections.enumeration/list; two-way adapters briefly.
+12. Patterns12Composite — tree of parts: menu/categories or file-system-like or product bundles (bundle price = sum of parts);
+    Component interface, Leaf, Composite (children list), uniform treatment (total price, count, print indented tree),
+    recursion, sealed interface + records version with switch-free recursion (pattern matching switch only "(Java 21+)"),
+    safety vs transparency (add() on a leaf), cycles pitfall, link to t18 directories walk and t24 recursion.
+13. Patterns13State — order lifecycle (OrderStatus) with behaviour per state: switch everywhere problem → State interface with
+    classes per state, transitions returning next state, illegal transition → exception; enum with abstract methods as state
+    machine (link t08_enums/Enums04EnumMapSet), state vs strategy (who changes it), table-driven transitions (EnumMap), sealed
+    states carrying data (records); PUŁAPKA: state explosion.
+14. Patterns14ChainOfResponsibility — request validation / discount rules / support ticket escalation: handlers in a chain,
+    each handles or passes on; building chains (linked handlers vs List<Handler> loop), stop vs continue semantics,
+    functional chain (Function/Predicate composition), servlet filters / Spring Security filter chain / HandlerInterceptor,
+    logging pipelines; PUŁAPKA: request falls off the end unhandled (default handler), order dependence.
+15. Patterns15Visitor — operations over a fixed class hierarchy (document elements or shapes or AST of simple expressions
+    1 + 2 * x): adding operations without changing classes (export to text, compute price/area, evaluate), double dispatch
+    explained, accept/visit boilerplate, the expression problem (easy to add operations, hard to add types), modern
+    alternative: sealed interface + records + instanceof pattern (Java 16+) or switch patterns "(Java 21+)" — compare,
+    FileVisitor from t18_io_files/Io07WalkingDirectories as a JDK visitor; final summary table of all 15 patterns
+    (problem → pattern → JDK/Spring example).
+
+
 ## S — t21_concurrency (Opus, 2 batches: S1 Concurrency01–05 + package-info, S2 Concurrency06–10)   · TAG `conc1`/`conc2` · scope `"t21_concurrency/*"`
 Folder `src/t21_concurrency/` (create). Package `t21_concurrency`. package-info.java (batch S1) + 10 lessons. Learner knows t01–t20
 (OOP, records, enums, exceptions, generics, collections, lambdas, Optional, streams incl. parallel streams basics, java.time, IO,
