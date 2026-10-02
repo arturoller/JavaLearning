@@ -62,8 +62,8 @@ java -Dfile.encoding=UTF-8 -Dsun.stdout.encoding=UTF-8 tools/Verify.java --tag X
   Jeden PR = jeden dział (łatwy przegląd).
 
 ## 6. Stan i kolejność pracy (aktualizuj po każdym dziale)
-- **Gotowe (✅):** helpers, t00–t17, t19, t20, t21, t24, t25, t26, t27.
-- **Do napisania, w tej kolejności:** t18_io_files (14), t22_design_patterns (15), t23_modern_java (7),
+- **Gotowe (✅):** helpers, t00–t21, t24, t25, t26, t27.
+- **Do napisania, w tej kolejności:** t22_design_patterns (15), t23_modern_java (7),
   t28_networking_http (6), t29_jdbc_databases (7), t30_build_modules (6), t31_jdk_toolbox (4), t32_junit_mockito (5),
   t33_interview_prep (4), t34_toward_spring (4), t35_capstone (4). Nazwy lekcji: `tools/lessons.txt`; tematy: README.
 - **Dodatki w gotowych działach (🔶 w README):** t00 Start06Git/Start07IntelliJRefactoring/Start08JShell, t04 Strings08RegexAdvanced/
@@ -81,6 +81,10 @@ java -Dfile.encoding=UTF-8 -Dsun.stdout.encoding=UTF-8 tools/Verify.java --tag X
 - Narzędzie Write/Edit zamienia `\uXXXX` na prawdziwe znaki — unikaj takich escape'ów albo przywracaj je zamianą w powłoce.
 - Pliki UTF-8 bez BOM. Chwilowy błąd gita „Unable to write new index file” (IntelliJ/antywirus trzyma plik) → ponów polecenie.
 - W chmurze (Linux) powyższe problemy Windows nie występują, ale nadal: JDK 17 i `./mvnw`.
+- W chmurze weryfikator uruchamiaj bez zmiennej `JAVA_TOOL_OPTIONS` (JVM wypisuje „Picked up …” na stderr → każde uruchomienie
+  liczy się jako FAILED RUN) i z polskim Locale (linie WYNIK nagrano na polskim Windows; np. `IntSummaryStatistics.toString`
+  używa Locale domyślnego): `locale-gen pl_PL.UTF-8`, potem `env -u JAVA_TOOL_OPTIONS LANG=pl_PL.UTF-8 java … tools/Verify.java …`.
+  Brak JDK 17 → `apt-get install openjdk-17-jdk-headless` (JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64).
 
 ## 8. Powiązania z SpringLearning
 - SpringLearning trzyma kopię rejestru tego kursu (`tools/javalearning-lessons.txt`) do sprawdzania odesłań. Gdy tu zmienią się

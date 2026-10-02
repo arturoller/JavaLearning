@@ -89,6 +89,164 @@ BATCH S2:
     locking broken without volatile and correct with it (code + explanation), long/double tearing (non-volatile 64-bit
     writes may be split — JLS 17.7), false sharing mentioned, summary table "co gwarantuje co".
 
+## R — t18_io_files (Sonnet, 4 batches: R1 Io01–04 + package-info, R2 Io05–08, R3 Io09–11, R4 Io12–14)   · TAG `io1`…`io4` · scope `"t18_io_files/*"`
+Folder `src/t18_io_files/` (create). Package `t18_io_files`. package-info.java (batch R1) + 14 lessons. Learner knows t01–t17
+(OOP, records, enums, exceptions incl. try-with-resources and wrapping, generics, collections, lambdas, Optional, BigDecimal,
+streams, java.time). t19+ NOT known (no reflection, no concurrency). java.nio.file is the main API; java.io only where it still
+matters (streams of bytes, Reader/Writer wrappers, serialization) — always say which one is "new" (NIO.2, Java 7+).
+PORTABILITY = the hardest rule here. WYNIK lines are recorded on Linux, the learner runs Windows 10 (default charset windows-1250
+in Java 17, `\` as separator, `\r\n` line ends, case-insensitive file names, open files cannot be deleted). Output MUST be
+identical on both:
+- All files live in `helpers.TempDir.create("io…")`, deleted in `finally` with `TempDir.deleteRecursively`. Never write into the
+  project folder, never print an absolute path (temp folder name is random) → print paths RELATIVE to the temp dir and with `/`:
+  declare in the lesson `private static String rel(Path base, Path p) { return base.relativize(p).toString().replace('\\', '/'); }`
+  (explain once per lesson why). Path.toString() of a multi-part path printed raw = PUŁAPKA (Windows prints `a\b`).
+- Never print `Charset.defaultCharset()`, `System.lineSeparator()`, `File.separator`, absolute/root paths, isAbsolute() of
+  "/x", file sizes of files written with platform line separators (Files.write(path, lines), BufferedWriter.newLine(),
+  PrintWriter.println, Properties.store) — those differ between systems; explain them in comments instead. Text written with
+  explicit "\n" (Files.writeString) has a deterministic size → OK to print.
+- ALWAYS pass a charset (StandardCharsets.UTF_8) to every Reader/Writer/InputStreamReader/getBytes/new String; the "no charset"
+  variant only in comments as PUŁAPKA (Java 17 uses the system default; Java 18+ defaults to UTF-8 — JEP 400).
+- Directory listings (Files.list/walk/find, DirectoryStream) have NO guaranteed order → sort by the rel(...) string. Use only
+  lower-case ASCII-or-Polish file names that differ by more than case.
+- IO exception messages contain the full path (and FileInputStream/FileReader messages contain an OS-language text like
+  "(No such file or directory)" vs Polish Windows text) → never print getMessage() of IO exceptions. Do NOT use expectThrows
+  for file operations; declare a small lesson helper, e.g. `ioFails(String label, ThrowingIo action)` printing
+  `✔ label → rzucono NoSuchFileException (plik: nie-ma.txt)` using the exception's simple class name and, for
+  FileSystemException, `Path.of(e.getFile()).getFileName()`. expectThrows is fine for non-IO exceptions (parsing, validation).
+- Never demo permissions/AccessDeniedException at runtime (cloud runs as root, Windows differs), file locking, hidden files,
+  probeContentType, POSIX attributes — comments only. Timestamps: set them yourself with FileTime.from(Instant.parse(...)) and
+  print the FileTime (UTC ISO) — never print real creation/modification times.
+- Close EVERYTHING (try-with-resources), including Files.lines/list/walk/find streams and zip file systems — on Windows an open
+  handle makes deleting the temp dir fail.
+- Compressed sizes (ZIP/GZIP) depend on the zlib build → print only facts like `skompresowany < oryginał → true`.
+- Never print to System.err (the verifier treats any stderr output as a failed run): java.util.logging must use
+  setUseParentHandlers(false) + own Handler/Formatter writing to System.out or to a file.
+- Multi-line text produced by the JDK (Transformer, Properties.store, printStackTrace into a StringWriter) → normalize
+  `\r\n` → `\n` and print line by line; skip the date comment line of Properties.store (explain why).
+Common content rules: every lesson explains which exceptions can be thrown and why IOException is checked; PRZED/PO
+(java.io.File + manual close → NIO.2 + try-with-resources) where natural; Polish letters in file content (ą, ę, ł, ż) to keep
+charset awareness alive. Exercises work on files the exercise method receives as parameters (the exercises() method prepares a
+temp dir, passes Paths, deletes it in finally); the checks compare strings/numbers/lists, never paths. 3–5 exercises per lesson.
+
+BATCH R1:
+1. Io01PathFiles — Path vs old java.io.File (File.toPath/Path.toFile, why NIO.2: exceptions instead of `false`, symlinks,
+   attributes); Path.of (Java 11+) vs Paths.get; resolve, resolveSibling, relativize, normalize ("a/./b/../c" → a/c),
+   getFileName, getParent, getNameCount, subpath, startsWith (by path elements, not text: Path.of("abc").startsWith("ab") false),
+   endsWith; Path is only a NAME — no file needed (exists false); Files: exists/notExists (both false when unknown — comment),
+   isDirectory, isRegularFile, createDirectory vs createDirectories, createFile (FileAlreadyExistsException), copy / move with
+   StandardCopyOption.REPLACE_EXISTING (without it → FileAlreadyExistsException), ATOMIC_MOVE in comments, delete vs
+   deleteIfExists, DirectoryNotEmptyException, size, get/setLastModifiedTime with a fixed FileTime, createTempFile/Directory
+   (names random → only facts); toAbsolutePath / toRealPath only described (output machine-dependent).
+2. Io02ReadingText — Files.readString (Java 11+), readAllLines, Files.lines (lazy Stream — must be closed: try-with-resources),
+   BufferedReader + readLine loop (classic), newBufferedReader(path, UTF_8); counting words/lines, finding lines, line numbers;
+   which to choose (small file → readString/readAllLines; big file → lines/BufferedReader; table: memory vs convenience);
+   MalformedInputException when reading a windows-1250 or ISO-8859-2 encoded file as UTF-8 (prepare the bytes with getBytes of
+   that charset) — preview of Io12; reading resources from the classpath only mentioned (getResourceAsStream, SpringLearning).
+   Use Scanner(Path, UTF_8) briefly (token reading, nextInt) and when NOT to use it (slow, swallows IOException — ioException()).
+3. Io03WritingText — Files.writeString with options CREATE, TRUNCATE_EXISTING (default), APPEND, CREATE_NEW; Files.write(lines)
+   (adds platform line separator — size differs, explain, print content only); BufferedWriter (newBufferedWriter), PrintWriter
+   with printf(Locale.ROOT, ...), flush vs close (data lost when not closed — demo: write via BufferedWriter without close, read
+   → empty; then close it properly — must not leave it open!), write-to-temp-then-move atomic save pattern (resistant to crash
+   in the middle), StringWriter for building text in memory, overwriting by accident (TRUNCATE default) as PUŁAPKA.
+4. Io04Csv — reading SampleData.salesCsvLines() written to a file: header handling, split(",", -1) (why -1: trailing empty
+   fields), parsing into a record SaleRow (LocalDate, sku, name, Category, int qty, BigDecimal price) with validation, collecting
+   errors with line numbers instead of crashing (4 invalid lines: report "linia N: powód"), summary (total value per category
+   via TreeMap or EnumMap, BigDecimal), writing a report CSV back and reading it again; quoting rules of real CSV (commas and
+   quotes inside fields, "" escape) — implement a small quote-aware split for one line and show where naive split breaks;
+   recommend libraries (OpenCSV, Apache Commons CSV, Jackson CSV) for real projects; Locale/decimal separator pitfall
+   ("79,00" in Polish Excel exports, semicolon separator in Polish Excel).
+package-info.java: reading order of all 14 lessons with one-line descriptions.
+
+BATCH R2:
+5. Io05JsonManual — JSON format (object, array, string, number, true/false/null), why the JDK has no JSON parser (Jackson/Gson in
+   real projects; Spring Boot uses Jackson — SpringLearning); WRITE: a small JsonWriter building JSON from Map/List/record with
+   correct escaping (", \, newline, control chars), stable key order (LinkedHashMap/TreeMap), pretty print with indent;
+   READ: a tiny recursive-descent parser (objects, arrays, strings with escapes incl. \n \" \\ and \uXXXX — careful: AGENT_KIT
+   escape rule!, numbers as BigDecimal, true/false/null) returning Map/List/String/BigDecimal/Boolean/null with clear error
+   messages including position ("pozycja 17: oczekiwano ':'"); round trip file → objects → file; pitfalls: numbers as double
+   (0.1+0.2), trailing commas not allowed, single quotes not allowed, comments not allowed. Keep the parser ≤ 120 lines.
+6. Io06Properties — java.util.Properties: load(Reader) with UTF-8 (load(InputStream) assumes ISO-8859-1 → Polish letters
+   broken — demo by reading UTF-8 bytes through load(InputStream) and printing the mojibake), getProperty with default,
+   key=value / key: value / key value, comments # and !, line continuation \, spaces trimmed around keys, all values are
+   String → parse int/boolean/Duration with validation and clear errors, store(Writer, comment) (date comment line skipped
+   when printing, platform line separators normalized), keys are unordered (Hashtable) → print sorted
+   (stringPropertyNames into TreeSet), layering defaults: new Properties(defaults) (default file + user overrides +
+   System.getProperty override — only with a lesson-specific key set via System.setProperty and cleared after), typed config
+   record built from Properties (like Spring's @ConfigurationProperties — mention), application.properties in Spring.
+7. Io07WalkingDirectories — build a small tree in the temp dir (src/…, docs/…, a few files with known sizes); Files.list
+   (one level), Files.walk (depth, maxDepth), Files.find (BiPredicate with attributes), DirectoryStream with glob
+   ("*.{java,txt}"), PathMatcher (glob vs regex syntax: "glob:**/*.java"), walkFileTree with SimpleFileVisitor
+   (preVisitDirectory, visitFile, postVisitDirectory, visitFileFailed; FileVisitResult CONTINUE/SKIP_SUBTREE/TERMINATE) —
+   deleting a tree, copying a tree, computing directory sizes; printing an indented tree (├── └──) sorted; ALWAYS sort and
+   close streams; why sorted(Comparator.reverseOrder()) deletes children before parents (as in helpers.TempDir); symlink loops
+   (FOLLOW_LINKS) in comments.
+8. Io08BinaryStreams — bytes vs characters (InputStream/OutputStream vs Reader/Writer), the decorator idea (FileOutputStream →
+   BufferedOutputStream → DataOutputStream), Files.newInputStream/newOutputStream, readAllBytes, read(byte[]) loop and the
+   "returns how many bytes it actually read" pitfall (ignoring the return value), transferTo (Java 9+), copying with a buffer,
+   DataOutputStream/DataInputStream (writeInt, writeUTF, writeDouble — fixed format, read in the same order; EOFException),
+   a tiny custom binary file format (magic number + version + records) with validation, hex dump of bytes (HexFormat is Java 17
+   — java.util.HexFormat.of().formatHex(...) — mark (Java 17+)), signed byte pitfall (byte b = (byte) 200 → -56; & 0xFF),
+   big-endian order of DataOutputStream vs ByteBuffer.order(LITTLE_ENDIAN), ByteArrayInput/OutputStream for tests in memory,
+   why buffering matters (count write calls with a counting wrapper, no timings).
+
+BATCH R3:
+9. Io09Serialization — Serializable, ObjectOutputStream/ObjectInputStream to a file and to a byte array, transient fields
+   (lost → default value), serialVersionUID (why declare it; InvalidClassException when it differs — demo by serializing with a
+   class, then changing the UID in the BYTES is too hacky → instead explain + show ObjectStreamClass.lookup(X.class)
+   .getSerialVersionUID() of a class with an explicit UID), static fields not serialized, non-serializable field →
+   NotSerializableException (demo, message is the class name — deterministic, ok to print), superclass without Serializable
+   needs a no-arg constructor (its fields re-initialized — demo), records serialize via canonical constructor (validation runs
+   on deserialization — demo with compact constructor rejecting bad data; normal classes skip constructors), custom
+   writeObject/readObject briefly, deep copy via serialization (and why copy constructors are better), SECURITY: deserializing
+   untrusted data is dangerous (gadget chains), ObjectInputFilter (Java 9+) with an allow-list demo
+   (ObjectInputFilter.Config.createFilter("t18_io_files.*;java.base/*;!*")), modern alternatives (JSON, protobuf); -Xlint:all
+   requires serialVersionUID on Serializable classes ([serial] warning) — every Serializable class declares
+   `private static final long serialVersionUID = 1L;` (except records/enums where it is not needed — check the compiler).
+10. Io10SimpleLogger — why logging instead of System.out (levels, timestamps, destinations, can be switched off); levels
+    TRACE/DEBUG/INFO/WARN/ERROR; own SimpleLogger: level filter, injected Clock (Clock.fixed → deterministic timestamps),
+    format "2026-05-04 12:00:00.000 [INFO ] Klasa — wiadomość", appending to a log file in the temp dir (Files.writeString
+    APPEND, UTF-8), placeholders "{}" like SLF4J (implement), exception logging with the stack trace's first line only (class +
+    message; full trace not printed — line numbers would change), lazy messages with Supplier (cost of string building when
+    level disabled — count calls), rolling by size (log.1, log.2 — simple rename demo); java.util.logging overview with a
+    custom Handler to System.out + Formatter (NEVER to stderr) and setUseParentHandlers(false); SLF4J + Logback in real projects
+    and in Spring Boot (comments); don't log passwords/PESEL; log levels in production.
+11. Io11IoExceptions — hierarchy: IOException → FileSystemException → NoSuchFileException, FileAlreadyExistsException,
+    DirectoryNotEmptyException, AccessDeniedException, NotDirectoryException; FileNotFoundException (old java.io) vs
+    NoSuchFileException (NIO.2) — when each appears; MalformedInputException/CharacterCodingException; EOFException;
+    UncheckedIOException inside lambdas/streams (Files.lines → map with IO inside → wrap and unwrap getCause), try-with-resources
+    with several resources (closing order reversed — trace with own AutoCloseable), suppressed exceptions from close()
+    (getSuppressed — own resource throwing in close), what to catch where (low level: throw; top level: one message for the
+    user + log), retry with limit for transient errors (simulated with a counter, no sleeps), NEVER swallow (empty catch) —
+    PRZED/PO, don't use exists()-then-open (TOCTOU race) — just try and catch NoSuchFileException; Files.newBufferedReader
+    vs new FileReader — message language pitfall (why we print exception TYPES here).
+
+BATCH R4:
+12. Io12Charsets — bytes vs chars vs code points; what an encoding is; UTF-8 (1–4 bytes; ASCII 1 byte, Polish letters 2 bytes,
+    emoji 4 bytes — "zażółć".getBytes(UTF_8).length), ISO-8859-2, windows-1250, UTF-16 (2 or 4 bytes + BOM in "UTF-16");
+    hex of "ł" in each; mojibake demos (UTF-8 bytes decoded as windows-1250 / ISO-8859-1 → "zaĹĽĂłĹ‚Ä‡"-like text — copy from a
+    real run), malformed bytes: new String replaces with U+FFFD (print as "?" via replace, or print the code point count) vs
+    CharsetDecoder with CodingErrorAction.REPORT → MalformedInputException; String.length() vs codePointCount for emoji (build
+    emoji via Character.toChars(0x1F600) — no escapes in source!), BOM (EF BB BF) at the start of UTF-8 files from Windows
+    Notepad — detect and strip; Java 17 default charset depends on the OS (windows-1250 on Polish Windows) vs Java 18+ UTF-8
+    (JEP 400) — explain, never print it; file.encoding, IntelliJ encoding settings, console output; Charset.isSupported,
+    availableCharsets (print only contains checks). Normalizer (NFC vs NFD: "ó" as one or two code points) — short.
+13. Io13ZipArchives — ZipOutputStream (putNextEntry, closeEntry, directories end with "/"), ZipInputStream (iterate entries,
+    read content), ZipFile (random access, entries()), zip file system: FileSystems.newFileSystem(zipPath, Map.of("create",
+    "true")) then Files.copy/writeString/walk inside the zip (Java 13+ overload newFileSystem(Path, Map) — check & mark), GZIP
+    (GZIPOutputStream/GZIPInputStream) of a text, compression facts only (compressed < original), entry names in UTF-8 (Polish
+    names), ZIP SLIP security pitfall (entry "../../evil.txt" → normalize + startsWith(target) check, demo the check rejecting
+    it), zip bomb (limit total size), sorting entries for deterministic output, CRC32 (java.util.zip.CRC32 value of a known text
+    is deterministic — ok to print), jar = zip (mention).
+14. Io14Xml — XML basics (elements, attributes, text, well-formed vs valid), DOM: DocumentBuilderFactory (secure: disallow
+    DOCTYPE — feature "http://apache.org/xml/features/disallow-doctype-decl" — XXE explained), parse from a string/file,
+    getElementsByTagName, attributes, text content, modify and write back with Transformer (OutputKeys.INDENT; normalize line
+    ends; print line by line), whitespace text nodes pitfall (getChildNodes counts them); StAX: XMLStreamReader (pull, events,
+    low memory — big files), XMLStreamWriter (writing with escaping of < & "); XPath: XPathFactory, expressions
+    ("/biblioteka/ksiazka[@rok>2010]/tytul", count(), text()), NodeList → List<String>; escaping (&lt; &amp; in XML text —
+    careful: the lesson Javadoc must not contain HTML entities; put such examples inside string literals or {@code});
+    SAX mentioned; JAXB / Jackson XML not in JDK 17 (removed in Java 11) — mention; namespaces briefly. Data: a small
+    library catalog (books with Polish titles, years, ISBN-like ids).
 
 ## P — t19_annotations_reflection (Opus)   · TAG `refl` · scope `"t19_annotations_reflection/*"`
 Folder `E:\java\JavaLearning\src\t19_annotations_reflection\` (create). Package `t19_annotations_reflection`. package-info.java +
