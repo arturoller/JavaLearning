@@ -1,5 +1,56 @@
 # Assignments (one agent at a time; each agent reads AGENT_KIT.md + ONLY its own section here)
 
+## U — t23_modern_java (Sonnet, 1 batch)   · TAG `mod` · scope `"t23_modern_java/*"`
+Folder `src/t23_modern_java/` (create). Package `t23_modern_java`. package-info.java + 7 lessons. Learner knows t01–t22: MOST
+features below were already used in earlier lessons — this section is a REVIEW-AND-DEEPEN tour "what changed in Java 8 → 17 and
+why", organized by release, each feature shown PRZED (old style) / PO (new style), with its pitfalls and an exact
+"(Java N+)" label, plus cross-references to the lesson where it was taught in depth (registry tools/lessons.txt). Do NOT
+re-teach whole topics (streams, Optional, records) — summarize in 1 section and link. Accuracy of version numbers is critical:
+use the JEP number and the release where the feature became FINAL (preview releases mentioned as "podgląd w Javie N").
+Java 18–21 features: ONLY in comments/text blocks as code samples marked "(Java 21+)" etc. — the verifier compiles with
+--release 17, so they must not be in compiled code. Release cadence: every 6 months, LTS 8, 11, 17, 21, 25.
+Determinism as usual (no now(), no HashMap printing, Locale explicit).
+1. Modern01Java8 — the big shift: lambdas and functional interfaces, method references, default and static methods in
+   interfaces (diamond problem resolution: class wins, then more specific interface, else override with X.super.m()), Stream API,
+   Optional, java.time, CompletableFuture, String.join, Map.getOrDefault/computeIfAbsent/merge/forEach, Iterable.forEach,
+   Collection.removeIf, List.sort, Comparator.comparing chains, Base64, effectively final; PRZED/PO for each (anonymous class →
+   lambda, loop → stream, null → Optional, Date → LocalDate); links to t13/t14/t16/t17.
+2. Modern02Var — local variable type inference (Java 10, JEP 286): where allowed (locals with initializer, for, for-each,
+   try-with-resources, lambda parameters in Java 11 JEP 323 for annotations), where not (fields, parameters, return types, null
+   initializer, array initializer {1,2}, lambdas without target type), var + diamond pitfall (new ArrayList<>() → ArrayList<Object>),
+   var with int literal vs long, readability guidelines (good: long generic types; bad: var x = service.get()),
+   var is not a keyword (reserved type name — `var var = 1;` compiles), non-denotable types (anonymous class members visible via var).
+3. Modern03SwitchExpressions — Java 14 (JEP 361): arrow labels, no fall-through, multiple labels, switch as expression with
+   yield, exhaustiveness for enums (no default needed in expression; adding an enum constant breaks compilation — benefit), old
+   switch statement pitfalls (missing break demo), switch on String/enum/int, null → NullPointerException in Java 17 switch
+   (case null only Java 21+), pattern matching for switch "(Java 21+)" in comments; PRZED/PO rewrites.
+4. Modern04TextBlocks — Java 15 (JEP 378): syntax, incidental indentation removal (position of closing """), trailing spaces
+   stripped (\s escape to keep), \<newline> line continuation, escaping """ inside, line endings always \n regardless of
+   source file (portability!), formatted() (Java 15), stripIndent/translateEscapes; uses: JSON, SQL, HTML, tests;
+   PUŁAPKA: careful — AGENT_KIT unicode-escape rule; build examples whose output is deterministic and print line by line.
+5. Modern05RecordsSealedPatterns — records (Java 16, JEP 395) recap with link to t09, instanceof pattern (Java 16, JEP 394:
+   scope rules — flow scoping with && and !(x instanceof T t) return), sealed classes/interfaces (Java 17, JEP 409: permits,
+   final/sealed/non-sealed subclasses, same package/module rule, getPermittedSubclasses), modelling a domain as a sealed
+   hierarchy of records (payment methods, shapes, expression tree), exhaustive handling in Java 17 via if/instanceof chain with
+   a final else throwing, and the Java 21 version (switch patterns + record patterns, JEP 440/441) in comments; algebraic data
+   types idea; when sealed helps (closed set) vs hurts (plugins).
+6. Modern06ApiAdditions — small API gems by release: Java 9 (List/Set/Map.of + immutability and null rejection, Optional.or/
+   ifPresentOrElse/stream, Stream.takeWhile/dropWhile/iterate(3 args)/ofNullable, private interface methods, try-with-resources
+   on effectively final variables, InputStream.transferTo, ProcessHandle), Java 10 (List.copyOf, Collectors.toUnmodifiableList,
+   Optional.orElseThrow()), Java 11 (String isBlank/strip/lines/repeat, Files.readString/writeString, Predicate.not,
+   HttpClient — link t28, Optional.isEmpty, Collection.toArray(IntFunction)), Java 12 (Collectors.teeing, String.indent/transform,
+   CompactNumberFormat — print with explicit Locale), Java 14 (helpful NullPointerException messages JEP 358 — copy real message),
+   Java 16 (Stream.toList, mapMulti), Java 17 (RandomGenerator JEP 356 with a seed, HexFormat); each with a one-line
+   PRZED/PO; table at the end.
+7. Modern07WhatsNextJava21 — what Java 18–21 (and 22–25 briefly) bring, ALL as commented code samples: UTF-8 by default (18,
+   JEP 400 — link t18_io_files/Io12Charsets), simple web server jwebserver (18), record patterns & pattern matching for switch
+   (21), virtual threads (21, JEP 444 — link t21_concurrency/Concurrency04Executors; Executors.newVirtualThreadPerTaskExecutor),
+   sequenced collections (21: getFirst/getLast/reversed), String templates (preview then withdrawn — say so), structured
+   concurrency/scoped values (preview), unnamed variables `_` (22), Stream gatherers (24), instance main methods / compact
+   source files (25), flexible constructor bodies (25); how to read release notes / JEPs, upgrade strategy (LTS to LTS),
+   --release flag, what the learner's Java 17 code needs to change (nothing breaks; deprecations: SecurityManager, finalization).
+   Runnable part: small Java 17 programs showing "today's way", next to the commented future way.
+
 ## T — t22_design_patterns (Sonnet, 3 batches: T1 Patterns01–05 + package-info, T2 Patterns06–10, T3 Patterns11–15)   · TAG `pat1`…`pat3` · scope `"t22_design_patterns/*"`
 Folder `src/t22_design_patterns/` (create). Package `t22_design_patterns`. package-info.java (batch T1) + 15 lessons. Learner knows
 t01–t21 (OOP, inheritance, interfaces, records, enums, sealed, exceptions, generics, collections, lambdas, Optional, streams,
