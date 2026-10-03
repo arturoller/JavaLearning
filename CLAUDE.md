@@ -17,7 +17,9 @@ Opis kursu dla ucznia: `README.md`. Szczegółowa specyfikacja lekcji dla podage
 ```
 src/helpers/        wspólne narzędzia lekcji (Console, Check, SampleData, model/) — NIE zmieniaj istniejących danych
 src/tNN_temat/      działy t00–t35, lekcje bezpośrednio w pakiecie działu (np. src/t08_enums/Enums01Basics.java)
-tools/              narzędzia autorów (w gicie): Verify.java, AGENT_KIT.md, lessons.txt (rejestr), tags.txt, ASSIGNMENTS.md
+tools/              narzędzia autorów (w gicie): Verify.java, TableOfContents.java, AGENT_KIT.md, lessons.txt (rejestr),
+                    tags.txt, ASSIGNMENTS.md
+SPIS_TRESCI.md      spis wszystkich lekcji z linkami — GENEROWANY przez tools/TableOfContents.java (nie edytuj ręcznie)
 temp/               lokalne pliki robocze (w .gitignore): build/, lib/ (biblioteki), tmp-*/ (eksperymenty), commitmsg.txt
 pom.xml, mvnw       Maven (sourceDirectory = src), Java 17, Lombok tylko dla t20; Maven Wrapper — globalny mvn niepotrzebny
 ```
@@ -56,7 +58,9 @@ java -Dfile.encoding=UTF-8 -Dsun.stdout.encoding=UTF-8 tools/Verify.java --tag X
   od razu po napisaniu. Nowa paczka lekcji = nowy agent; poprawki do jego paczki = wiadomość do tego samego agenta.
 - **Odbiór pracy agenta (zawsze przez główną sesję):** weryfikacja całego działu + wyrywkowo merytoryka (PUŁAPKA, ŚCIĄGA,
   ODPOWIEDZI, liczby i fakty) + szukanie kalk językowych. Dopiero potem commit.
-- **Git:** 1 dział = 1 commit, w tym samym commicie wiersz działu w README (⏳ → ✅ z opisem). Komunikaty po polsku
+- **Git:** 1 dział = 1 commit, w tym samym commicie wiersz działu w README (⏳ → ✅ z opisem), hasła nowych lekcji w indeksie
+  A–Z (odesłania jako linki `[`tNN_x/Klasa`](src/tNN_x/Klasa.java)`) i odświeżony spis:
+  `java -Dfile.encoding=UTF-8 tools/TableOfContents.java`. Komunikaty po polsku
   (`t18_io_files: pliki (14 lekcji)`) z liniami Co-Authored-By. Lokalnie: commit na `main`, **push robi użytkownik**.
   **W chmurze: gałąź na dział (np. `t18-io-files`), push gałęzi i pull request do `main` — nigdy push na `main`.**
   Jeden PR = jeden dział (łatwy przegląd).
