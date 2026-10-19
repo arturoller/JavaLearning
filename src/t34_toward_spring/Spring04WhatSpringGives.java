@@ -147,25 +147,26 @@ public class Spring04WhatSpringGives {
         section("2. Startery: jedna zależność zamiast dziesięciu");
 
         Map<String, String> starters = new LinkedHashMap<>();
-        starters.put("spring-boot-starter-web", "Spring MVC + Jackson (JSON) + wbudowany Tomcat");
+        starters.put("spring-boot-starter-webmvc", "Spring MVC + Jackson (JSON) + wbudowany Tomcat");
         starters.put("spring-boot-starter-validation", "Bean Validation (Hibernate Validator)");
         starters.put("spring-boot-starter-data-jpa", "Spring Data JPA + Hibernate + pula połączeń HikariCP");
         starters.put("spring-boot-starter-actuator", "/actuator/health, metryki");
-        starters.put("spring-boot-starter-test", "JUnit 5 + AssertJ + Mockito + Spring Test");
+        starters.put("spring-boot-starter-test", "JUnit + AssertJ + Mockito + Spring Test");
         showEach("starter → co przynosi", starters);
         // WYNIK: starter → co przynosi (liczba kluczy: 5):
-        // WYNIK: • spring-boot-starter-web → Spring MVC + Jackson (JSON) + wbudowany Tomcat
+        // WYNIK: • spring-boot-starter-webmvc → Spring MVC + Jackson (JSON) + wbudowany Tomcat
         // WYNIK: • spring-boot-starter-validation → Bean Validation (Hibernate Validator)
         // WYNIK: • spring-boot-starter-data-jpa → Spring Data JPA + Hibernate + pula połączeń HikariCP
         // WYNIK: • spring-boot-starter-actuator → /actuator/health, metryki
-        // WYNIK: • spring-boot-starter-test → JUnit 5 + AssertJ + Mockito + Spring Test
+        // WYNIK: • spring-boot-starter-test → JUnit + AssertJ + Mockito + Spring Test
 
         // PUŁAPKA: dopisywanie wersji do bibliotek zarządzanych przez Boot (np. <version> przy Jacksonie)
         // rozjeżdża zestaw sprawdzonych wersji — błędy typu NoSuchMethodError w trakcie działania.
         // DOBRA PRAKTYKA: wersję podajesz raz — przy spring-boot-starter-parent; reszta bez <version>.
         // W Springu: fragment pom.xml —
-        //   <parent> org.springframework.boot : spring-boot-starter-parent : 3.x.y </parent>
-        //   <dependency> org.springframework.boot : spring-boot-starter-web </dependency>   (bez wersji!)
+        //   <parent> org.springframework.boot : spring-boot-starter-parent : 4.x.y </parent>
+        //   <dependency> org.springframework.boot : spring-boot-starter-webmvc </dependency>   (bez wersji!)
+        //   (w Boot 3 ten starter nazywał się spring-boot-starter-web; w Boot 4 stara nazwa jest przestarzała)
     }
 
     // =================================================================================================
@@ -754,8 +755,8 @@ public class Spring04WhatSpringGives {
 
         // DOBRA PRAKTYKA: piramida testów — dużo szybkich testów jednostkowych, mniej wycinków, kilka pełnych
         // @SpringBootTest. Wstrzykiwanie przez konstruktor sprawia, że serwis przetestujesz w ogóle bez Springa.
-        // W Springu: atrapa beana w kontekście: @MockBean (Boot do 3.3; od Boot 3.4 zalecane @MockitoBean
-        //            ze Spring Framework 6.2); profil testowy: @ActiveProfiles("test").
+        // W Springu: atrapa beana w kontekście: @MockitoBean (ze Spring Framework 6.2; dawne @MockBean
+        //            usunięto w Boot 4); profil testowy: @ActiveProfiles("test").
     }
 
     // =================================================================================================
@@ -792,8 +793,8 @@ public class Spring04WhatSpringGives {
         // WYNIK: • współbieżność (t21) → @Async, @Scheduled, pule wątków zarządzane przez Springa
 
         // W Springu: JAK ZACZĄĆ PROJEKT SPRING BOOT (start.spring.io):
-        //   1. Wejdź na https://start.spring.io — Project: Maven, Language: Java, Spring Boot: najnowsza stabilna 3.x.
-        //   2. Group: pl.nauka, Artifact: sklep, Packaging: Jar, Java: 17 (Boot 3 wymaga co najmniej Javy 17).
+        //   1. Wejdź na https://start.spring.io — Project: Maven, Language: Java, Spring Boot: najnowsza stabilna 4.x.
+        //   2. Group: pl.nauka, Artifact: sklep, Packaging: Jar, Java: 21 lub nowsza, zalecana 25 (Boot 4 wymaga co najmniej Javy 17).
         //   3. Dependencies (zależności): Spring Web, Validation, Spring Data JPA, H2 Database, Spring Boot Actuator,
         //      opcjonalnie Spring Boot DevTools (automatyczny restart po zmianie kodu).
         //   4. GENERATE → rozpakuj ZIP → w IntelliJ: File → Open → wskaż pom.xml → „Open as Project”.
